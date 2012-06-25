@@ -1,0 +1,2 @@
+[$HOME/vr/nvda/srt2]
+checkout = git svn clone 'http://subversion.assembla.com/svn/screenReaderTranslations' 'srt2'

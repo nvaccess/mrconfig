@@ -1,0 +1,4 @@
+[$HOME/vr/nvda/code]
+checkout = bzr init-repo --no-trees code
+skip = test ! -d code
+order = 1

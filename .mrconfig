@@ -1,0 +1,24 @@
+[DEFAULT]
+git_gc = git gc "$@"
+jobs = 5
+shell = bash
+lib =
+	isAddon () {
+		test -d ${MR_REPO}/addon/locale
+		return $?
+	}
+	commitPo () {
+		file=${MR_REPO}/addon/locale/$1/LC_MESSAGES/nvda.po
+		msgfmt -c -o /tmp/test.mo $file
+		if [ "$?" != "0" ]; then return 1; fi
+		git add $file
+		authors="$(python ${MR_REPO}/../../srt/scripts/addresses.py $1)"
+		bash -c "echo git commit $authors -m "wip" $file"
+	}
+include = cat /usr/share/mr/*
+
+[$HOME/vr/mr]
+checkout = git clone 'git@github.com:mhameed/mrconfig' 'mr'
+git_up = git pull
+
+include = cat ~/vr/mr/repos/*

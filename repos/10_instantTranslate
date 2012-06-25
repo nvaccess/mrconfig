@@ -1,0 +1,2 @@
+[$HOME/vr/nvda/addons/instantTranslate]
+checkout = git clone 'git@bitbucket.org:nvdaaddonteam/instant-translate' 'instantTranslate'

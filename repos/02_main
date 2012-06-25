@@ -1,0 +1,4 @@
+[$HOME/vr/nvda/code/main]
+checkout = bzr branch 'bzr+ssh://mhameed@bzr.nvaccess.org/srv/bzr/nvda/main/' 'main'
+update = bzr pull
+order = 2
