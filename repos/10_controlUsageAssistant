@@ -1,0 +1,2 @@
+[$HOME/vr/nvda/addons/controlUsageAssistant]
+checkout = git clone 'git@bitbucket.org:nvdaaddonteam/controlUsageAssistant.git' 'controlUsageAssistant'
