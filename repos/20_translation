@@ -1,4 +1,0 @@
-[$HOME/vr/nvda/code/translation]
-checkout = bzr checkout main translation
-update = bzr up
-order = 20

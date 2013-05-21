@@ -1,4 +1,2 @@
 [$HOME/vr/nvda/code]
-checkout = bzr init-repo --no-trees code
-skip = test ! -d code
-order = 1
+checkout = git clone 'git://git.nvaccess.org/nvda.git' 'code'
