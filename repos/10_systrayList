@@ -1,2 +1,2 @@
 [$HOME/vr/nvda/addons/systrayList]
-checkout = git clone 'git@bitbucket.org:nvdaaddonteam/nvda-systraylist' 'systrayList'
+checkout = git clone 'git@bitbucket.org:nvdaaddonteam/systrayList' 'systrayList'
