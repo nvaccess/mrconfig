@@ -1,0 +1,2 @@
+[$HOME/vr/nvda/addons/bitche]
+checkout = git clone 'git@bitbucket.org:nvdaaddonteam/bitche.git' 'bitche'

@@ -1,0 +1,2 @@
+[$HOME/vr/nvda/addons/eMule]
+checkout = git clone 'git@bitbucket.org:nvdaaddonteam/eMule.git' 'eMule'

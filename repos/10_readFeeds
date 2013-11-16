@@ -1,0 +1,2 @@
+[$HOME/vr/nvda/addons/readFeeds]
+checkout = git clone 'git@bitbucket.org:nvdaaddonteam/readFeeds.git' 'readFeeds'

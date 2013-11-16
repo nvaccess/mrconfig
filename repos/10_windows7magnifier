@@ -1,0 +1,2 @@
+[$HOME/vr/nvda/addons/windows7magnifier]
+checkout = git clone 'git@bitbucket.org:nvdaaddonteam/windows7magnifier.git' 'windows7magnifier'

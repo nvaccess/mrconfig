@@ -1,0 +1,2 @@
+[$HOME/vr/nvda/addons/balloonhistory]
+checkout = git clone 'git@bitbucket.org:nvdaaddonteam/balloonhistory.git' 'balloonhistory'

@@ -1,0 +1,2 @@
+[$HOME/vr/nvda/addons/NoBeepsSpeechMode]
+checkout = git clone 'git@bitbucket.org:nvdaaddonteam/NoBeepsSpeechMode.git' 'NoBeepsSpeechMode'

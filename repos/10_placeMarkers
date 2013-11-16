@@ -1,0 +1,2 @@
+[$HOME/vr/nvda/addons/placeMarkers]
+checkout = git clone 'git@bitbucket.org:nvdaaddonteam/placeMarkers.git' 'placeMarkers'
