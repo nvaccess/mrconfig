@@ -1,21 +1,4 @@
 [DEFAULT]
 jobs = 5
-lib =
-	isAddon () {
-		test -d ${MR_REPO}/addon/locale
-		return $?
-	}
-	commitPo () {
-		file=${MR_REPO}/addon/locale/$1/LC_MESSAGES/nvda.po
-		msgfmt -c -o /tmp/test.mo $file
-		if [ "$?" != "0" ]; then return 1; fi
-		git add $file
-		authors="$(python ${MR_REPO}/../../srt/scripts/addresses.py $1)"
-		bash -c "echo git commit $authors -m "wip" $file"
-	}
-include = cat /usr/share/mr/*
 
-[$HOME/vr/nvda-mr]
-checkout = git clone 'git@bitbucket.org:mhameed/nvda-mr' 'nvda-mr'
-
-include = cat ~/vr/nvda-mr/repos/*
+include = find enabled.d -name '[0-9]*' -exec cat '{}' \+
