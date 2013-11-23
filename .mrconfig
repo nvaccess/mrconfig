@@ -1,4 +1,4 @@
 [DEFAULT]
 jobs = 5
 
-include = find enabled.d -name '[0-9]*' -exec cat '{}' \+
+include = cat enabled.d/[0-9]*
