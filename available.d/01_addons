@@ -1,4 +1,5 @@
-[$HOME/vr/nvda/addons]
+[addons]
 checkout = mkdir addons
+update = echo
 skip = test ! -d addons
 order = 1

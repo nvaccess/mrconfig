@@ -1,2 +1,2 @@
-[$HOME/vr/nvda/addons/word]
+[addons/word]
 checkout = git clone 'git@bitbucket.org:nvdaaddonteam/word.git' 'word'

@@ -1,2 +1,2 @@
-[$HOME/vr/nvda/addons/stopwatch]
+[addons/stopwatch]
 checkout = git clone 'git@bitbucket.org:nvdaaddonteam/stopwatch.git' 'stopwatch'

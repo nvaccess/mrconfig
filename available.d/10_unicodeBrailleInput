@@ -1,2 +1,2 @@
-[$HOME/vr/nvda/addons/unicodeBrailleInput]
+[addons/unicodeBrailleInput]
 checkout = git clone 'git@bitbucket.org:nvdaaddonteam/unicodeBrailleInput' 'unicodeBrailleInput'

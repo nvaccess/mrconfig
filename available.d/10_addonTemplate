@@ -1,2 +1,2 @@
-[$HOME/vr/nvda/addons/addonTemplate]
+[addons/addonTemplate]
 checkout = git clone 'git@bitbucket.org:nvdaaddonteam/addonTemplate' 'addonTemplate'

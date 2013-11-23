@@ -1,2 +1,2 @@
-[$HOME/vr/nvda/addons/resourceMonitor]
+[addons/resourceMonitor]
 checkout = git clone 'git@bitbucket.org:nvdaaddonteam/resourceMonitor' 'resourceMonitor'

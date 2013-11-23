@@ -1,2 +1,2 @@
-[$HOME/vr/nvda/addons/focusHighlight]
+[addons/focusHighlight]
 checkout = git clone 'git@bitbucket.org:nvdaaddonteam/focusHighlight.git' 'focusHighlight'

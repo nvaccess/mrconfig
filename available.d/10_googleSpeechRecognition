@@ -1,2 +1,2 @@
-[$HOME/vr/nvda/addons/googleSpeechRecognition]
+[addons/googleSpeechRecognition]
 checkout = git clone 'git@bitbucket.org:nvdaaddonteam/googleSpeechRecognition.git' 'googleSpeechRecognition'

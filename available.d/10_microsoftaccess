@@ -1,2 +1,2 @@
-[$HOME/vr/nvda/addons/microsoftaccess]
+[addons/microsoftaccess]
 checkout = git clone 'git@bitbucket.org:nvdaaddonteam/microsoftaccess.git' 'microsoftaccess'

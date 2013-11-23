@@ -1,2 +1,2 @@
-[$HOME/vr/nvda/addons/emoticons]
+[addons/emoticons]
 checkout = git clone 'git@bitbucket.org:nvdaaddonteam/emoticons.git' 'emoticons'

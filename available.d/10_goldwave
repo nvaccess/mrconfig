@@ -1,2 +1,2 @@
-[$HOME/vr/nvda/addons/goldwave]
+[addons/goldwave]
 checkout = git clone 'git@bitbucket.org:nvdaaddonteam/goldwave.git' 'goldwave'

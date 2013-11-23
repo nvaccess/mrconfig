@@ -1,2 +1,2 @@
-[$HOME/vr/nvda/addons/extendedWinamp]
+[addons/extendedWinamp]
 checkout = git clone 'git@bitbucket.org:nvdaaddonteam/extendedWinamp' 'extendedWinamp'

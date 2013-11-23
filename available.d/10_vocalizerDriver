@@ -1,2 +1,2 @@
-[$HOME/vr/nvda/addons/vocalizerDriver]
+[addons/vocalizerDriver]
 checkout = git clone 'git@unreliabledevice.net:vocalizer-driver-public.git' 'vocalizerDriver'

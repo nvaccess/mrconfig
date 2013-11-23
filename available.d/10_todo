@@ -1,2 +1,2 @@
-[$HOME/vr/nvda/todo]
+[todo]
 checkout = git clone 'git@bitbucket.org:nvdaaddonteam/todo' 'todo'

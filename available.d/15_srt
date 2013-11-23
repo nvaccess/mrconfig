@@ -1,2 +1,2 @@
-[$HOME/vr/nvda/srt]
+[srt]
 checkout = svn checkout 'http://subversion.assembla.com/svn/screenReaderTranslations' 'srt'

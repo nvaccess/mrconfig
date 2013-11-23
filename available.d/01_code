@@ -1,2 +1,2 @@
-[$HOME/vr/nvda/code]
-checkout = git clone 'git://git.nvaccess.org/nvda.git' 'code'
+[mainNVDACode]
+checkout = git clone 'git://git.nvaccess.org/nvda.git' 'mainNVDACode'

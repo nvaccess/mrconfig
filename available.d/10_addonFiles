@@ -1,2 +1,2 @@
-[$HOME/vr/nvda/addons/addonFiles]
+[addons/addonFiles]
 checkout = git clone 'git@bitbucket.org:nvdaaddonteam/addonFiles' 'addonFiles'
