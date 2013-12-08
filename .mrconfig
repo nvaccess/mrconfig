@@ -1,4 +1,10 @@
 [DEFAULT]
 jobs = 5
+lib = :
+    getBitbucketURL() {
+		bt=git@bitbucket.org:nvdaaddonteam
+        name=$(basename $MR_REPO)
+		echo ${bt}/${name}.git
+	}
 
 include = cat enabled.d/[0-9]*
