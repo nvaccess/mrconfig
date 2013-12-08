@@ -1,2 +1,2 @@
 [addons/instantTranslate]
-checkout = git clone 'git@bitbucket.org:nvdaaddonteam/instantTranslate' 'instantTranslate'
+checkout = git clone $(getBitbucketURL) $MR_REPO 

@@ -1,2 +1,2 @@
-[addons/unicodeBrailleInput]
+[addons/virtualRevision]
 checkout = git clone $(getBitbucketURL) $MR_REPO

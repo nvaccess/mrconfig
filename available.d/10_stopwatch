@@ -1,2 +1,2 @@
 [addons/stopwatch]
-checkout = git clone 'git@bitbucket.org:nvdaaddonteam/stopwatch.git' 'stopwatch'
+checkout = git clone $(getBitbucketURL) $MR_REPO

@@ -1,2 +1,2 @@
 [addons/readFeeds]
-checkout = git clone 'git@bitbucket.org:nvdaaddonteam/readFeeds.git' 'readFeeds'
+checkout = git clone $(getBitbucketURL) $MR_REPO 

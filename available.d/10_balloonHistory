@@ -1,2 +1,2 @@
 [addons/balloonHistory]
-checkout = git clone 'git@bitbucket.org:nvdaaddonteam/balloonhistory.git' 'balloonHistory'
+checkout = git clone $(getBitbucketURL) $MR_REPO 

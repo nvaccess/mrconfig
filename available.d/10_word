@@ -1,2 +1,2 @@
 [addons/word]
-checkout = git clone 'git@bitbucket.org:nvdaaddonteam/word.git' 'word'
+checkout = git clone $(getBitbucketURL) $MR_REPO

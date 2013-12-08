@@ -1,2 +1,2 @@
 [addons/systrayList]
-checkout = git clone 'git@bitbucket.org:nvdaaddonteam/systrayList' 'systrayList'
+checkout = git clone $(getBitbucketURL) $MR_REPO

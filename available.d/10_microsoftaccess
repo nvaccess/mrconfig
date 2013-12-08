@@ -1,2 +1,2 @@
 [addons/microsoftaccess]
-checkout = git clone 'git@bitbucket.org:nvdaaddonteam/microsoftaccess.git' 'microsoftaccess'
+checkout = git clone $(getBitbucketURL) $MR_REPO 

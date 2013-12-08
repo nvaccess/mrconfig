@@ -1,2 +1,2 @@
 [addons/bitChe]
-checkout = git clone 'git@bitbucket.org:nvdaaddonteam/bitche.git' 'bitChe'
+checkout = git clone $(getBitbucketURL) $MR_REPO 

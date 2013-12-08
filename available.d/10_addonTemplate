@@ -1,2 +1,2 @@
 [addons/addonTemplate]
-checkout = git clone 'git@bitbucket.org:nvdaaddonteam/addonTemplate' 'addonTemplate'
+checkout = git clone $(getBitbucketURL) $MR_REPO

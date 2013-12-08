@@ -1,2 +1,2 @@
 [addons/extendedWinamp]
-checkout = git clone 'git@bitbucket.org:nvdaaddonteam/extendedWinamp' 'extendedWinamp'
+checkout = git clone $(getBitbucketURL) $MR_REPO 

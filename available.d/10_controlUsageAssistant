@@ -1,2 +1,2 @@
 [addons/controlUsageAssistant]
-checkout = git clone 'git@bitbucket.org:nvdaaddonteam/controlUsageAssistant.git' 'controlUsageAssistant'
+checkout = git clone $(getBitbucketURL) $MR_REPO 

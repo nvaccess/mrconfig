@@ -1,2 +1,2 @@
 [addons/emoticons]
-checkout = git clone 'git@bitbucket.org:nvdaaddonteam/emoticons.git' 'emoticons'
+checkout = git clone $(getBitbucketURL) $MR_REPO 

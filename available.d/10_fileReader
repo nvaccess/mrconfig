@@ -1,2 +1,2 @@
-[addons/goldwave]
+[addons/fileReader]
 checkout = git clone $(getBitbucketURL) $MR_REPO 

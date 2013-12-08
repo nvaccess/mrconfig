@@ -1,2 +1,2 @@
 [addons/googleSpeechRecognition]
-checkout = git clone 'git@bitbucket.org:nvdaaddonteam/googleSpeechRecognition.git' 'googleSpeechRecognition'
+checkout = git clone $(getBitbucketURL) $MR_REPO 

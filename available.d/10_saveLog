@@ -1,2 +1,2 @@
 [addons/saveLog]
-checkout = git clone 'git@bitbucket.org:nvdaaddonteam/saveLog.git' 'saveLog'
+checkout = git clone $(getBitbucketURL) $MR_REPO 

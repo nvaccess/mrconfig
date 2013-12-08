@@ -1,2 +1,2 @@
 [addons/dropbox]
-checkout = git clone 'git@bitbucket.org:nvdaaddonteam/dropbox' 'dropbox'
+checkout = git clone $(getBitbucketURL) $MR_REPO 

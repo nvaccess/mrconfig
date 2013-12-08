@@ -1,2 +1,2 @@
-[addons/goldwave]
+[addons/extendedDigitalEditions]
 checkout = git clone $(getBitbucketURL) $MR_REPO 
