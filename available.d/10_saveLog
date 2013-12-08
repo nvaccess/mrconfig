@@ -1,0 +1,2 @@
+[addons/saveLog]
+checkout = git clone 'git@bitbucket.org:nvdaaddonteam/saveLog.git' 'saveLog'

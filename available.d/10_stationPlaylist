@@ -1,0 +1,2 @@
+[addons/stationPlaylist]
+checkout = git clone 'git@bitbucket.org:nvdaaddonteam/stationPlaylist.git' 'stationPlaylist'
