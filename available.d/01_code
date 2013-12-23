@@ -1,2 +1,2 @@
 [mainNVDACode]
-checkout = git clone 'git://git.nvaccess.org/nvda.git' 'mainNVDACode'
+checkout = git clone --recursive 'git://git.nvaccess.org/nvda.git' 'mainNVDACode'
