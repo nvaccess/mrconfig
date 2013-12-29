@@ -1,5 +1,6 @@
 [addons]
 checkout = mkdir addons
 update = echo
+push = echo
 skip = test ! -d addons
 order = 1
