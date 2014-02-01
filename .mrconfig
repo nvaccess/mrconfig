@@ -1,13 +1,16 @@
 [DEFAULT]
 jobs = 5
-lib = :
-    getBitbucketURL() {
-		bt=git@bitbucket.org:nvdaaddonteam
-        name=$(basename $MR_REPO)
-		echo ${bt}/${name}.git
-	}
+include =
+	. $(dirname $MR_CONFIG)/.library-loaders
+	load_libraries $(dirname $MR_CONFIG)/.sh.d/*
+
+
+# Export functionality from our sh functions to be available as mr commands:
+isAddon = if $(isAddon); then echo yes; else echo no; fi
+addon2svn = addon2svn 
+addAddon2settings = addAddon2settings
 
 [.]
 checkout = git clone 'https://bitbucket.org/nvdaaddonteam/nvda-mrconfig.git' $MR_REPO
 
-include = cat enabled.d/[0-9]*
+include = cat $(dirname $MR_CONFIG)/enabled.d/[0-9]*
