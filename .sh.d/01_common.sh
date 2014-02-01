@@ -9,6 +9,6 @@ logMsg() {
 
 # A check to see if the current directory looks like an addon.
 isAddon() {
-	test -d ${MR_REPO}/addon/locale -a -f sconstruct
+	test -d ${MR_REPO}/addon -a -f sconstruct -a -f buildVars.py
 }
 
