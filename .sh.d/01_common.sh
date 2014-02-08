@@ -1,4 +1,4 @@
-PATH2TOPDIR=../../srt/
+PATH2TOPDIR=../..
 DEBUG=1
 
 logMsg() {
