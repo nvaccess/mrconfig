@@ -9,6 +9,7 @@ include =
 isAddon = if $(isAddon); then echo yes; else echo no; fi
 addon2svn = addon2svn 
 addon2settings = addon2settings
+svn2addon = svn2addon
 
 [.]
 checkout = git clone 'https://bitbucket.org/nvdaaddonteam/nvda-mrconfig.git' $MR_REPO
