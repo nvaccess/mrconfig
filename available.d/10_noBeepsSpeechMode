@@ -1,2 +1,2 @@
-[addons/NoBeepsSpeechMode]
+[addons/noBeepsSpeechMode]
 checkout = git clone $(getBitbucketURL) $MR_REPO 
