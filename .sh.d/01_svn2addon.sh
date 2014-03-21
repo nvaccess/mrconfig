@@ -22,6 +22,16 @@ svn2addon() {
 	addonName=$(basename $PWD)
     logMsg "Running svn2addon for $addonName"
     ADDONDIR="$(pwd)"
+    # If there are any locally modified files, make sure to stash them so they are not accidentally committed.
+    needToStash="$(git status --porcelain -uno | wc -l)"
+    if [ "$needToStash" -ne 0 ]; then
+        datetime="$(date +'%Y-%m-%d at %H:%M:%S')"
+        curBranch="$(git branch | grep '*' | awk '{print $2}')"
+        git stash save "$datetime on $curBranch before switching to stable branch"
+    fi
+    git checkout stable
+    # If stable branch doesn't exist, return code will be non-zero, and mr will stop, so we don't need to do anything here.
+
     cd $PATH2TOPDIR
     ls -1 srt/*/add-ons/$addonName/nvda.po | while read srcFile; do
         lang=$(echo $srcFile | sed 's+srt/\(.*\)/add.*/nvda.po+\1+g')
@@ -65,5 +75,14 @@ svn2addon() {
     # deal with the readme's
     rm -rf addon/doc/en/
     git add addon/doc/*/readme.md
+    git commit -m "l10n updates" && git push
+    # incase there are anything left that we didnt deem suitable to commit,
+    # such as po files that are less than 70% translated.
+    git reset --hard HEAD
+    # revert back to whatever branch that we were on before the processing, and unstash any temporary work.
+    git checkout "$curBranch"
+    if [ "$needToStash" -ne 0 ]; then
+        git stash pop
+    fi
 }
 
