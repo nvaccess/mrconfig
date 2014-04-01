@@ -15,18 +15,11 @@ transformPo() {
 }
 
 svn2addon() {
-	if ! $(isAddon); then
-		logMsg "Warning: Doesn't seem to be an addon, aborting."
-		exit 1
-	fi
+    isAddonOrDie
 	addonName=$(basename $PWD)
     logMsg "Running svn2addon for $addonName"
+    hasStableBranchOrDie
     ADDONDIR="$(pwd)"
-    # check that we have a stable branch
-    if git branch -r | grep -qv "origin/stable"; then
-        logMsg "Warning: this addon has no stable branch, aborting."
-        exit 1
-    fi
 
     # If there are any locally modified files, make sure to stash them so they are not accidentally committed.
     needToStash="$(git status --porcelain -uno | wc -l)"

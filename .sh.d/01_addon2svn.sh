@@ -1,8 +1,6 @@
 addon2settings() {
-	if ! $(isAddon); then
-		echo "Doesn't seem to be an addon, aborting."
-		return 1
-	fi
+    isAddonOrDie
+    hasStableBranchOrDie
 	addonName=$(basename $PWD)
     cd $PATH2TOPDIR/srt
     ls -1 */settings | while read file; do
@@ -13,10 +11,8 @@ addon2settings() {
 }
 
 addon2svn() {
-	if ! $(isAddon); then
-		echo "Doesn't seem to be an addon, aborting."
-		return 1
-	fi
+    isAddonOrDie
+    hasStableBranchOrDie
 	addonName=$(basename $PWD)
 	logMsg "Running addon2svn for $addonName"
 	scons pot mergePot
