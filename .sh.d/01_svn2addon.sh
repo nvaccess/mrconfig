@@ -16,12 +16,18 @@ transformPo() {
 
 svn2addon() {
 	if ! $(isAddon); then
-		echo "Doesn't seem to be an addon, aborting."
-		return 1
+		logMsg "Warning: Doesn't seem to be an addon, aborting."
+		exit 1
 	fi
 	addonName=$(basename $PWD)
     logMsg "Running svn2addon for $addonName"
     ADDONDIR="$(pwd)"
+    # check that we have a stable branch
+    if git branch -r | grep -qv "origin/stable"; then
+        logMsg "Warning: this addon has no stable branch, aborting."
+        exit 1
+    fi
+
     # If there are any locally modified files, make sure to stash them so they are not accidentally committed.
     needToStash="$(git status --porcelain -uno | wc -l)"
     if [ "$needToStash" -ne 0 ]; then
@@ -30,7 +36,6 @@ svn2addon() {
         git stash save "$datetime on $curBranch before switching to stable branch"
     fi
     git checkout stable
-    # If stable branch doesn't exist, return code will be non-zero, and mr will stop, so we don't need to do anything here.
 
     cd $PATH2TOPDIR
     ls -1 srt/*/add-ons/$addonName/nvda.po | while read srcFile; do
