@@ -20,7 +20,7 @@ isAddonOrDie() {
 }
 
 hasStableBranchOrDie() {
-    if git branch -r | grep -qv "origin/stable"; then
+    if ! git branch -r | grep -q "origin/stable"; then 
         logMsg "Warning: this addon has no stable branch, aborting."
         exit 1
     fi
