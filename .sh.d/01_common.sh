@@ -3,7 +3,7 @@ DEBUG=1
 
 logMsg() {
     if [ $DEBUG -ne 0 ]; then
-        echo 1>&2 `date '+%Y/%m/%d %H:%M:%S'` "$@"
+        echo 1>&2 `date '+%H:%M:%S'` "$@"
     fi
 }
 
