@@ -42,7 +42,7 @@ addon2svn() {
             sed -i -e "s/Language: /Language: $lang/g" $lang/add-ons/${addonName}/nvda.po
             msgmerge --no-location -U $lang/add-ons/${addonName}/nvda.po /tmp/${addonName}-merge.pot
             svn add $lang/add-ons/${addonName}/nvda.po
-            svn commit -m "${lang}: ${addonName} ready to be translated."  $lang/add-ons/${addonName}/nvda.po
+            svn commit -m "${lang}: ${addonName} ready to be translated."  $lang/add-ons/${addonName}/
         else
             logMsg "Already available for translation, merging in new messages."
             msgmerge --no-location -U $lang/add-ons/${addonName}/nvda.po /tmp/${addonName}-merge.pot
