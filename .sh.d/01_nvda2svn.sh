@@ -14,3 +14,13 @@ mergePot() {
     done
     svn commit -m "Merged nvda interface messages from $potName"  */nvda.po
 }
+
+findRevs() {
+    logMsg "Running findRevs"
+    langs=$(ls -1 */settings | sed 's+/settings++' | awk '{printf("%s ", $1)}')
+    cd scripts
+    ./findRevs.py --langs $langs
+    cd ..
+    svn -q add  */settings */userGuide-diffs/* */changes-diffs/* */symbols-diffs/*
+    svn commit -m "All langs: new revisions for translation." */settings */userGuide-diffs/* */changes-diffs/* */symbols-diffs/*
+}
