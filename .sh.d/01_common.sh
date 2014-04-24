@@ -20,7 +20,7 @@ _checkProgExists() {
 
 checkNeededProgsExists() {
     # checks if the required command exists
-    _checkProgExists msgfmt msgmerge po4a-translate pocount scons
+    _checkProgExists elinks msgfmt msgmerge po4a-translate pocount scons wget
 }
 
 # A check to see if the current directory looks like an addon.
