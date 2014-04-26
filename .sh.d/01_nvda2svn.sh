@@ -21,6 +21,12 @@ findRevs() {
     cd scripts
     ./findRevs.py --langs $langs
     cd ..
+    # Calculate userGuide-stats.txt for every revision.
+    find */userGuide-diffs/ -maxdepth 1 -mindepth 1 -type d | grep -vi ".svn"  || while read rev; do
+        pushd $rev >/dev/null 2>&1
+        python ../../../scripts/stats.py
+        popd >/dev/null 2>&1
+    done
     svn -q add  */settings */userGuide-diffs/* */changes-diffs/* */symbols-diffs/*
     svn commit -m "All langs: new revisions for translation." */settings */userGuide-diffs/* */changes-diffs/* */symbols-diffs/*
 }
