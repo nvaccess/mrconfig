@@ -11,9 +11,11 @@ addon2svn = addon2svn
 addon2settings = addon2settings
 svn2addon = svn2addon
 checkProgs = :
+registerAddon = :
 
 [.]
 checkout = git clone 'https://bitbucket.org/nvdaaddonteam/nvda-mrconfig.git' $MR_REPO
 checkProgs = checkNeededProgsExists
+registerAddon = registerAddon "$@"
 
 include = cat $(dirname $MR_CONFIG)/enabled.d/[0-9]*

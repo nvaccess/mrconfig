@@ -42,3 +42,29 @@ hasStableBranchOrDie() {
         exit 1
     fi
 }
+
+# suppose to be run from available.d in the mr config repo.
+registerAddon () {
+    addonName="$1"
+    curDir=$(basename $PWD)
+    if test "$curDir" != "available.d" ; then
+        echo "To run this command, we need to be in the available.d directory"
+        exit 1
+    fi
+    logMsg "Registering addon ${addonName}"
+    # check that the repo exists on bitbucket:
+    tmpName=$(mktemp -d)
+    if git clone $(getBitbucketURL $addonName) ${tmpName}; then
+        rm -rf ${tmpName}
+        echo "[addons/${addonName}]" >10_${addonName}
+        echo "checkout = git clone \$(getBitbucketURL) \$MR_REPO" >>10_${addonName}
+        git add 10_${addonName}
+        git commit -m "added ${addonName} to mr config." 10_${addonName}
+        # create a symlink for the new addon in enabled.d
+        cd ../enabled.d && ln -s ../10_${addonName} .
+        echo "all done, inspect commit and push if everything looks ok."
+    else
+        echo "unable to clone the ${addonName} repo from bitbucket nvdaaddonteam, please make sure the name is correct."
+        exit 1
+    fi
+}
