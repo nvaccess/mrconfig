@@ -1,5 +1,6 @@
 PATH2TOPDIR=../..
 DEBUG=1
+#set -x
 
 logMsg() {
     if [ $DEBUG -ne 0 ]; then

@@ -2,3 +2,4 @@
 checkout = svn checkout 'http://subversion.assembla.com/svn/screenReaderTranslations' 'srt'
 findRevs = findRevs
 mergePot = mergePot
+svn2nvda = svn2nvda
