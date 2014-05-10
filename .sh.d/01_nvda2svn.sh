@@ -22,7 +22,7 @@ findRevs() {
     ./findRevs.py --langs $langs
     cd ..
     # Calculate userGuide-stats.txt for every revision.
-    find */userGuide-diffs/ -maxdepth 1 -mindepth 1 -type d | grep -vi ".svn"  || while read rev; do
+    find */userGuide-diffs/ -maxdepth 1 -mindepth 1 -type d | grep -vi ".svn" | while read rev; do
         pushd $rev >/dev/null 2>&1
         python ../../../scripts/stats.py
         popd >/dev/null 2>&1
