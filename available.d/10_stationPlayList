@@ -1,0 +1,2 @@
+[addons/stationPlayList]
+checkout = git clone $(getBitbucketURL) $MR_REPO
