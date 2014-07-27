@@ -34,6 +34,7 @@ svn2nvda () {
         fi
         _cp $lang/symbols.dic source/locale/$lang/symbols.dic
         _cp $lang/characterDescriptions.dic source/locale/$lang/characterDescriptions.dic
+        _cp $lang/gestures.ini source/locale/$lang/gestures.ini
 
         _cp $lang/changes.t2t  user_docs/$lang/changes.t2t
         _cp $lang/userGuide.t2t  user_docs/$lang/userGuide.t2t
