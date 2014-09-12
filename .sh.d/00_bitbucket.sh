@@ -4,7 +4,7 @@ getBitbucketURL() {
         name="$1"
     fi
     uri=https://bitbucket.org/nvdaaddonteam
-    if [ -n "$MR_USE_PROTOCOL" ] && [ "$MR_USE_PROTOCOL" == "ssh" ]; then
+    if [ "$MR_USE_PROTOCOL" = "ssh" ]; then
         uri="git@bitbucket.org:nvdaaddonteam"
     fi
     echo ${uri}/${name}.git
