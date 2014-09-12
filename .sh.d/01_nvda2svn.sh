@@ -21,6 +21,6 @@ findRevs() {
     cd scripts
     ./findRevs.py --langs $langs
     cd ..
-    svn -q add  */settings */userGuide-diffs/* */changes-diffs/* */symbols-diffs/*
-    svn commit -m "All langs: new revisions for translation." */settings */userGuide-diffs/* */changes-diffs/* */symbols-diffs/*
+    svn -q add  */settings */userGuide-newRevisions/* */changes-newRevisions/* */symbols-newRevisions/*
+    svn commit -m "All langs: new revisions for translation." */settings */userGuide-newRevisions/* */changes-newRevisions/* */symbols-newRevisions/*
 }
