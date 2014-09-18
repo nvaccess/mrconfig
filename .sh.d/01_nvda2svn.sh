@@ -1,8 +1,8 @@
 mergePot() {
     logMsg "Running mergePot"
     # Download the pot file from the snapshots page and store it in /tmp/
-    pageUrl='http://www.nvda-project.org/wiki/Snapshots/'
-    potUrl=$(elinks --dump "$pageUrl" | grep ".pot" | grep master | head -n 1 | awk '{print $2}')
+    pageUrl='http://community.nvda-project.org/wiki/Snapshots'
+    potUrl=$(wget -qO - $pageUrl | sed -n 'b main;: quit;q;: main;s`^.*\(http://.*master.*\.pot\).*$`\1`p;t quit')
     potName=$(basename "$potUrl")
     logMsg "Downloading $potName from $potUrl"
     wget -q -O /tmp/$potName "$potUrl"
