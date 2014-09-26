@@ -18,9 +18,16 @@ mergePot() {
 findRevs() {
     logMsg "Running findRevs"
     langs=$(ls -1 */settings | sed 's+/settings++' | awk '{printf("%s ", $1)}')
-    cd scripts
-    ./findRevs.py --langs $langs
-    cd ..
-    svn -q add  */settings */userGuide-newRevisions/* */changes-newRevisions/* */symbols-newRevisions/*
-    svn commit -m "All langs: new revisions for translation." */settings */userGuide-newRevisions/* */changes-newRevisions/* */symbols-newRevisions/*
+    for lang in ${langs}; do
+        logMsg "Processing ${lang}"
+        cd scripts
+        ./findRevs.py --langs $lang
+        cd ..
+        # previously svn add to already versioned files use to be silent newer
+        # svn seem to produce errors and bork, so override this with the
+        # --force flag.
+        svn add -q --force ${lang}/settings ${lang}/userGuide-newRevisions/*
+        ${lang}/changes-newRevisions/* ${lang}/symbols-newRevisions/*
+        svn commit -m "${lang}: new revisions for translation." ${lang}/settings ${lang}/userGuide-newRevisions/* ${lang}/changes-newRevisions/* ${lang}/symbols-newRevisions/*
+    done
 }
