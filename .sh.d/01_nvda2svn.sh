@@ -26,8 +26,7 @@ findRevs() {
         # previously svn add to already versioned files use to be silent newer
         # svn seem to produce errors and bork, so override this with the
         # --force flag.
-        svn add -q --force ${lang}/settings ${lang}/userGuide-newRevisions/*
-        ${lang}/changes-newRevisions/* ${lang}/symbols-newRevisions/*
+        svn add -q --force ${lang}/settings ${lang}/userGuide-newRevisions/* ${lang}/changes-newRevisions/* ${lang}/symbols-newRevisions/*
         svn commit -m "${lang}: new revisions for translation." ${lang}/settings ${lang}/userGuide-newRevisions/* ${lang}/changes-newRevisions/* ${lang}/symbols-newRevisions/*
     done
 }
