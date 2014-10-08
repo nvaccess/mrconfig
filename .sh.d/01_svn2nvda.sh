@@ -10,10 +10,13 @@ _cp() {
 
 svn2nvda () {
     logMsg "Running svn2nvda"
-    git -C "$gitDir" reset --hard HEAD
+    git -C "$gitDir" stash
     git -C "$gitDir" checkout master
-    git -C "$gitDir" branch l10n master
-    git -C "$gitDir" checkout l10n
+    git -C "$gitDir" fetch origin
+    brname="staging_l10n_$(date +'%Y-%m-%d')"
+    git -C "$gitDir" branch -D "$brname" || true
+    git -C "$gitDir" branch "$brname" origin/master
+    git -C "$gitDir" checkout "$brname"
     svnRev=$(svn info | grep -i "Revision")
 
     ls -1 */settings | while read file; do
@@ -41,9 +44,13 @@ svn2nvda () {
         commit=$(git -C "$gitDir" diff --cached | wc -l)
         if [ "$commit" -gt "0" ]; then
             authors=$(python scripts/addresses.py $lang)
-            echo "L10n updates for: $lang\nFrom translation svn $svnRev\n\nAuthors:\n$authors" | 
+            stats=$(git -C "$gitDir" diff --cached --numstat --shortstat)
+            echo "L10n updates for: $lang\nFrom translation svn $svnRev\n\nAuthors:\n$authors\n\nStats:\n$stats" | 
             git -C "$gitDir" commit -F -
         fi
     done
+    git -C "$gitDir" checkout master
+    git -C "$gitDir" push --force origin "$brname"
+    git -C "$gitDir" stash pop
     echo "All languages processed, use stg to edit authors/provide additional information., also don't forget to push to try repo to make sure a snapshot can be built."
 }
