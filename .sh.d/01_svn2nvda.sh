@@ -13,7 +13,7 @@ svn2nvda () {
     git -C "$gitDir" stash
     git -C "$gitDir" checkout master
     git -C "$gitDir" fetch origin
-    brname="staging_l10n_$(date +'%Y-%m-%d')"
+    brname="staging_l10n_$(date '+%Y-%m-%d_-_%H-%M-%S')"
     git -C "$gitDir" branch -D "$brname" || true
     git -C "$gitDir" branch "$brname" origin/master
     git -C "$gitDir" checkout "$brname"
@@ -50,7 +50,7 @@ svn2nvda () {
         fi
     done
     git -C "$gitDir" checkout master
-    git -C "$gitDir" push --force origin "$brname"
+    git -C "$gitDir" push origin "$brname"
     git -C "$gitDir" stash pop
     echo "All languages processed, use stg to edit authors/provide additional information., also don't forget to push to try repo to make sure a snapshot can be built."
 }
