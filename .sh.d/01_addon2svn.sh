@@ -45,8 +45,27 @@ addon2svn() {
             svn commit -m "${lang}: ${addonName} ready to be translated."  $lang/add-ons/${addonName}/
         else
             logMsg "Already available for translation, merging in new messages."
+
+            # Statistics before merging pot.
+            bfuzzy=$(pocount $lang/add-ons/${addonName}/nvda.po | grep -i fuzzy | awk '{print \$2}')
+            buntranslated=$(pocount $lang/add-ons/${addonName}/nvda.po | grep -i untranslated | awk '{print \$2}')
+            bmsg="$bfuzzy fuzzy and $buntranslated untranslated"
+
             msgmerge --no-location -U $lang/add-ons/${addonName}/nvda.po /tmp/${addonName}-merge.pot
-            svn commit -m "${lang}: ${addonName} merged in new messages."  $lang/add-ons/${addonName}/nvda.po
+
+            # Statistics after merging pot.
+            afuzzy=$(pocount $lang/add-ons/${addonName}/nvda.po | grep -i fuzzy | awk '{print \$2}')
+            auntranslated=$(pocount $lang/add-ons/${addonName}/nvda.po | grep -i untranslated | awk '{print \$2}')
+            amsg="$afuzzy fuzzy and $auntranslated untranslated"
+
+            if [ "$bmsg" == "$amsg" ]; then
+                # nothing has changed, dont need to action.
+                # revert because comments/timestamps in po file might have changed.
+                svn revert $lang/add-ons/${addonName}/nvda.po
+            else
+                # need to commit, because before and after are diffrent.
+                svn commit -m "${lang}: ${addonName} merged in ${amsg} messages"  $lang/add-ons/${addonName}/nvda.po
+            fi
         fi
     done
     cd "$ADDONDIR"
