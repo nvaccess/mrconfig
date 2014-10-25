@@ -58,13 +58,13 @@ addon2svn() {
             auntranslated=$(pocount $lang/add-ons/${addonName}/nvda.po | grep -i untranslated | awk '{print $2}')
             amsg="$afuzzy fuzzy and $auntranslated untranslated"
 
-            if [ "$bmsg" == "$amsg" ]; then
+            if [ "$bmsg" != "$amsg" ]; then
+                # need to commit, because before and after are diffrent.
+                svn commit -m "${lang}: ${addonName} merged in ${amsg} messages"  $lang/add-ons/${addonName}/nvda.po
+            else
                 # nothing has changed, dont need to action.
                 # revert because comments/timestamps in po file might have changed.
                 svn revert $lang/add-ons/${addonName}/nvda.po
-            else
-                # need to commit, because before and after are diffrent.
-                svn commit -m "${lang}: ${addonName} merged in ${amsg} messages"  $lang/add-ons/${addonName}/nvda.po
             fi
         fi
     done
