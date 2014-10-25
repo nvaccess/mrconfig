@@ -47,15 +47,15 @@ addon2svn() {
             logMsg "Already available for translation, merging in new messages."
 
             # Statistics before merging pot.
-            bfuzzy=$(pocount $lang/add-ons/${addonName}/nvda.po | grep -i fuzzy | awk '{print \$2}')
-            buntranslated=$(pocount $lang/add-ons/${addonName}/nvda.po | grep -i untranslated | awk '{print \$2}')
+            bfuzzy=$(pocount $lang/add-ons/${addonName}/nvda.po | grep -i fuzzy | awk '{print $2}')
+            buntranslated=$(pocount $lang/add-ons/${addonName}/nvda.po | grep -i untranslated | awk '{print $2}')
             bmsg="$bfuzzy fuzzy and $buntranslated untranslated"
 
             msgmerge --no-location -U $lang/add-ons/${addonName}/nvda.po /tmp/${addonName}-merge.pot
 
             # Statistics after merging pot.
-            afuzzy=$(pocount $lang/add-ons/${addonName}/nvda.po | grep -i fuzzy | awk '{print \$2}')
-            auntranslated=$(pocount $lang/add-ons/${addonName}/nvda.po | grep -i untranslated | awk '{print \$2}')
+            afuzzy=$(pocount $lang/add-ons/${addonName}/nvda.po | grep -i fuzzy | awk '{print $2}')
+            auntranslated=$(pocount $lang/add-ons/${addonName}/nvda.po | grep -i untranslated | awk '{print $2}')
             amsg="$afuzzy fuzzy and $auntranslated untranslated"
 
             if [ "$bmsg" == "$amsg" ]; then
