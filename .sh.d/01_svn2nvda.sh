@@ -49,8 +49,8 @@ svn2nvda () {
             git -C "$gitDir" commit -F -
         fi
     done
+    git -C "$gitDir" push origin HEAD:"$brname"
     git -C "$gitDir" checkout master
-    git -C "$gitDir" push origin "$brname"
     git -C "$gitDir" stash pop
     echo "All languages processed, use stg to edit authors/provide additional information., also don't forget to push to try repo to make sure a snapshot can be built."
 }
