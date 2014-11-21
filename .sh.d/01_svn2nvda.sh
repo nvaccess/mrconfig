@@ -32,7 +32,7 @@ svn2nvda () {
             #date -u +'%F %T %z'
         fi
         needsCommitting=$(svn log -r"{$interface_last_date}":head ${lang}/nvda.po | grep -iP "r[0-9]+ \|" | grep -viP "commitbot|mhameed" | wc -l)
-        if test "$needsCommitting" != "0" ; then
+        if test "$needsCommitting" != "0" && python -m poChecker $lang/nvda.po ; then
             _cp $lang/nvda.po source/locale/$lang/LC_MESSAGES/nvda.po
         fi
         _cp $lang/symbols.dic source/locale/$lang/symbols.dic
