@@ -1,0 +1,2 @@
+[addons/clipContentsDesigner]
+checkout = git clone $(getBitbucketURL) $MR_REPO
