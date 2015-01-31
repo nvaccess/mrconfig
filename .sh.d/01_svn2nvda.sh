@@ -13,10 +13,11 @@ svn2nvda () {
     git -C "$gitDir" stash
     git -C "$gitDir" checkout master
     git -C "$gitDir" fetch origin
-    git -C "$gitDir" branch -D l10n || true
-    git -C "$gitDir" branch l10n origin/master
-    git -C "$gitDir" checkout l10n
-    svnRev=$(svn info | grep -i "Revision")
+    brname=l10n
+    git -C "$gitDir" branch -D "$brname" || true
+    git -C "$gitDir" branch "$brname" origin/master
+    git -C "$gitDir" checkout "$brname"
+    svnRev=$(svn info | grep -i "Revision" | awk '{print $2}')
 
     ls -1 */settings | while read file; do
         lang=$(dirname $file)
@@ -44,7 +45,7 @@ svn2nvda () {
         if [ "$commit" -gt "0" ]; then
             authors=$(python scripts/addresses.py $lang)
             stats=$(git -C "$gitDir" diff --cached --numstat --shortstat)
-            echo "L10n updates for: $lang\nFrom translation svn $svnRev\n\nAuthors:\n$authors\n\nStats:\n$stats" | 
+            echo "L10n updates for: $lang\nFrom translation svn revision: $svnRev\n\nAuthors:\n$authors\n\nStats:\n$stats" | 
             git -C "$gitDir" commit -F -
         fi
     done
