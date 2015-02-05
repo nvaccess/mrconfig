@@ -13,10 +13,9 @@ svn2nvda () {
     git -C "$gitDir" stash
     git -C "$gitDir" checkout master
     git -C "$gitDir" fetch origin
-    brname="staging_l10n_$(date '+%Y-%m-%d_-_%H-%M-%S')"
-    git -C "$gitDir" branch -D "$brname" || true
-    git -C "$gitDir" branch "$brname" origin/master
-    git -C "$gitDir" checkout "$brname"
+    git -C "$gitDir" branch -D l10n || true
+    git -C "$gitDir" branch l10n origin/master
+    git -C "$gitDir" checkout l10n
     svnRev=$(svn info | grep -i "Revision")
 
     ls -1 */settings | while read file; do
@@ -49,8 +48,7 @@ svn2nvda () {
             git -C "$gitDir" commit -F -
         fi
     done
-    git -C "$gitDir" push origin HEAD:"$brname"
     git -C "$gitDir" checkout master
-    git -C "$gitDir" stash pop
+    git -C "$gitDir" stash pop || true
     echo "All languages processed, use stg to edit authors/provide additional information., also don't forget to push to try repo to make sure a snapshot can be built."
 }
