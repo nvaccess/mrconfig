@@ -72,7 +72,8 @@ svn2addon() {
     done
     # deal with the readme's
     rm -rf addon/doc/en/
-    git add addon/doc/*/readme.md
+    # make sure we succeed even if no readme files have been translated.
+    git add addon/doc/*/readme.md || true
     git commit -m "l10n updates" && git push
     # incase there are anything left that we didnt deem suitable to commit,
     # such as po files that are less than 70% translated.
