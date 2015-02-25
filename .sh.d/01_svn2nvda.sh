@@ -8,6 +8,30 @@ _cp() {
     fi
 }
 
+checkT2t() {
+    encoding=`file $1 | grep -vP ': +(ASCII text|UTF-8|empty)'`
+    if [ "$encoding" != "" ]; then
+        echo Encoding problem: $encoding
+        return 1
+    fi
+    if ! output=$(txt2tags -q -o /dev/null $1 2>&1); then
+        echo Error in $1:
+        echo "$output"
+        return 1
+    fi
+}
+
+checkUserGuide() {
+    checkT2t $1/userGuide.t2t || exit 1
+    pushd $1 > /dev/null
+    if ! output=$(python ../scripts/keyCommandsDoc.py 2>&1); then
+        echo Key commands error in $1/userGuide.t2t: $output
+        popd > /dev/null
+        return 1
+    fi
+    popd > /dev/null
+}
+
 svn2nvda () {
     logMsg "Running svn2nvda"
     git -C "$gitDir" stash
@@ -34,8 +58,8 @@ svn2nvda () {
         _cp $lang/characterDescriptions.dic source/locale/$lang/characterDescriptions.dic
         _cp $lang/gestures.ini source/locale/$lang/gestures.ini
 
-        _cp $lang/changes.t2t  user_docs/$lang/changes.t2t
-        _cp $lang/userGuide.t2t  user_docs/$lang/userGuide.t2t
+        checkT2t $lang/changes.t2t && _cp $lang/changes.t2t  user_docs/$lang/changes.t2t
+        checkUserGuide $lang && _cp $lang/userGuide.t2t  user_docs/$lang/userGuide.t2t
         commit=$(git -C "$gitDir" diff --cached | wc -l)
         if [ "$commit" -gt "0" ]; then
             authors=$(python scripts/addresses.py $lang)
