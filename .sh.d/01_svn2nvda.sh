@@ -9,6 +9,10 @@ _cp() {
 }
 
 checkT2t() {
+    if [ ! -f $1 ]; then
+        echo Warning: $1 does not exist
+        return 1
+    fi
     encoding=`file $1 | grep -vP ': +(HTML document, )?(ASCII text|UTF-8|empty)'`
     if [ "$encoding" != "" ]; then
         echo Encoding problem: $encoding
@@ -22,14 +26,17 @@ checkT2t() {
 }
 
 checkUserGuide() {
-    checkT2t $1/userGuide.t2t || exit 1
-    pushd $1 > /dev/null
+    checkT2t $1/userGuide.t2t || return 1
+    origDir=`pwd`
+    cd $1
+    result=0
     if ! output=$(python ../scripts/keyCommandsDoc.py 2>&1); then
         echo Key commands error in $1/userGuide.t2t: $output
-        popd > /dev/null
-        return 1
+        result=1
     fi
-    popd > /dev/null
+    rm -f keyCommands.t2t
+    cd $origDir
+    return $result
 }
 
 svn2nvda () {
