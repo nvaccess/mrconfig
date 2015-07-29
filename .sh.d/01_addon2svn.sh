@@ -37,7 +37,7 @@ addon2svn() {
         fi
         if [ ! -d $lang/add-ons/${addonName} ]; then
             logMsg "Wanted, but not already in svn, providing it."
-            svn mkdir $lang/add-ons/${addonName}
+            svn mkdir --parents $lang/add-ons/${addonName}
             cp /tmp/${addonName}.pot $lang/add-ons/${addonName}/nvda.po
             sed -i -e "s/Language: /Language: $lang/g" $lang/add-ons/${addonName}/nvda.po
             msgmerge --no-location -U $lang/add-ons/${addonName}/nvda.po /tmp/${addonName}-merge.pot
