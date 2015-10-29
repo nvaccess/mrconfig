@@ -61,7 +61,7 @@ registerAddon () {
         git add 10_${addonName}
         git commit -m "added ${addonName} to mr config." 10_${addonName}
         # create a symlink for the new addon in enabled.d
-        cd ../enabled.d && ln -s ../10_${addonName} .
+        cd ../enabled.d && ln -s ../available.d/10_${addonName} .
         echo "all done, inspect commit and push if everything looks ok."
     else
         echo "unable to clone the ${addonName} repo from bitbucket nvdaaddonteam, please make sure the name is correct."
