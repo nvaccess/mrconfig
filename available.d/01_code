@@ -1,3 +1,3 @@
 [mainNVDACode]
-checkout = git clone --recursive 'git://git.nvaccess.org/nvda.git' 'mainNVDACode'
+checkout = git clone --recursive 'https://github.com/nvaccess/nvda.git' 'mainNVDACode'
 fixups = git submodule update --init --recursive
