@@ -44,9 +44,10 @@ svn2nvda () {
     git -C "$gitDir" stash
     git -C "$gitDir" checkout master
     git -C "$gitDir" fetch origin
+    git -C "$gitDir" reset --hard origin/master
     brname=l10n
     git -C "$gitDir" branch -D "$brname" || true
-    git -C "$gitDir" branch "$brname" origin/master
+    git -C "$gitDir" branch "$brname"
     git -C "$gitDir" checkout "$brname"
     svnRev=$(svn info | grep -i "Revision" | awk '{print $2}')
 
@@ -77,7 +78,10 @@ svn2nvda () {
         fi
     done
     git -C "$gitDir" checkout master
+    git -C "$gitDir" merge --no-ff --no-commit l10n
+    echo "Update translations.\n\nFrom translation svn revision: $svnRev" |
+        git -C "$gitDir" commit -F -
+    git  -C "$gitDir" push
+    svn commit -m "Update metadata after merge to NVDA." */settings
     git -C "$gitDir" stash pop || true
-    echo "All languages processed, use stg to edit authors/provide additional information., also don't forget to push to try repo to make sure a snapshot can be built."
-    echo "When all done don't forget to commit the updated metadata in srt/*/settings"
 }
