@@ -1,16 +1,33 @@
+potName=/tmp/nvdaMaster.pot
+
+makePot() {
+    origDir=`pwd`
+    cd ../mainNVDACode/source
+    version="master-`git rev-parse --short master`"
+    xgettext -o $potName \
+        --package-name NVDA --package-version "$version" \
+        --foreign-user --add-comments=Translators: --keyword=pgettext:1c,2 \
+        --language=python \
+        *.py *.pyw */*.py */*/*.py
+    cd $origDir
+    # Tweak the headers.
+    sed -i '
+        2c# Copyright (C) 2006-'`date +%Y`'NVDA Contributors
+        3d
+        16s/CHARSET/UTF-8/
+        # Present Windows file paths instead of Unix.
+        /^#: /s,/,\\,g
+    ' $potName
+}
+
 mergePot() {
     logMsg "Running mergePot"
-    # Download the pot file from the snapshots page and store it in /tmp/
-    pageUrl='http://community.nvda-project.org/wiki/Snapshots'
-    potUrl=$(wget -qO - $pageUrl | sed -n 'b main;: quit;q;: main;s`^.*\(http.\?://.*master.*\.pot\).*$`\1`p;t quit')
-    potName=$(basename "$potUrl")
-    logMsg "Downloading $potName from $potUrl"
-    wget -q -O /tmp/$potName "$potUrl"
-    fromdos /tmp/$potName
+    logMsg "Making pot"
+    makePot
     # Now merge the pot into all available languages.
     ls -1 */nvda.po | while read file; do
         logMsg "Merging pot into $file"
-        msgmerge --no-location -U $file /tmp/$potName
+        msgmerge --no-location -U $file $potName
     done
     svn commit -m "Merged nvda interface messages from $potName"  */nvda.po
 }
