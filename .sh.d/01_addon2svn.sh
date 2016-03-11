@@ -30,7 +30,10 @@ addon2svn() {
     cd $PATH2TOPDIR/srt
     ls -1 */settings | while read file; do
         lang=$(dirname $file)
-        want=$(python scripts/db.py -f $file -g addon.${addonName})
+        if ! want=$(python scripts/db.py -f $file -g addon.${addonName}); then
+            logMsg "Error in settings file. Skipping $lang"
+            continue
+        fi
         logMsg "$lang wants ${addonName}: $want"
         if [ "$want" != "1" ]; then
             continue

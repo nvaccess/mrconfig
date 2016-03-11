@@ -54,7 +54,10 @@ svn2nvda () {
     ls -1 */settings | while read file; do
         lang=$(dirname $file)
         logMsg "Processing $lang" 
-        lastSubmittedSvnRev=$(python scripts/db.py -f $file -g nvda.lastSubmittedSvnRev)
+        if ! lastSubmittedSvnRev=$(python scripts/db.py -f $file -g nvda.lastSubmittedSvnRev); then
+            logMsg "Error in settings file. Skipping language"
+            continue
+        fi
         if test "0" = "${lastSubmittedSvnRev}"; then
             lastSubmittedSvnRev=1
         fi
