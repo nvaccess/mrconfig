@@ -1,0 +1,2 @@
+[addons/reportSymbols]
+checkout = git clone $(getBitbucketURL) $MR_REPO
