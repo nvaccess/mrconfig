@@ -41,7 +41,7 @@ findRevs() {
         ./findRevs.py --langs $lang
         cd ..
         svn add -q ${lang}/settings ${lang}/userGuide-newRevisions/* ${lang}/changes-newRevisions/* ${lang}/symbols-newRevisions/* || 
-        svn commit -m "${lang}: new revisions for translation." ${lang}/settings ${lang}/userGuide-newRevisions/* ${lang}/changes-newRevisions/* ${lang}/symbols-newRevisions/* ||
+        svn commit -m "${lang}: new revisions for translation." ${lang}/settings ${lang}/userGuide-newRevisions ${lang}/changes-newRevisions ${lang}/symbols-newRevisions ||
         logMsg "Error processing ${lang}"
     done
 }
