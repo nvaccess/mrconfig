@@ -1,0 +1,2 @@
+[addons/reviewCursorCopier]
+checkout = git clone $(getBitbucketURL) $MR_REPO
