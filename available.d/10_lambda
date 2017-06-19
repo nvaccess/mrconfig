@@ -1,0 +1,2 @@
+[addons/lambda]
+checkout = git clone $(getBitbucketURL) $MR_REPO
