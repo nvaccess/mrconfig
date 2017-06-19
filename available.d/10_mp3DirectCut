@@ -1,0 +1,2 @@
+[addons/mp3DirectCut]
+checkout = git clone $(getBitbucketURL) $MR_REPO
