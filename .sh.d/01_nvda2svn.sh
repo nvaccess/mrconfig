@@ -27,7 +27,7 @@ mergePot() {
     # Now merge the pot into all available languages.
     ls -1 */nvda.po | while read file; do
         logMsg "Merging pot into $file"
-        msgmerge --no-location -U $file $potName
+        msgmerge --no-location -U $file $potName || logMsg "Error merging pot into $file"
     done
     svn commit -m "Merged nvda interface messages from $potName"  */nvda.po
 }
