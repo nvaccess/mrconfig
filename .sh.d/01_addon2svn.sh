@@ -23,6 +23,8 @@ addon2svn() {
         git stash save "$datetime on $curBranch before switching to stable branch"
     fi
     git checkout stable
+    git fetch
+    git reset --hard origin/stable
 
 	scons pot mergePot
 	cp *.pot /tmp/

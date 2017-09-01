@@ -29,6 +29,8 @@ svn2addon() {
         git stash save "$datetime on $curBranch before switching to stable branch"
     fi
     git checkout stable
+    git fetch
+    git reset --hard origin/stable
 
     cd $PATH2TOPDIR
     ls -1 srt/*/add-ons/$addonName/nvda.po | while read srcFile; do
