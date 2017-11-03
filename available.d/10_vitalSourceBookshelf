@@ -1,0 +1,2 @@
+[addons/vitalSourceBookshelf]
+checkout = git clone $(getBitbucketURL) $MR_REPO
