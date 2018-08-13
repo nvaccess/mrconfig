@@ -42,9 +42,9 @@ checkUserGuide() {
 svn2nvda () {
     logMsg "Running svn2nvda"
     git -C "$gitDir" stash
-    git -C "$gitDir" checkout master
+    git -C "$gitDir" checkout beta
     git -C "$gitDir" fetch origin
-    git -C "$gitDir" reset --hard origin/master
+    git -C "$gitDir" reset --hard origin/beta
     brname=l10n
     git -C "$gitDir" branch -D "$brname" || true
     git -C "$gitDir" branch "$brname"
@@ -80,7 +80,7 @@ svn2nvda () {
             python scripts/db.py -f $file -s nvda.lastSubmittedSvnRev "$svnRev"
         fi
     done
-    git -C "$gitDir" checkout master
+    git -C "$gitDir" checkout beta
     git -C "$gitDir" merge --no-ff --no-commit l10n
     echo "Update translations.\n\nFrom translation svn revision: $svnRev" |
         git -C "$gitDir" commit -F -

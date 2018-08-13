@@ -1,9 +1,9 @@
-potName=/tmp/nvdaMaster.pot
+potName=/tmp/nvdaBeta.pot
 
 makePot() {
     origDir=`pwd`
     cd ../mainNVDACode/source
-    version="master-`git rev-parse --short master`"
+    version="beta-`git rev-parse --short beta`"
     xgettext -o $potName \
         --package-name NVDA --package-version "$version" \
         --foreign-user --add-comments=Translators: --keyword=pgettext:1c,2 \
