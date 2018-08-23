@@ -1,0 +1,2 @@
+[addons/objPad]
+checkout = git clone $(getBitbucketURL) $MR_REPO
