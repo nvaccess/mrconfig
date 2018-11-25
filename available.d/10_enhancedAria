@@ -1,0 +1,2 @@
+[addons/enhancedAria]
+checkout = git clone $(getBitbucketURL) $MR_REPO
