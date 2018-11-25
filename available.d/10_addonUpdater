@@ -1,0 +1,2 @@
+[addons/addonUpdater]
+checkout = git clone $(getBitbucketURL) $MR_REPO
