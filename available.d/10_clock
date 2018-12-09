@@ -1,0 +1,2 @@
+[addons/clock]
+checkout = git clone $(getBitbucketURL) $MR_REPO
