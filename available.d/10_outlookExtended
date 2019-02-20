@@ -1,0 +1,2 @@
+[addons/outlookExtended]
+checkout = git clone $(getBitbucketURL) $MR_REPO
