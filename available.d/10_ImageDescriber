@@ -1,0 +1,2 @@
+[addons/ImageDescriber]
+checkout = git clone $(getBitbucketURL) $MR_REPO
