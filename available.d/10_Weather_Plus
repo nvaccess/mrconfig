@@ -1,0 +1,2 @@
+[addons/Weather_Plus]
+checkout = git clone $(getBitbucketURL) $MR_REPO
