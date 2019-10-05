@@ -1,0 +1,2 @@
+[addons/beepKeyboard]
+checkout = git clone $(getBitbucketURL) $MR_REPO
