@@ -1,2 +1,2 @@
-[addons/vlc]
+[addons/VLC]
 checkout = git clone $(getBitbucketURL) $MR_REPO
