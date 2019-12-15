@@ -1,2 +1,0 @@
-[addons/AudioThemes3D]
-checkout = git clone $(getBitbucketURL) $MR_REPO
