@@ -1,2 +1,0 @@
-[addons/word]
-checkout = git clone $(getBitbucketURL) $MR_REPO
