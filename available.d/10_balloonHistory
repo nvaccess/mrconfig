@@ -1,2 +1,0 @@
-[addons/balloonHistory]
-checkout = git clone $(getBitbucketURL) $MR_REPO 
