@@ -1,2 +1,2 @@
 [addons/instantTranslate]
-checkout = git clone $(getBitbucketURL) $MR_REPO 
+checkout = git clone $(getBitGithubURL) $MR_REPO 
