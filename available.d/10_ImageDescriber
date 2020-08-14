@@ -1,2 +1,0 @@
-[addons/ImageDescriber]
-checkout = git clone $(getGithubURL) $MR_REPO
