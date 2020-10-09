@@ -14,7 +14,7 @@ checkProgs = :
 registerAddon = :
 
 [.]
-checkout = git clone 'https://bitbucket.org/nvdaaddonteam/nvda-mrconfig.git' $MR_REPO
+checkout = git clone 'https://github.com/nvaccess/mrconfig.git' $MR_REPO
 checkProgs = checkNeededProgsExists
 registerAddon = registerAddon "$@"
 
