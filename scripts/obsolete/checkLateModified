@@ -1,0 +1,2 @@
+svn log -r '{2012-07-30}':head -q nvda.po
+
