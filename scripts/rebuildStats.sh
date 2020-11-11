@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+
+# Called by convertOne.sh, with current directory set to SRT_PATH/<lang>
+
 nextRev=`ls -1 userGuide-newRevisions/ | head -n 1`
 outFile=userGuide-structureDifferences.txt
 if [ "$nextRev" == "" ]; then
@@ -6,10 +9,12 @@ if [ "$nextRev" == "" ]; then
     exit
 fi
 
+scriptsDir="../../scripts"
+
 # Get the structure of the localized document
-python ../scripts/stats.py userGuide.t2t >localized.stats
+python ${scriptsDir}/stats.py userGuide.t2t >localized.stats
 # Get the structure of the next revision to be translated.
-python ../scripts/stats.py userGuide-newRevisions/$nextRev/userGuide.t2t >next.stats
+python ${scriptsDir}/stats.py userGuide-newRevisions/$nextRev/userGuide.t2t >next.stats
 lang=$(basename `pwd`)
 
 d_args=(-d --unchanged-line-format='' --old-line-format='en %L' --new-line-format="$lang %L")

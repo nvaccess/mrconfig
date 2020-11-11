@@ -21,6 +21,7 @@ makePot() {
     ' $potName
 }
 
+# Run by cron from path ${PathToMrRepo}/srt/
 mergePot() {
     logMsg "Running mergePot"
     logMsg "Making pot"
@@ -33,14 +34,13 @@ mergePot() {
     svn commit -m "Merged nvda interface messages from $potName"  */nvda.po
 }
 
+# Run by cron from path cd ${PathToMrRepo}/srt/
 findRevs() {
     logMsg "Running findRevs"
     langs=$(ls -1 */settings | sed 's+/settings++' | awk '{printf("%s ", $1)}')
     for lang in ${langs}; do
         logMsg "Processing ${lang}"
-        cd scripts
-        ./findRevs.py --langs $lang
-        cd ..
+        ../scripts/findRevs.py --langs $lang
         svn add -q --parents ${lang}/settings ${lang}/userGuide-newRevisions/* ${lang}/changes-newRevisions/* ${lang}/symbols-newRevisions/* || 
         svn commit -m "${lang}: new revisions for translation." ${lang}/settings ${lang}/userGuide-newRevisions ${lang}/changes-newRevisions ${lang}/symbols-newRevisions ||
         logMsg "Error processing ${lang}"

@@ -1,6 +1,8 @@
 #!/bin/bash
 set -u
 
+# Called by webhook, with current directory set to SRT_PATH/<lang>
+
 getAbsPath() {
 absPath=$(readlink -f -n $1)
 absPath=$(dirname $absPath)

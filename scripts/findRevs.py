@@ -8,6 +8,11 @@ from plumbum.cmd import echo, grep, head, ls, msgfmt, pocount, sed, tail, mkdir,
 from plumbum import local
 from repo import Repo
 
+"""
+Should be run with working directory set to SRT directory
+"""
+
+
 logging.basicConfig(filename='findRevs.log',
     level=logging.DEBUG,
     format='%(asctime)s - %(levelname)s - %(message)s')
@@ -17,8 +22,8 @@ parser = argparse.ArgumentParser(description='language processor.')
 parser.add_argument('--langs', nargs='+', required=True)
 args = parser.parse_args()
 
-r = Repo('../../mainNVDACode/.git')
-tbpath = local.path('../')
+r = Repo('../mainNVDACode/.git')
+tbpath = local.path('./')
 linfo = {
     'changes': {
         'filename': 'changes.t2t',

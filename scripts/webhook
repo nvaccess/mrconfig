@@ -8,7 +8,7 @@ import poChecker
 from db import DB
 
 SRT_PATH = "/home/nvdal10n/mr/srt"
-SCRIPTS_PATH = os.path.join(SRT_PATH, "scripts")
+SCRIPTS_PATH = "/home/nvdal10n/mr/scripts"
 
 # Ensure our overridden svn gets used, includingsubprocesses.
 # Also add /usr/local/bin, which isn't already included in this context.
