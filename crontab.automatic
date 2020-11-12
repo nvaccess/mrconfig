@@ -1,5 +1,9 @@
 # Edit this file to introduce tasks to be run by cron.
 #
+# This file originated from:
+https://github.com/nvdaaddons/addonFiles/blob/f9daf6421f464ec83f4258e8fa77d1bd3b82c273/automatic.crontab
+# It will now be managed within this repo.
+#
 # Each task to run has to be defined through a single line
 # indicating with different fields when the task will be run
 # and what command to run for the task
@@ -28,7 +32,7 @@ poStatusHtml=/home/nvdal10n/ikiwiki/publish/poStatus.html
 22 * * * * cd $srt_scripts; ./poStatus.py >${poStatusHtml}
 
 # Keep live crontab in sync with version control.
-1 * * * * cd ${PathToMrRepo}/addons/addonFiles && git pull -q && crontab automatic.crontab
+1 * * * * cd ${PathToMrRepo} && crontab automatic.crontab
 
 #x  1 for addons starting with a
 00  1 * * fri cd ${PathToMrRepo}/addons/addonUpdater && chronic mr addon2svn && chronic mr svn2addon

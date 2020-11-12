@@ -2,8 +2,8 @@
 The `mrconfig` tool attempts to provide an abstraction for working with various version control systems.
 This repository has extended it and also uses it to run various scripts related to building translation files, providing diffs and statistics about translations and notifying translators.
 
-Generally, cron jobs trigger when different scripts are run.
-Although, when a commit is made to the SRT (Screen reader translations) repo, a webhook is run. 
+Generally, cron jobs trigger when different scripts are run. See `crontab.automatic` which has an entry to cause cron to be updated based on this file.
+When a commit is made to the SRT (Screen reader translations) repo, a webhook is run. 
 
 The `.mrconfig` file exposes functions from the scripts:
 - isAddon
@@ -46,4 +46,3 @@ The following are the entry points to the translations system ccode:
   - mr svn2addon
 - via assembla webhook
  - python scripts/webhook
- 
