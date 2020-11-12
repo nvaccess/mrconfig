@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+
+
+# Originated from revision 59393 (2020-11-12 05:29)
+# https://app.assembla.com/spaces/screenReaderTranslations/subversion/source/HEAD/scripts/addresses.py
+
 addresses = {
 	'default': {
 		'lang': '',
@@ -73,7 +78,7 @@ addresses = {
 		'email': [
 			'Daniel K. Gartmann <kontakt@nvda.dk>',
 			'Nicolai Svendsen <chojiro1990@gmail.com>',
-			'bue@vester-andersen.dk'
+			'bue@vester-andersen.dk',
 		],
 	},
 	'de': {
@@ -85,7 +90,7 @@ addresses = {
 			'Adriani Botez <adriani.botez@gmail.com>',
 			'Karl Eick <hozosch@web.de>',
 			'Robert Hänggi <aarjay.robert@gmail.com>',
-			'Astrid Waldschmetterling <a.r.waldschmetterling@gmx.de>'
+			'Astrid Waldschmetterling <a.r.waldschmetterling@gmx.de>',
 		],
 	},
 	'de_CH': {
@@ -108,7 +113,7 @@ addresses = {
 			'Juan C. buno <oprisniki@gmail.com>',
 			'Noelia Martinez <nrm1977@gmail.com>',
 			'Remy Ruiz <remyruiz@gmail.com>',
-			'Jose M. Delicado <jm.delicado@nvda.es>'
+			'Jose M. Delicado <jm.delicado@nvda.es>',
 		],
 	},
 	'es_CO': {
@@ -116,7 +121,7 @@ addresses = {
 		'email': [
 			'Jorge Zarache <reydelasmaquinas@outlook.com>',
 			'Luis Carlos Gonzáles Moráles <luiscarlosgm@hotmail.es>',
-			'Jose M. Delicado <jm.delicado@nvda.es>'
+			'Jose M. Delicado <jm.delicado@nvda.es>',
 		],
 	},
 	'fa': {
@@ -129,7 +134,7 @@ addresses = {
 	'fi': {
 		'lang': 'Finnish',
 		'email': [
-			'Jani Kinnunen <jani.kinnunen@wippies.fi>',
+			'Jani Kinnunen <janikinnunen340@gmail.com>',
 			'Isak Sand <isak.sand@gmail.com>',
 		],
 	},
@@ -141,7 +146,7 @@ addresses = {
 			'Remy Ruiz <remyruiz@gmail.com>',
 			'Abdelkrim Bensaid <abdelkrim.bensaid@free.fr>',
 			'Cyrille Bougot <cyrille.bougot2@laposte.net>',
-			'Corentin Bacqu&-Cazenave <corentin@progaccess.net>',
+			'Corentin Bacqué-Cazenave <corentin@progaccess.net>',
 		],
 	},
 	'ga': {
@@ -194,7 +199,8 @@ addresses = {
 		'lang': 'Icelandic',
 		'email': [
 			'Birkir R. Gunnarsson <birkir.gunnarsson@gmail.com>',
-			'Hlynur Hreinsson <hm.hreinsson@gmail.com>'
+			'Eythor Thrastarsson <eythor364@gmail.com>',
+			'Hlynur Hreinsson <hm.hreinsson@gmail.com>',
 		],
 	},
 	'it': {
@@ -268,6 +274,8 @@ addresses = {
 		'lang': 'Macedonian',
 		'email': [
 			'zvonimir stanecic <9a5dsz@gozaltech.org>',
+			'Ertay Shashko <ertay@outlook.com>',
+			'Aleksandar <glupav@gmail.com>',
 			'Kiko Lazarev <kristijan.lazarev@gmail.com>',
 		],
 	},
@@ -444,6 +452,7 @@ addresses = {
 			'sysking1024@gmail.com',
 			'dingpengyu06@gmail.com',
 			'singer.mike.zhao@gmail.com',
+			'1872265132@qq.com',
 		],
 	},
 	'zh_HK': {
@@ -458,6 +467,8 @@ addresses = {
 			'wangjanli@gmail.com',
 			'maro.zhang@gmail.com',
 			'Aaron Wu <waaron2000@gmail.com>',
-			'Victor Cai <surfer0627@gmail.com>'],
+			'Victor Cai <surfer0627@gmail.com>',
+			'haach111000@gmail.com',
+		],
 	},
 }
