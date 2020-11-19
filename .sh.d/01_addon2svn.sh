@@ -1,3 +1,6 @@
+
+scriptsDir="../scripts"
+
 addon2settings() {
     isAddonOrDie
     hasStableBranchOrDie
@@ -6,10 +9,11 @@ addon2settings() {
     ls -1 */settings | while read file; do
         lang=$(dirname $file)
         logMsg "Setting default value for ${addonName} in $file"
-        python scripts/db.py -f $file --set_default addon.${addonName} 0
+        python ${scriptsDir}/db.py -f $file --set_default addon.${addonName} 0
     done
 }
 
+# Run by cron with path ${PathToMrRepo}/addons/<addon Name>/
 addon2svn() {
     isAddonOrDie
     hasStableBranchOrDie
@@ -32,7 +36,7 @@ addon2svn() {
     cd $PATH2TOPDIR/srt
     ls -1 */settings | while read file; do
         lang=$(dirname $file)
-        if ! want=$(python scripts/db.py -f $file -g addon.${addonName}); then
+        if ! want=$(python ${scriptsDir}/db.py -f $file -g addon.${addonName}); then
             logMsg "Error in settings file. Skipping $lang"
             continue
         fi

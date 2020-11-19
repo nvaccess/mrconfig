@@ -1,0 +1,8 @@
+#!/bin/bash
+# svn has working copy locks, but it just fails if the lock is already held.
+# This causes problems, for example, when the post-commit hook runs during findRevs.
+# Therefore, use our own lock and block until it is acquired.
+(
+	flock 9 || exit 1
+	/usr/bin/svn "$@"
+) 9> /tmp/nvdal10n_svn.lock

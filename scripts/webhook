@@ -1,0 +1,101 @@
+#!/usr/bin/env python
+import os
+import cgi
+import re
+import subprocess
+from addresses import addresses, email
+import poChecker
+from db import DB
+
+SRT_PATH = "/home/nvdal10n/mr/srt"
+SCRIPTS_PATH = "/home/nvdal10n/mr/scripts"
+
+# Ensure our overridden svn gets used, includingsubprocesses.
+# Also add /usr/local/bin, which isn't already included in this context.
+os.environ["PATH"] = "/home/nvdal10n/bin:/usr/local/bin:" + os.environ["PATH"]
+
+form = cgi.FieldStorage() # instantiate only once!
+
+print "Content-type: text/plain\n"
+
+
+author = form['author'].value if form.has_key('author') else 'pratchett'
+action = form['action'].value if form.has_key('action') else 'wrote'
+body = form['body'].value if form.has_key('body') else 'the colour of magic'
+title = form['title'].value if form.has_key('title') else 'disc world'
+subject = "SRT %s" % title
+body = "%s %s %s\n\n%s" %(author, action, title, body)
+
+
+rcpts = []
+for key in addresses.keys():
+    if re.search('/test/', body):
+        break
+    if re.search('(\s+/%s/)|(\.%s\.po)' %(key, key), body):
+        rcpts.extend(addresses[key]['email'])
+
+hasAlert = False
+subprocess.call(["svn", "update", "-q"], cwd=SRT_PATH)
+
+# Check any po files in this commit.
+poFiles = re.findall(r'(?<=[AM]\s)/.*\.po', body)
+for po in poFiles:
+    poPath = os.path.join(SRT_PATH, po[1:])
+    try:
+        c = poChecker.PoChecker(poPath)
+        if not c.check():
+            if c.errorCount > 0:
+                hasAlert = True
+            body += "\n\n\n" + c.getReport().encode("UTF-8")
+    except:
+        import traceback
+        body += "\n\n\nError checking %s:\n%s" % (po, traceback.format_exc())
+        hasAlert = True
+
+# Check any settings files in this commit.
+files = re.findall(r'(?<=[AM]\s)/[^/]+/settings', body)
+for f in files:
+    f = f[1:]
+    path = os.path.join(SRT_PATH, f)
+    try:
+        DB(path)
+    except Exception as e:
+        hasAlert = True
+        body += "\n\n\nError in %s: %s" % (f, e)
+
+# Convert any t2t files in this commit.
+# The t2t conversion code operates per language.
+t2tLangs = re.findall(r'(?<=[AM]\s)/([^/]+)/[^/]+\.t2t', body)
+for lang in t2tLangs:
+    try:
+        subprocess.check_output([os.path.join(SCRIPTS_PATH, "convertOne.sh")],
+            cwd=os.path.join(SRT_PATH, lang),
+            stderr=subprocess.STDOUT)
+    except subprocess.CalledProcessError as e:
+        hasAlert = True
+        body += "\n\n\n" + e.output
+
+# Don't flag alerts for automated commits.
+# Automated commits shouldn't introduce errors, so any errors were there before.
+if hasAlert and author != "CommitBot":
+    subject = "[alert] " + subject
+email(rcpts, subject, body, includeAdmin=hasAlert)
+
+f = open('/tmp/webhook.log', 'a')
+f.write("--- start ---\n")
+f.write("rcpts: %s\n" % ", ".join(rcpts))
+f.write("subject: %s\n" % subject)
+f.write("body: %s\n" % body)
+f.write("-- raw data ---\n")
+for key in form.keys():
+    f.write("%s='%s'\n" % (key, form[key].value))
+f.write("--- end ---\n")
+f.close()
+print "Notification sent."
+
+
+if re.search("/website/", body):
+    print "running website post-commit hook."
+    pc = '/home/nvdal10n/ikiwiki/publish/post-commit'
+    subprocess.call([pc])
+    print "finnished website post-commit hook."

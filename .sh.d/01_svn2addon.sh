@@ -14,6 +14,7 @@ transformPo() {
     fi
 }
 
+# Run by cron from path ${PathToMrRepo}/addons/<addon name>
 svn2addon() {
     isAddonOrDie
 	addonName=$(basename $PWD)

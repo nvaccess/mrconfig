@@ -1,0 +1,9 @@
+Dear <name>,
+
+Thanks for volunteering to help with the maintenance of the <languageName> localization of NVDA.
+Please find inclosed invitation to create an account on assembla, so that you can submit your work.
+
+If you have any questions or need clarification of the process, or need guidance, please do not hesitate to ask for help on the translation list.
+We sometimes do a initial skype call to help new translators get started, we can do that if you feel it will be helpful.
+Thanks and welcome to the team.
+<senderName> 
