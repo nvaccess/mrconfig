@@ -43,9 +43,11 @@ linfo = {
 }
 _wdiff = wdiff['-w', '-{', '-x', '}-', '-y', '+{', '-z', '}+', '-d']
 for lang in args.langs:
+    settingsPath = tbpath.join(lang).join('settings')
     try:
-        mySettings = DB(tbpath.join(lang).join('settings')._path)
+        mySettings = DB(settingsPath._path)
     except:
+        logging.error("settings not found: ".format(settingsPath._path))
         continue
     logging.debug(pformat(mySettings))
     branch = mySettings['nvda.branch']
