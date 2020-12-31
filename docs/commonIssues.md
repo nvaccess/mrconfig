@@ -40,3 +40,21 @@ Check if the `available.d/10_<addon name>` file has been removed but the entry i
 To fix, remove the entry from `automatic.crontab`.
 
 Check if the case of the repo `/home/nvdal10n/mr/addons/<addon name>` matches the entry in `automatic.crontab`, if not fix the case.
+
+### Missing 'msgstr' section
+
+Cron email with message:
+```
+Already available for translation, merging in new messages.
+<lang>/add-ons/<addon name>/nvda.po:66: missing 'msgstr' section
+msgmerge: found 1 fatal error
+```
+An entry in the file (at the line specified) is missing the msgstr section.
+To fix this add an empty string for the msgstr.
+EG:
+```
+#. Translators: the tooltip text for a menu item.
+msgid "Shows a dictionary dialog to customize emoticons"
+msgstr ""
+```
+This needs to be done in the SRT repository.
