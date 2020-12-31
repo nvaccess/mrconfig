@@ -27,3 +27,16 @@ msgmerge: error while opening "<lang ID>/add-ons/<addon name>/nvda.po" for readi
 The po file is missing. Perhaps it was deleted accidentally or the translator decided they would not translate for the add-on.
 
 Scripts are being updated to handle this case. The file will be re-added. If the translator no longer wants to work on this add-on, the settings file should be updated to reflect that instead. 
+
+
+### Addon removed from addonFiles
+
+Cron email with message:
+```
+/bin/sh: 1: cd: can't cd to /home/nvdal10n/mr/addons/<addon name>
+```
+
+Check if the `available.d/10_<addon name>` file has been removed but the entry in `automatic.crontab` was not removed.
+To fix, remove the entry from `automatic.crontab`.
+
+Check if the case of the repo `/home/nvdal10n/mr/addons/<addon name>` matches the entry in `automatic.crontab`, if not fix the case.
