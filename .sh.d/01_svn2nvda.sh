@@ -54,12 +54,14 @@ svn2nvda () {
 
     ls -1 */settings | while read file; do
         lang=$(dirname $file)
-        logMsg "Processing $lang" 
+        logMsg "Processing $lang"
         if ! lastSubmittedSvnRev=$(python ../scripts/db.py -f $file -g nvda.lastSubmittedSvnRev); then
             logMsg "Error in settings file. Skipping language"
             continue
         fi
+        logMsg "Got lastSubmittedSvnRev: $lastSubmittedSvnRev"
         if test "0" = "${lastSubmittedSvnRev}"; then
+            logMsg "LastSubmittedSvnRev == 0 setting to 1"
             lastSubmittedSvnRev=1
         fi
         if test "60382" -gt "${lastSubmittedSvnRev}"; then
@@ -68,7 +70,9 @@ svn2nvda () {
         else
           needsCommitting=$(svn log -r${lastSubmittedSvnRev}:head ${lang}/nvda.po | grep -iP "r[0-9]+ \|" | grep -viP "commitbot" | wc -l)
         fi
+        logMsg "Needs committing: ${needsCommitting}"
         if test "$needsCommitting" != "0" && python ../scripts/poChecker $lang/nvda.po ; then
+            logMsg "copying po file"
             _cp $lang/nvda.po source/locale/$lang/LC_MESSAGES/nvda.po
         fi
         _cp $lang/symbols.dic source/locale/$lang/symbols.dic
@@ -79,9 +83,10 @@ svn2nvda () {
         checkUserGuide $lang && _cp $lang/userGuide.t2t  user_docs/$lang/userGuide.t2t
         commit=$(git -C "$gitDir" diff --cached | wc -l)
         if [ "$commit" -gt "0" ]; then
+            logMsg "Doing commit and updating lastSubmittedSvnRev to $svnRev"
             authors=$(python ../scripts/addresses.py $lang)
             stats=$(git -C "$gitDir" diff --cached --numstat --shortstat)
-            echo "L10n updates for: $lang\nFrom translation svn revision: $svnRev\n\nAuthors:\n$authors\n\nStats:\n$stats" | 
+            echo "L10n updates for: $lang\nFrom translation svn revision: $svnRev\n\nAuthors:\n$authors\n\nStats:\n$stats" |
             git -C "$gitDir" commit -F -
             python ../scripts/db.py -f $file -s nvda.lastSubmittedSvnRev "$svnRev"
         fi
