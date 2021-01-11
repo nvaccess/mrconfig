@@ -62,7 +62,12 @@ svn2nvda () {
         if test "0" = "${lastSubmittedSvnRev}"; then
             lastSubmittedSvnRev=1
         fi
-        needsCommitting=$(svn log -r${lastSubmittedSvnRev}:head ${lang}/nvda.po | grep -iP "r[0-9]+ \|" | grep -viP "commitbot" | wc -l)
+        if test "60382" -gt "${lastSubmittedSvnRev}"; then
+          logMsg "Force needsCommitting"
+          needsCommitting=1
+        else
+          needsCommitting=$(svn log -r${lastSubmittedSvnRev}:head ${lang}/nvda.po | grep -iP "r[0-9]+ \|" | grep -viP "commitbot" | wc -l)
+        fi
         if test "$needsCommitting" != "0" && python ../scripts/poChecker $lang/nvda.po ; then
             _cp $lang/nvda.po source/locale/$lang/LC_MESSAGES/nvda.po
         fi
