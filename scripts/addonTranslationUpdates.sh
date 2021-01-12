@@ -6,7 +6,7 @@ LogDir=/home/nvdal10n/translationUpdateLogs/
 
 _doAddonTranslationUpdate(){
   set -x # for echo of commands and variables
-  addonPath=$1
+  addonPath="${PathToAddons}/$1"
 
   if cd "${addonPath}"; then
     echo Exit early
