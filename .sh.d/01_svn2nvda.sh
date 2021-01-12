@@ -71,7 +71,7 @@ svn2nvda () {
           needsCommitting=$(svn log -r${lastSubmittedSvnRev}:head ${lang}/nvda.po | grep -iP "r[0-9]+ \|" | grep -viP "commitbot" | wc -l)
         fi
         logMsg "Needs committing: ${needsCommitting}"
-        if test "$needsCommitting" != "0" && python ../scripts/poChecker $lang/nvda.po ; then
+        if test "$needsCommitting" != "0" && python ../scripts/poChecker.py $lang/nvda.po ; then
             logMsg "copying po file"
             _cp $lang/nvda.po source/locale/$lang/LC_MESSAGES/nvda.po
         fi
