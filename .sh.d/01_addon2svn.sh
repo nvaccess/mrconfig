@@ -21,7 +21,7 @@ _addFreshPoFile() {
     cp /tmp/${addonName}.pot ${addonPoPath}
     sed -i -e "s/Language: /Language: $lang/g" ${addonPoPath}
     msgmerge --no-location -U ${addonPoPath} /tmp/${addonName}-merge.pot
-    svn add ${addonPoPath}
+    svn add --parents ${addonPoPath}
     svn commit -m "${lang}: ${addonName} ready to be translated."  ${addonPath}
 }
 
