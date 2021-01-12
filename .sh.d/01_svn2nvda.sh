@@ -64,7 +64,7 @@ svn2nvda () {
             logMsg "LastSubmittedSvnRev == 0 setting to 1"
             lastSubmittedSvnRev=1
         fi
-        if test "60382" -gt "${lastSubmittedSvnRev}"; then
+        if test "60531" -gt "${lastSubmittedSvnRev}"; then
           logMsg "Force needsCommitting"
           needsCommitting=1
         else
