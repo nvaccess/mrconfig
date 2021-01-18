@@ -448,8 +448,7 @@ addresses = {
 		'email': [
 			'vgjh2005@gmail.com',
 			'jiangtiandao901647@gmail.com',
-			'manchen0528@gmail.com',
-			'sysking1024@gmail.com',
+			'manchen_0528@outlook.com',
 			'dingpengyu06@gmail.com',
 			'singer.mike.zhao@gmail.com',
 			'1872265132@qq.com',
