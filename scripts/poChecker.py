@@ -80,7 +80,7 @@ class PoChecker(object):
 
 	def _checkSyntax(self):
 		p = subprocess.Popen((MSGFMT, "-o", "-", self._poPath),
-			stdout=file("NUL:" if sys.platform == "win32" else "/dev/null", "w"),
+			stdout=open("NUL:" if sys.platform == "win32" else "/dev/null", "w"),
 			stderr=subprocess.PIPE)
 		output = p.stderr.read()
 		if p.wait() != 0:
@@ -235,7 +235,7 @@ def main():
 	for fn in sys.argv[1:]:
 		c = PoChecker(fn)
 		if not c.check():
-			print c.getReport().encode("UTF-8") + "\n\n"
+			print(c.getReport().encode("UTF-8") + "\n\n")
 		if c.errorCount > 0:
 			exitCode = 1
 	return exitCode
