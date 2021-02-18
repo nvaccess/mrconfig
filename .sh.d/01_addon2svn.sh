@@ -32,10 +32,10 @@ addon2svn() {
 	addonName=$(basename $PWD)
 	logMsg "Running addon2svn for $addonName"
     # If there are any locally modified files, make sure to stash them so they are not accidentally committed.
+    curBranch="$(git branch | grep '*' | awk '{print $2}')"
     needToStash="$(git status --porcelain -uno | wc -l)"
     if [ "$needToStash" -ne 0 ]; then
         datetime="$(date +'%Y-%m-%d at %H:%M:%S')"
-        curBranch="$(git branch | grep '*' | awk '{print $2}')"
         git stash save "$datetime on $curBranch before switching to stable branch"
     fi
     git checkout stable
@@ -91,7 +91,7 @@ addon2svn() {
         fi
     done
     cd "$ADDONDIR"
-    # revert just incase.
+    # revert just in-case.
     git reset --hard HEAD
     # revert back to whatever branch that we were on before the processing, and unstash any temporary work.
     git checkout "$curBranch"
