@@ -13,7 +13,7 @@ DIFF=`which diff`
 #ELINKS=`which elinks`
 MSGMERGE=`which msgmerge`
 POCOUNT=`which pocount`
-PYTHON27=`which python2.7`
+PYTHON38=`which python3.8`
 SCONS=`which scons`
 #TWIDGE=`which twidge`
 WDIFF=`which wdiff`
@@ -34,8 +34,8 @@ elif [ "$MSGMERGE" == "" ]; then
 elif [ "$POCOUNT" == "" ]; then
     echo "Can't find pocount."
     exit 1
-elif [ "$PYTHON27" == "" ]; then
-    echo "could not locate python 2.7, can not continue."
+elif [ "$PYTHON38" == "" ]; then
+    echo "could not locate python 3.8, can not continue."
     exit 1
 elif [ "$SCONS" == "" ]; then
     echo "could not locate scons, can not continue."
