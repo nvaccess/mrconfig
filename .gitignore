@@ -4,3 +4,9 @@ mainNVDACode/
 srt/
 todo/
 *~
+*.pyc
+.DS_Store
+._*
+.project
+.pydevproject
+.venv

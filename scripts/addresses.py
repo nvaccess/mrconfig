@@ -25,14 +25,14 @@ def email(rcpts, subject, body, includeAdmin=False):
 
 if __name__ == "__main__" and len(sys.argv) >= 2:
     lang = sys.argv[1]
-    if not addresses.has_key(lang):
-        print "unable to find language: %s" %lang
+    if lang not in addresses:
+        print("unable to find language: %s" %lang)
         sys.exit()
     # we were called from the webhook with lang, subject, body, so send email.
     if len(sys.argv) == 4:
         email(addresses[lang]['email'], sys.argv[2], sys.argv[3])
     # we were called by another script, with a lang code, spit out email addresses suitable for a commit message.
     elif len(sys.argv) == 2:
-        print "\n".join(addresses[lang]['email'])
+        print("\n".join(addresses[lang]['email']))
     else:
-        print "dont know what to do."
+        print("dont know what to do.")

@@ -1,4 +1,5 @@
-#!/usr/bin/python
+#!/usr/bin/python3
+
 import re
 import sys
 import txt2tags
@@ -62,4 +63,4 @@ if id:
     pars = 0; tables = 0; lists = 0
 
 for i in info:
-    print("%s start:%s paragraphs:%d, tables:%d, lists:%d\n\n" %(i[0],i[1], i[2], i[3], i[4] ))
+    print(("%s start:%s paragraphs:%d, tables:%d, lists:%d\n\n" %(i[0],i[1], i[2], i[3], i[4] )))

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import os.path
-from cStringIO import StringIO
+from io import StringIO
 from translate.storage import statsdb
 
 SRT_ROOT = ".."

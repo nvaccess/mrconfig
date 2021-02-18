@@ -9,7 +9,7 @@ class Repo():
         """Creates a repo object to the given git repo path."""
         p = local.path(gitrpath)
         if not p.exists():
-            raise(ValueError("%s doesn't seem to be a git repository." % gitrpath))
+            raise(ValueError(f"{gitrpath} doesn't seem to be a git repository."))
         self.gitRepoPath = p
         self.git = git['--git-dir='+p._path]
 
