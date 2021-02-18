@@ -9,7 +9,7 @@ addon2settings() {
     ls -1 */settings | while read file; do
         lang=$(dirname $file)
         logMsg "Setting default value for ${addonName} in $file"
-        python ${scriptsDir}/db.py -f $file --set_default addon.${addonName} 0
+        python3 ${scriptsDir}/db.py -f $file --set_default addon.${addonName} 0
     done
 }
 
@@ -48,7 +48,7 @@ addon2svn() {
     cd $PATH2TOPDIR/srt
     ls -1 */settings | while read file; do
         lang=$(dirname $file)
-        if ! want=$(python ${scriptsDir}/db.py -f $file -g addon.${addonName}); then
+        if ! want=$(python3 ${scriptsDir}/db.py -f $file -g addon.${addonName}); then
             logMsg "Error in settings file. Skipping $lang"
             continue
         fi

@@ -30,7 +30,7 @@ checkUserGuide() {
     origDir=`pwd`
     cd $1
     result=0
-    if ! output=$(python ../../scripts/keyCommandsDoc.py 2>&1); then
+    if ! output=$(python3 ../../scripts/keyCommandsDoc.py 2>&1); then
         echo Key commands error in $1/userGuide.t2t: $output
         result=1
     fi
@@ -55,7 +55,7 @@ svn2nvda () {
     ls -1 */settings | while read file; do
         lang=$(dirname $file)
         logMsg "Processing $lang"
-        if ! lastSubmittedSvnRev=$(python ../scripts/db.py -f $file -g nvda.lastSubmittedSvnRev); then
+        if ! lastSubmittedSvnRev=$(python3 ../scripts/db.py -f $file -g nvda.lastSubmittedSvnRev); then
             logMsg "Error in settings file. Skipping language"
             continue
         fi
@@ -71,7 +71,7 @@ svn2nvda () {
           needsCommitting=$(svn log -r${lastSubmittedSvnRev}:head ${lang}/nvda.po | grep -iP "r[0-9]+ \|" | grep -viP "commitbot" | wc -l)
         fi
         logMsg "Needs committing: ${needsCommitting}"
-        if test "$needsCommitting" != "0" && python ../scripts/poChecker.py $lang/nvda.po ; then
+        if test "$needsCommitting" != "0" && python3 ../scripts/poChecker.py $lang/nvda.po ; then
             logMsg "copying po file"
             _cp $lang/nvda.po source/locale/$lang/LC_MESSAGES/nvda.po
         fi
@@ -84,11 +84,11 @@ svn2nvda () {
         commit=$(git -C "$gitDir" diff --cached | wc -l)
         if [ "$commit" -gt "0" ]; then
             logMsg "Doing commit and updating lastSubmittedSvnRev to $svnRev"
-            authors=$(python ../scripts/addresses.py $lang)
+            authors=$(python3 ../scripts/addresses.py $lang)
             stats=$(git -C "$gitDir" diff --cached --numstat --shortstat)
             echo "L10n updates for: $lang\nFrom translation svn revision: $svnRev\n\nAuthors:\n$authors\n\nStats:\n$stats" |
             git -C "$gitDir" commit -F -
-            python ../scripts/db.py -f $file -s nvda.lastSubmittedSvnRev "$svnRev"
+            python3 ../scripts/db.py -f $file -s nvda.lastSubmittedSvnRev "$svnRev"
         fi
     done
     git -C "$gitDir" checkout beta
