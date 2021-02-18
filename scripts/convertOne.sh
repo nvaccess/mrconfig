@@ -23,7 +23,7 @@ if [ "$encoding" != "" ]; then
     echo "$encoding"
     echo
 else
-    if ! output=$($PYTHON27 ${MYDIR}/keyCommandsDoc.py 2>&1); then
+    if ! output=$($PYTHON38 ${MYDIR}/keyCommandsDoc.py 2>&1); then
         result=2
         echo "$lang: Error generating Key Commands document from User Guide: $output"
         echo
