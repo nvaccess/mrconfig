@@ -31,7 +31,7 @@ else
 
     # process each t2t file individually to make it easier to spot errors in output.
     for file in *.t2t; do
-        if ! output=$(txt2tags -q $file 2>&1); then
+        if ! output=$(python3 /home/nvdal10n/mr/scripts/txt2tags.py -q $file 2>&1); then
             result=3
             echo $lang: Error processing $file:
             echo "$output"
