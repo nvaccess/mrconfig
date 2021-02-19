@@ -24,9 +24,9 @@ svn2addon() {
 
     # If there are any locally modified files, make sure to stash them so they are not accidentally committed.
     needToStash="$(git status --porcelain -uno | wc -l)"
+    curBranch="$(git branch | grep '*' | awk '{print $2}')"
     if [ "$needToStash" -ne 0 ]; then
         datetime="$(date +'%Y-%m-%d at %H:%M:%S')"
-        curBranch="$(git branch | grep '*' | awk '{print $2}')"
         git stash save "$datetime on $curBranch before switching to stable branch"
     fi
     git checkout stable
@@ -78,7 +78,7 @@ svn2addon() {
     # make sure we succeed even if no readme files have been translated.
     git add addon/doc/*/readme.md || true
     git commit -m "l10n updates" && git push
-    # incase there are anything left that we didnt deem suitable to commit,
+    # in case there are anything left that we didn't deem suitable to commit,
     # such as po files that are less than 70% translated.
     git reset --hard HEAD
     # revert back to whatever branch that we were on before the processing, and unstash any temporary work.
