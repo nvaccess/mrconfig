@@ -146,6 +146,7 @@ class PoChecker(object):
 	RE_UNNAMED_PERCENT = re.compile(r"(?<!%)%[.\d]*[a-zA-Z]")
 	RE_NAMED_PERCENT = re.compile(r"(?<!%)%\([^(]+\)[.\d]*[a-zA-Z]")
 	RE_FORMAT = re.compile(r"(?<!\{)\{([^{}:]+):?[^{}]*\}")
+
 	def _getInterpolations(self, text):
 		unnamedPercent = self.RE_UNNAMED_PERCENT.findall(text)
 		namedPercent = set(self.RE_NAMED_PERCENT.findall(text))
@@ -228,6 +229,7 @@ class PoChecker(object):
 		report += "\n\n" + "\n\n".join(self.alerts)
 		return report
 
+
 def main():
 	if len(sys.argv) <= 1:
 		sys.exit("Usage: %s poFile ...")
@@ -235,10 +237,12 @@ def main():
 	for fn in sys.argv[1:]:
 		c = PoChecker(fn)
 		if not c.check():
-			print(c.getReport().encode("UTF-8") + "\n\n")
+			report = c.getReport() + "\n\n"
+			print(report.encode("UTF-8"))
 		if c.errorCount > 0:
 			exitCode = 1
 	return exitCode
+
 
 if __name__ == "__main__":
 	sys.exit(main())
