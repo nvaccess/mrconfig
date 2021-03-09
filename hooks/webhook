@@ -1,0 +1,9 @@
+
+#!/usr/bin/env python3
+
+import sys
+
+sys.path.append('../mr/scripts')
+
+with open('../mr/scripts/webhook', 'r') as f:
+        exec(f.read(), {}, {})

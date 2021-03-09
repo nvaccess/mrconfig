@@ -22,6 +22,7 @@
 # m h  dom mon dow   command
 PATH=/home/nvdal10n/bin:/usr/local/bin:/usr/bin:/bin
 PathToMrRepo=/home/nvdal10n/mr
+PathToCGI=/home/nvdal10n/cgi/
 AddonTranslationUpdate="/home/nvdal10n/mr/scripts/addonTranslationUpdates.sh"
 NVDATranslationUpdate="/home/nvdal10n/mr/scripts/nvdaTranslationUpdates.sh"
 
@@ -33,6 +34,9 @@ poStatusHtml=/home/nvdal10n/ikiwiki/publish/poStatus.html
 
 # Keep live crontab in sync with version control.
 1 * * * * cd ${PathToMrRepo} && git pull -q && crontab automatic.crontab
+
+# Ensure webhooks stay up to date.
+3 * * * * cp ${PathToMrRepo}/hooks/ ${PathToCGI}
 
 # Keep addonFiles in sync with version control.
 1 * * * * cd ${PathToMrRepo}/addons/addonFiles && git pull -q
