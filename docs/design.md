@@ -45,7 +45,8 @@ The following are the entry points to the translations system ccode:
   - mr addon2svn
   - mr svn2addon
 - via assembla webhook
- - python scripts/webhook
+  - hooks/webhook  
+  - python scripts/webhook
 
 ## Notifications
 When a crontab command fails an email is sent to the nvdal10n account.
