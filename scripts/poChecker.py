@@ -10,6 +10,7 @@ import glob
 import codecs
 import re
 import subprocess
+from typing import List
 
 MSGFMT = "msgfmt"
 
@@ -33,15 +34,14 @@ class PoChecker(object):
 		self._po = codecs.open(po, "r", "UTF-8")
 		self._string = None
 		#: Error and warning messages.
-		#: @type: list of unicode
-		self.alerts = []
+		self.alerts: List[str] = []
 		#: Whether there is a syntax error.
 		#: @type: bool
 		self.hasSyntaxError = False
 		#: The number of warnings.
 		#: @type: int
 		self.warningCount = 0
-		#: The numberf of errors.
+		#: The number of errors.
 		#: @type: int
 		self.errorCount = 0
 
@@ -81,7 +81,13 @@ class PoChecker(object):
 	def _checkSyntax(self):
 		p = subprocess.Popen((MSGFMT, "-o", "-", self._poPath),
 			stdout=open("NUL:" if sys.platform == "win32" else "/dev/null", "w"),
-			stderr=subprocess.PIPE)
+			stderr=subprocess.PIPE,
+			errors="UTF-8",
+		)
+		# https://docs.python.org/3.7/library/subprocess.html#subprocess.Popen.stderr
+		#  If the encoding or errors arguments were specified or the universal_newlines argument was True,
+		#  the stream is a text stream, otherwise it is a byte stream. If the stderr argument was not PIPE,
+		#  this attribute is None.
 		output = p.stderr.read()
 		if p.wait() != 0:
 			output = output.rstrip().replace("\r\n", "\n")
