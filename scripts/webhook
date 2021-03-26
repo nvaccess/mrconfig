@@ -71,10 +71,17 @@ for lang in t2tLangs:
     try:
         subprocess.check_output([os.path.join(SCRIPTS_PATH, "convertOne.sh")],
             cwd=os.path.join(SRT_PATH, lang),
-            stderr=subprocess.STDOUT)
+            stderr=subprocess.STDOUT,
+            errors="UTF-8",
+        )
+        # https://docs.python.org/3.7/library/subprocess.html#subprocess.Popen.stderr
+        #  If the encoding or errors arguments were specified or the universal_newlines argument was True,
+        #  the stream is a text stream, otherwise it is a byte stream. If the stderr argument was not PIPE,
+        #  this attribute is None.
     except subprocess.CalledProcessError as e:
+        convertOneError: str = e.output
         hasAlert = True
-        body += "\n\n\n" + e.output
+        body += "\n\n\n" + convertOneError
 
 # Don't flag alerts for automated commits.
 # Automated commits shouldn't introduce errors, so any errors were there before.
