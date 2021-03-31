@@ -47,7 +47,8 @@ for po in poFiles:
         if not c.check():
             if c.errorCount > 0:
                 hasAlert = True
-            body += "\n\n\n" + c.getReport().encode("UTF-8")
+            report = c.getReport()
+            body += "\n\n\n" + report
     except:
         import traceback
         body += "\n\n\nError checking %s:\n%s" % (po, traceback.format_exc())

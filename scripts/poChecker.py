@@ -10,7 +10,7 @@ import glob
 import codecs
 import re
 import subprocess
-from typing import List
+from typing import List, Optional
 
 MSGFMT = "msgfmt"
 
@@ -213,10 +213,9 @@ class PoChecker(object):
 					self._formatInterpolations(strUnnamedPercent, strNamedPercent, strFormats)),
 				isError=error)
 
-	def getReport(self):
+	def getReport(self) -> Optional[str]:
 		"""Get a text report about any errors or warnings.
 		@return: The text or C{None} if there were no problems.
-		@rtype: unicode
 		"""
 		if not self.alerts:
 			return None
