@@ -5,8 +5,6 @@
 """
 
 import sys
-import os
-import glob
 import codecs
 import re
 import subprocess
@@ -151,7 +149,7 @@ class PoChecker(object):
 
 	RE_UNNAMED_PERCENT = re.compile(r"(?<!%)%[.\d]*[a-zA-Z]")
 	RE_NAMED_PERCENT = re.compile(r"(?<!%)%\([^(]+\)[.\d]*[a-zA-Z]")
-	RE_FORMAT = re.compile(r"(?<!\{)\{([^{}:]+):?[^{}]*\}")
+	RE_FORMAT = re.compile(r"(?<!{){([^{}:]+):?[^{}]*}")
 
 	def _getInterpolations(self, text):
 		unnamedPercent = self.RE_UNNAMED_PERCENT.findall(text)

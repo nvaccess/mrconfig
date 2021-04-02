@@ -30,9 +30,10 @@ body = "%s %s %s\n\n%s" %(author, action, title, body)
 
 rcpts = []
 for key in addresses.keys():
-    if re.search('/test/', body):
+    if re.search(r'/test/', body):
         break
-    if re.search('(\s+/%s/)|(\.%s\.po)' %(key, key), body):
+    # language id in path or filename: "/en-us/" or ".en-us.po"
+    if re.search(rf'(\s+/{key}/)|(\.{key}\.po)', body):
         rcpts.extend(addresses[key]['email'])
 
 hasAlert = False
