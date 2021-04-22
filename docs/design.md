@@ -36,7 +36,7 @@ When a commit is made to SRT, a webhook is run which:
 - See nginx config: `publicServer/conf/nginx/sites-available/nvda`
 
 ## Code entry points
-The following are the entry points to the translations system ccode:
+The following are the entry points to the translation system code:
 - via cron
   - mr svn2nvda
   - mr mergePot
@@ -49,5 +49,5 @@ The following are the entry points to the translations system ccode:
   - python scripts/webhook
 
 ## Notifications
-When a crontab command fails an email is sent to the nvdal10n account.
-Which is forwarded to the addresses listed in `~/.forward`
+- When a crontab command fails an email is sent to the nvdal10n account.
+  Which is forwarded to the addresses listed in `~/.forward`
