@@ -8,7 +8,7 @@ addresses = {
 	'default': {
 		'lang': '',
 		'email': [
-			'nvdal10n@exbi.nvaccess.org',
+			'nvdal10n@zebi.nvaccess.org',
 		],
 	},
 	'af_ZA': {
