@@ -28,9 +28,8 @@ NVDATranslationUpdate="/home/nvdal10n/mr/scripts/nvdaTranslationUpdates.sh"
 
 00  0 * * fri $NVDATranslationUpdate
 
-srt_scripts=/home/nvdal10n/mr/srt/scripts/
 poStatusHtml=/home/nvdal10n/ikiwiki/publish/poStatus.html
-22 * * * * cd $srt_scripts; ./poStatus.py >${poStatusHtml}
+22 * * * * cd ${PathToMrRepo}/scripts && ./poStatus.py >${poStatusHtml}
 
 # Keep live crontab in sync with version control.
 1 * * * * cd ${PathToMrRepo} && git pull -q && crontab automatic.crontab
