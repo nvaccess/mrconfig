@@ -101,7 +101,7 @@ print(f"""--- start ---
 rcpts: {", ".join(rcpts)}
 subject: {subject}
 body: {body}
---- raw data ---"
+--- raw data ---
 {rawData}:
 --- end ---
 """)
