@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import os.path
+import sys
 from io import StringIO
 from datetime import datetime
 from translate.storage import statsdb
@@ -67,7 +68,11 @@ def makeReport():
 		)
 		for po in listPoFiles(lang, webPoFiles):
 			path = os.path.join(SRT_ROOT, po)
-			totals = stats.filetotals(path)
+			try:
+				totals = stats.filetotals(path)
+			except Exception as e:
+				sys.stderr.write(f"Unable to load {path}: {e}")
+				raise e
 			total = totals["total"]
 			if total:
 				transPercent = totals["translated"] / float(totals["total"]) * 100
