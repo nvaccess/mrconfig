@@ -11,7 +11,7 @@ from db import DB
 SRT_PATH = "/home/nvdal10n/mr/srt"
 SCRIPTS_PATH = "/home/nvdal10n/mr/scripts"
 
-# Ensure our overridden svn gets used, includingsubprocesses.
+# Ensure our overridden svn gets used, including subprocesses.
 # Also add /usr/local/bin, which isn't already included in this context.
 os.environ["PATH"] = "/home/nvdal10n/bin:/usr/local/bin:" + os.environ["PATH"]
 
@@ -42,6 +42,7 @@ subprocess.call(["svn", "update", "-q"], cwd=SRT_PATH)
 # Check any po files in this commit.
 poFiles = re.findall(r'(?<=[AM]\s)/.*\.po', body)
 for po in poFiles:
+    print(f"Found poFile match:{po}")
     poPath = os.path.join(SRT_PATH, po[1:])
     try:
         c = poChecker.PoChecker(poPath)
@@ -70,6 +71,7 @@ for f in files:
 # The t2t conversion code operates per language.
 t2tLangs = re.findall(r'(?<=[AM]\s)/([^/]+)/[^/]+\.t2t', body)
 for lang in t2tLangs:
+    print(f"run convertOne for {lang}")
     try:
         subprocess.check_output([os.path.join(SCRIPTS_PATH, "convertOne.sh")],
             cwd=os.path.join(SRT_PATH, lang),
@@ -90,22 +92,22 @@ for lang in t2tLangs:
 if hasAlert and author != "CommitBot":
     subject = "[alert] " + subject
 email(rcpts, subject, body, includeAdmin=hasAlert)
-
-f = open('/tmp/webhook.log', 'a')
-f.write("--- start ---\n")
-f.write("rcpts: %s\n" % ", ".join(rcpts))
-f.write("subject: %s\n" % subject)
-f.write("body: %s\n" % body)
-f.write("-- raw data ---\n")
-for key in form.keys():
-    f.write("%s='%s'\n" % (key, form[key].value))
-f.write("--- end ---\n")
-f.close()
 print("Notification sent.")
 
+rawData= "\n".join(
+    [f"{key}='{form[key].value}'n" for key in form.keys()]
+)
+print(f"""--- start ---
+rcpts: {", ".join(rcpts)}
+subject: {subject}
+body: {body}
+--- raw data ---"
+{rawData}:
+--- end ---
+""")
 
 if re.search("/website/", body):
     print("running website post-commit hook.")
     pc = '/home/nvdal10n/ikiwiki/publish/post-commit'
     subprocess.call([pc])
-    print("finnished website post-commit hook.")
+    print("finished website post-commit hook.")
