@@ -36,7 +36,7 @@ poStatusHtml=/home/nvdal10n/ikiwiki/publish/poStatus.html
 1 * * * * cd ${PathToMrRepo} && git pull -q && crontab automatic.crontab
 
 # Ensure webhooks stay up to date.
-3 * * * * cp ${PathToMrRepo}/hooks/ ${PathToCGI}
+3 * * * * cp ${PathToMrRepo}/hooks/* ${PathToCGI}
 
 # Keep addonFiles in sync with version control.
 1 * * * * cd ${PathToMrRepo}/addons/addonFiles && git pull -q
