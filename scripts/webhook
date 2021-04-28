@@ -109,5 +109,12 @@ body: {body}
 if re.search("/website/", body):
     print("running website post-commit hook.")
     pc = '/home/nvdal10n/ikiwiki/publish/post-commit'
-    subprocess.call([pc])
+    try:
+        subprocess.check_output(
+            [pc],
+            stderr=subprocess.STDOUT,
+            errors="UTF-8",
+        )
+    except subprocess.CalledProcessError as e:
+        print(f"error occurred during {pc}: {e}")
     print("finished website post-commit hook.")
