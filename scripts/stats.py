@@ -4,11 +4,13 @@ import re
 import sys
 import txt2tags
 
+# Called by rebuildStats, with current directory set to SRT_PATH/<lang>
+
 # regexps for matching t2t section headings
 nheader = re.compile(r'(\++)(.*?)(\++.*)')
 unheader = re.compile(r'(=+)(.*?)(=+.*)')
 
-f = open(sys.argv[1])
+f = open(sys.argv[1]) # eg userGuide.t2t
 lines = f.readlines()
 f.close()
 
