@@ -13,7 +13,7 @@ logging.basicConfig(
 	stream=sys.stderr, # stderr should result in /var/log/uwsgi/app/nvdal10n.log
 )
 
-startDate = datetime.now().strftime("%Y-%b-%d %H:%M")
+startDate = datetime.now().strftime("%Y-%b-%d %H:%M:%S")
 logging.info(f"Webhook starting: {startDate}")
 
 SCRIPTS_PATH = os.path.abspath('../mr/scripts')
@@ -46,5 +46,5 @@ try:
 except Exception as e:
 	logging.error(f"Error running process: {e}")
 
-endDate = datetime.now().strftime("%Y-%b-%d %H:%M")
+endDate = datetime.now().strftime("%Y-%b-%d %H:%M:%S")
 logging.info(f"Webhook finished: {endDate}")
