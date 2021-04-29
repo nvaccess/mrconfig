@@ -4,13 +4,17 @@ import sys
 import logging
 import subprocess
 import os
+from datetime import datetime
 
+date = datetime.now().strftime("%Y-%b-%d %H:%M")
 logging.basicConfig(
 	# This process is run as user nvdal10n.
 	# filename='/var/log/uwsgi/app/nvdal10n-webhook.log', # no write permission
 	level=logging.DEBUG,
 	stream=sys.stderr, # stderr should result in /var/log/uwsgi/app/nvdal10n.log
 )
+
+logging.info(f"Webhook starting: {date}")
 
 SCRIPTS_PATH = os.path.abspath('../mr/scripts')
 
