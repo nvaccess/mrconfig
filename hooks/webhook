@@ -6,7 +6,6 @@ import subprocess
 import os
 from datetime import datetime
 
-date = datetime.now().strftime("%Y-%b-%d %H:%M")
 logging.basicConfig(
 	# This process is run as user nvdal10n.
 	# filename='/var/log/uwsgi/app/nvdal10n-webhook.log', # no write permission
@@ -14,7 +13,8 @@ logging.basicConfig(
 	stream=sys.stderr, # stderr should result in /var/log/uwsgi/app/nvdal10n.log
 )
 
-logging.info(f"Webhook starting: {date}")
+startDate = datetime.now().strftime("%Y-%b-%d %H:%M")
+logging.info(f"Webhook starting: {startDate}")
 
 SCRIPTS_PATH = os.path.abspath('../mr/scripts')
 
@@ -45,3 +45,6 @@ try:
 
 except Exception as e:
 	logging.error(f"Error running process: {e}")
+
+endDate = datetime.now().strftime("%Y-%b-%d %H:%M")
+logging.info(f"Webhook finished: {endDate}")
