@@ -62,6 +62,7 @@ for f in files:
     f = f[1:]
     path = os.path.join(SRT_PATH, f)
     try:
+        print(f"testing settings file: {path}")
         DB(path)
     except Exception as e:
         hasAlert = True
