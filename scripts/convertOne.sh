@@ -23,7 +23,7 @@ if [ "$encoding" != "" ]; then
     echo "$encoding"
     echo
 else
-    if ! output=$($PYTHON38 ${MYDIR}/keyCommandsDoc.py 2>&1); then
+    if ! output=$(python3 ${MYDIR}/keyCommandsDoc.py 2>&1); then
         result=2
         echo "$lang: Error generating Key Commands document from User Guide: $output"
         echo
@@ -31,7 +31,7 @@ else
 
     # process each t2t file individually to make it easier to spot errors in output.
     for file in *.t2t; do
-        if ! output=$(python3 /home/nvdal10n/mr/scripts/txt2tags.py -q $file 2>&1); then
+        if ! output=$(python3 ${MYDIR}/txt2tags.py -q $file 2>&1); then
             result=3
             echo $lang: Error processing $file:
             echo "$output"

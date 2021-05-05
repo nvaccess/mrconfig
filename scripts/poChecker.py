@@ -5,12 +5,10 @@
 """
 
 import sys
-import os
-import glob
 import codecs
 import re
 import subprocess
-from typing import List
+from typing import List, Optional
 
 MSGFMT = "msgfmt"
 
@@ -151,7 +149,7 @@ class PoChecker(object):
 
 	RE_UNNAMED_PERCENT = re.compile(r"(?<!%)%[.\d]*[a-zA-Z]")
 	RE_NAMED_PERCENT = re.compile(r"(?<!%)%\([^(]+\)[.\d]*[a-zA-Z]")
-	RE_FORMAT = re.compile(r"(?<!\{)\{([^{}:]+):?[^{}]*\}")
+	RE_FORMAT = re.compile(r"(?<!{){([^{}:]+):?[^{}]*}")
 
 	def _getInterpolations(self, text):
 		unnamedPercent = self.RE_UNNAMED_PERCENT.findall(text)
@@ -213,10 +211,9 @@ class PoChecker(object):
 					self._formatInterpolations(strUnnamedPercent, strNamedPercent, strFormats)),
 				isError=error)
 
-	def getReport(self):
+	def getReport(self) -> Optional[str]:
 		"""Get a text report about any errors or warnings.
 		@return: The text or C{None} if there were no problems.
-		@rtype: unicode
 		"""
 		if not self.alerts:
 			return None

@@ -82,8 +82,8 @@ class KeyCommandsMaker(object):
 		"""Constructor.
 		@param userGuideFilename: The file name of the User Guide to be used as input.
 		@type userGuideFilename: str
-		@param keyCommandsFilename: The file name of the key commands file to be output. 
-		@type keyCommandsFilename: str
+		@param keyCommandsFileName: The file name of the key commands file to be output.
+		@type keyCommandsFileName: str
 		"""
 		self._initClass()
 		self.ugFn = userGuideFilename
