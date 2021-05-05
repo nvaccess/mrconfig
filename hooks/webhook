@@ -7,10 +7,11 @@ import os
 from datetime import datetime
 
 logging.basicConfig(
-	# This process is run as user nvdal10n.
-	# filename='/var/log/uwsgi/app/nvdal10n-webhook.log', # no write permission
+	# This process is run as user nvdal10n, which does not have write permissions for
+	# /var/log/uwsgi/app/ so instead of writing to file, write to stderr.
+	# stderr is logged to /var/log/uwsgi/app/nvdal10n.log by nginx/fastcgi
 	level=logging.DEBUG,
-	stream=sys.stderr, # stderr should result in /var/log/uwsgi/app/nvdal10n.log
+	stream=sys.stderr,
 )
 
 startDate = datetime.now().strftime("%Y-%b-%d %H:%M:%S")
