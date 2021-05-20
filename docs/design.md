@@ -49,5 +49,36 @@ The following are the entry points to the translation system code:
   - python scripts/webhook
 
 ## Notifications
+When a crontab command fails an email is sent to the nvdal10n account.
+Which is forwarded to the addresses listed in `~/.forward`
+
+## Add-ons
+Addon repositories are cloned due to the `available.d/10_<addon name>` file being symlinked (on the nvaccess server) from the `enabled.d` directory. They are cloned to `~/mr/addons`.
+- The addon repositories are updated and used to generate a `*.pot` file to merge with translations in the `SRT` repository.
+
+### Translating a new add-on
+Although outdated the following gives an overview: https://github.com/nvdaaddons/nvdaaddons.github.io/wiki/MakeAddonsTranslatable
+
+Now:
+- The addon must have a public repository on [`nvdaaddons`](https://github.com/nvdaaddons/).
+- The addon must have a branch named `stable`.
+  - Author merges code here when stable and ready to receive translations. 
+  - Translations (po files) are pushed here.
+- Admins on NV Access server register the add-on and commit settings for translators.
+  - `sudo su nvdal10n` 
+  - `cd ~/mr`
+  - `mr up`
+  - `cd available.d`
+  - `mr registerAddon <addon repo name>`
+  - `git push`
+  - `cd ~/mr`
+  - `mr up`
+  - `cd addons/<addon repo name>`
+  - `mr addon2settings`
+  - `cd ~/mr/srt`
+  - `svn commit */settings -m "Make <addon name> add-on available for translation."`
+- add entry to `automatic.crontab`
+
+## Errors / loggin
 - When a crontab command fails an email is sent to the nvdal10n account.
   Which is forwarded to the addresses listed in `~/.forward`
