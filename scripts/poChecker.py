@@ -5,11 +5,10 @@
 """
 
 import sys
-import os
-import glob
 import codecs
 import re
 import subprocess
+from typing import List, Optional
 
 MSGFMT = "msgfmt"
 
@@ -33,15 +32,14 @@ class PoChecker(object):
 		self._po = codecs.open(po, "r", "UTF-8")
 		self._string = None
 		#: Error and warning messages.
-		#: @type: list of unicode
-		self.alerts = []
+		self.alerts: List[str] = []
 		#: Whether there is a syntax error.
 		#: @type: bool
 		self.hasSyntaxError = False
 		#: The number of warnings.
 		#: @type: int
 		self.warningCount = 0
-		#: The numberf of errors.
+		#: The number of errors.
 		#: @type: int
 		self.errorCount = 0
 
@@ -80,8 +78,14 @@ class PoChecker(object):
 
 	def _checkSyntax(self):
 		p = subprocess.Popen((MSGFMT, "-o", "-", self._poPath),
-			stdout=file("NUL:" if sys.platform == "win32" else "/dev/null", "w"),
-			stderr=subprocess.PIPE)
+			stdout=open("NUL:" if sys.platform == "win32" else "/dev/null", "w"),
+			stderr=subprocess.PIPE,
+			errors="UTF-8",
+		)
+		# https://docs.python.org/3.7/library/subprocess.html#subprocess.Popen.stderr
+		#  If the encoding or errors arguments were specified or the universal_newlines argument was True,
+		#  the stream is a text stream, otherwise it is a byte stream. If the stderr argument was not PIPE,
+		#  this attribute is None.
 		output = p.stderr.read()
 		if p.wait() != 0:
 			output = output.rstrip().replace("\r\n", "\n")
@@ -145,7 +149,8 @@ class PoChecker(object):
 
 	RE_UNNAMED_PERCENT = re.compile(r"(?<!%)%[.\d]*[a-zA-Z]")
 	RE_NAMED_PERCENT = re.compile(r"(?<!%)%\([^(]+\)[.\d]*[a-zA-Z]")
-	RE_FORMAT = re.compile(r"(?<!\{)\{([^{}:]+):?[^{}]*\}")
+	RE_FORMAT = re.compile(r"(?<!{){([^{}:]+):?[^{}]*}")
+
 	def _getInterpolations(self, text):
 		unnamedPercent = self.RE_UNNAMED_PERCENT.findall(text)
 		namedPercent = set(self.RE_NAMED_PERCENT.findall(text))
@@ -206,10 +211,9 @@ class PoChecker(object):
 					self._formatInterpolations(strUnnamedPercent, strNamedPercent, strFormats)),
 				isError=error)
 
-	def getReport(self):
+	def getReport(self) -> Optional[str]:
 		"""Get a text report about any errors or warnings.
 		@return: The text or C{None} if there were no problems.
-		@rtype: unicode
 		"""
 		if not self.alerts:
 			return None
@@ -228,6 +232,7 @@ class PoChecker(object):
 		report += "\n\n" + "\n\n".join(self.alerts)
 		return report
 
+
 def main():
 	if len(sys.argv) <= 1:
 		sys.exit("Usage: %s poFile ...")
@@ -235,10 +240,12 @@ def main():
 	for fn in sys.argv[1:]:
 		c = PoChecker(fn)
 		if not c.check():
-			print c.getReport().encode("UTF-8") + "\n\n"
+			report = c.getReport() + "\n\n"
+			print(report.encode("UTF-8"))
 		if c.errorCount > 0:
 			exitCode = 1
 	return exitCode
+
 
 if __name__ == "__main__":
 	sys.exit(main())

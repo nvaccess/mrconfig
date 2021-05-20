@@ -1,6 +1,9 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
+
 import argparse
-import os, re, sys
+import os
+import re
+import sys
 import logging
 from pprint import pprint, pformat
 from db import DB
@@ -62,10 +65,10 @@ for lang in args.langs:
             logging.info('No new revisions to be processed')
             continue
         allRevs = r.getRevList(branch)
-        print "revisions that needs processing: %d" % len(rl)
+        print("revisions that needs processing: %d" % len(rl))
         for hash in rl:
             index = allRevs.index(hash)
-            print("%d" %index)
+            print(("%d" %index))
             mkdirpath = tbpath.join(lang).join(linfo[key]['dstprefix']).join(index)
             mkdir['-p', mkdirpath._path]()
             diffText = r.getDiffBetween(prevhash, hash, linfo[key]['srcpath'])

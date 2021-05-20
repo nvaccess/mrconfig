@@ -1,10 +1,14 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import os.path
-from cStringIO import StringIO
+import sys
+from io import StringIO
+from datetime import datetime
 from translate.storage import statsdb
 
-SRT_ROOT = ".."
+# Called by cron, with current directory set to mr/scripts
+
+SRT_ROOT = "../srt"
 
 def listLangs():
 	langs = []
@@ -41,32 +45,45 @@ def listPoFiles(lang, webPoFiles):
 			yield po
 
 def makeReport():
+	date = datetime.now().strftime("%Y-%b-%d %H:%M")
 	out = StringIO()
-	out.write('<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">\n'
-		'<HTML><HEAD>\n'
-		'<META NAME="generator" CONTENT="postatus.py">\n'
-		'<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">\n'
-		'<TITLE>po file status - {date}</TITLE>\n'
-		'</HEAD><BODY>\n'
-		'<H1>po file status - {date}</H1>\n'
-	)
+	out.write(f"""<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+	<META NAME="generator" CONTENT="postatus.py">
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+	<TITLE>po file status - {date}</TITLE>
+</HEAD><BODY>
+	<H1>po file status - {date}</H1>
+""")
 	stats = statsdb.StatsCache()
 	webPoFiles = listWebPoFiles()
 	for lang in listLangs():
-		out.write('<br/><H2>{lang}</H2><br/>\n'
-			'<table><tr><th>Filename</th><th>Percentage translated</th><th>Total number of messages</th></tr>\n'
-			.format(lang=lang))
+		out.write(
+			f'<br/><H2>{lang}</H2><br/>\n'
+			'<table>\n'
+			'<tr><th>Filename</th>'
+			'<th>Percentage translated</th>'
+			'<th>Total number of messages</th>'
+			'</tr>\n'
+		)
 		for po in listPoFiles(lang, webPoFiles):
 			path = os.path.join(SRT_ROOT, po)
-			totals = stats.filetotals(path)
+			try:
+				totals = stats.filetotals(path)
+			except Exception as e:
+				sys.stderr.write(f"Unable to load {path}: {e}")
+				raise e
 			total = totals["total"]
 			if total:
 				transPercent = totals["translated"] / float(totals["total"]) * 100
 			else:
 				transPercent = 0.0
-			out.write("<tr><td>{po}</td><td>{transPercent:.2f}%</td><td>{total}</td></tr>\n"
-				.format(po=po.replace("/", "&#47;"), transPercent=transPercent,
-					total=totals["total"]))
+			out.write(
+				f"<tr><td>{po.replace('/', '&#47;')}</td>"
+				f"<td>{transPercent:.2f}%</td>"
+				f"<td>{totals['total']}</td>"
+				f"</tr>\n"
+			)
 		out.write('</table>\n')
 	out.write('</BODY></HTML>\n')
 	return out.getvalue()

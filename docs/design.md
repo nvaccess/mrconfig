@@ -36,7 +36,7 @@ When a commit is made to SRT, a webhook is run which:
 - See nginx config: `publicServer/conf/nginx/sites-available/nvda`
 
 ## Code entry points
-The following are the entry points to the translations system ccode:
+The following are the entry points to the translation system code:
 - via cron
   - mr svn2nvda
   - mr mergePot
@@ -45,7 +45,8 @@ The following are the entry points to the translations system ccode:
   - mr addon2svn
   - mr svn2addon
 - via assembla webhook
- - python scripts/webhook
+  - hooks/webhook  
+  - python scripts/webhook
 
 ## Notifications
 When a crontab command fails an email is sent to the nvdal10n account.
@@ -77,3 +78,7 @@ Now:
   - `cd ~/mr/srt`
   - `svn commit */settings -m "Make <addon name> add-on available for translation."`
 - add entry to `automatic.crontab`
+
+## Errors / loggin
+- When a crontab command fails an email is sent to the nvdal10n account.
+  Which is forwarded to the addresses listed in `~/.forward`

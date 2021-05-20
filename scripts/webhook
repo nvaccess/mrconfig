@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
+
 import os
 import cgi
 import re
@@ -10,29 +11,31 @@ from db import DB
 SRT_PATH = "/home/nvdal10n/mr/srt"
 SCRIPTS_PATH = "/home/nvdal10n/mr/scripts"
 
-# Ensure our overridden svn gets used, includingsubprocesses.
+# Ensure our overridden svn gets used, including subprocesses.
 # Also add /usr/local/bin, which isn't already included in this context.
 os.environ["PATH"] = "/home/nvdal10n/bin:/usr/local/bin:" + os.environ["PATH"]
 
 form = cgi.FieldStorage() # instantiate only once!
 
-print "Content-type: text/plain\n"
+print("Content-type: text/plain\n")
 
 
-author = form['author'].value if form.has_key('author') else 'pratchett'
-action = form['action'].value if form.has_key('action') else 'wrote'
-body = form['body'].value if form.has_key('body') else 'the colour of magic'
-title = form['title'].value if form.has_key('title') else 'disc world'
+author = form['author'].value if 'author' in form else 'pratchett'
+action = form['action'].value if 'action' in form else 'wrote'
+body = form['body'].value if 'body' in form else 'the colour of magic'
+title = form['title'].value if 'title' in form else 'disc world'
 subject = "SRT %s" % title
 body = "%s %s %s\n\n%s" %(author, action, title, body)
 
 
 rcpts = []
-for key in addresses.keys():
-    if re.search('/test/', body):
+for langCode in addresses.keys():
+    if re.search(r'/test/', body):
+        print("Test detected")
         break
-    if re.search('(\s+/%s/)|(\.%s\.po)' %(key, key), body):
-        rcpts.extend(addresses[key]['email'])
+    # language id in path or filename: "/en-us/" or ".en-us.po"
+    if re.search(rf'(\s+/{langCode}/)|(\.{langCode}\.po)', body):
+        rcpts.extend(addresses[langCode]['email'])
 
 hasAlert = False
 subprocess.call(["svn", "update", "-q"], cwd=SRT_PATH)
@@ -40,13 +43,15 @@ subprocess.call(["svn", "update", "-q"], cwd=SRT_PATH)
 # Check any po files in this commit.
 poFiles = re.findall(r'(?<=[AM]\s)/.*\.po', body)
 for po in poFiles:
+    print(f"Found poFile match:{po}")
     poPath = os.path.join(SRT_PATH, po[1:])
     try:
         c = poChecker.PoChecker(poPath)
         if not c.check():
             if c.errorCount > 0:
                 hasAlert = True
-            body += "\n\n\n" + c.getReport().encode("UTF-8")
+            report = c.getReport()
+            body += "\n\n\n" + report
     except:
         import traceback
         body += "\n\n\nError checking %s:\n%s" % (po, traceback.format_exc())
@@ -58,6 +63,7 @@ for f in files:
     f = f[1:]
     path = os.path.join(SRT_PATH, f)
     try:
+        print(f"testing settings file: {path}")
         DB(path)
     except Exception as e:
         hasAlert = True
@@ -67,35 +73,50 @@ for f in files:
 # The t2t conversion code operates per language.
 t2tLangs = re.findall(r'(?<=[AM]\s)/([^/]+)/[^/]+\.t2t', body)
 for lang in t2tLangs:
+    print(f"run convertOne for {lang}")
     try:
         subprocess.check_output([os.path.join(SCRIPTS_PATH, "convertOne.sh")],
             cwd=os.path.join(SRT_PATH, lang),
-            stderr=subprocess.STDOUT)
+            stderr=subprocess.STDOUT,
+            errors="UTF-8",
+        )
+        # https://docs.python.org/3.7/library/subprocess.html#subprocess.Popen.stderr
+        #  If the encoding or errors arguments were specified or the universal_newlines argument was True,
+        #  the stream is a text stream, otherwise it is a byte stream. If the stderr argument was not PIPE,
+        #  this attribute is None.
     except subprocess.CalledProcessError as e:
+        convertOneError: str = e.output
         hasAlert = True
-        body += "\n\n\n" + e.output
+        body += "\n\n\n" + convertOneError
 
 # Don't flag alerts for automated commits.
 # Automated commits shouldn't introduce errors, so any errors were there before.
 if hasAlert and author != "CommitBot":
     subject = "[alert] " + subject
 email(rcpts, subject, body, includeAdmin=hasAlert)
+print("Notification sent.")
 
-f = open('/tmp/webhook.log', 'a')
-f.write("--- start ---\n")
-f.write("rcpts: %s\n" % ", ".join(rcpts))
-f.write("subject: %s\n" % subject)
-f.write("body: %s\n" % body)
-f.write("-- raw data ---\n")
-for key in form.keys():
-    f.write("%s='%s'\n" % (key, form[key].value))
-f.write("--- end ---\n")
-f.close()
-print "Notification sent."
-
+rawData= "\n".join(
+    [f"{key}='{form[key].value}'n" for key in form.keys()]
+)
+print(f"""--- start ---
+rcpts: {", ".join(rcpts)}
+subject: {subject}
+body: {body}
+--- raw data ---
+{rawData}:
+--- end ---
+""")
 
 if re.search("/website/", body):
-    print "running website post-commit hook."
+    print("running website post-commit hook.")
     pc = '/home/nvdal10n/ikiwiki/publish/post-commit'
-    subprocess.call([pc])
-    print "finnished website post-commit hook."
+    try:
+        subprocess.check_output(
+            [pc],
+            stderr=subprocess.STDOUT,
+            errors="UTF-8",
+        )
+    except subprocess.CalledProcessError as e:
+        print(f"error occurred during {pc}: {e}")
+    print("finished website post-commit hook.")

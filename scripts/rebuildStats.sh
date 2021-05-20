@@ -12,9 +12,9 @@ fi
 scriptsDir="../../scripts"
 
 # Get the structure of the localized document
-python ${scriptsDir}/stats.py userGuide.t2t >localized.stats
+python3 ${scriptsDir}/stats.py userGuide.t2t >localized.stats
 # Get the structure of the next revision to be translated.
-python ${scriptsDir}/stats.py userGuide-newRevisions/$nextRev/userGuide.t2t >next.stats
+python3 ${scriptsDir}/stats.py userGuide-newRevisions/$nextRev/userGuide.t2t >next.stats
 lang=$(basename `pwd`)
 
 d_args=(-d --unchanged-line-format='' --old-line-format='en %L' --new-line-format="$lang %L")

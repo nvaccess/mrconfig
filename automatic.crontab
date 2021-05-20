@@ -21,109 +21,111 @@
 # 
 # m h  dom mon dow   command
 PATH=/home/nvdal10n/bin:/usr/local/bin:/usr/bin:/bin
-PathToMrRepo=/home/nvdal10n/mr/
-00  0 * * fri cd $PathToMrRepo; chronic mr up
-05  0 * * fri cd ${PathToMrRepo}/srt/ && chronic mr svn2nvda
-10  0 * * fri cd ${PathToMrRepo}/srt/ && chronic mr mergePot
-15  0 * * fri cd ${PathToMrRepo}/srt/ && chronic mr findRevs
+PathToMrRepo=/home/nvdal10n/mr
+PathToCGI=/home/nvdal10n/cgi/
+AddonTranslationUpdate="/home/nvdal10n/mr/scripts/addonTranslationUpdates.sh"
+NVDATranslationUpdate="/home/nvdal10n/mr/scripts/nvdaTranslationUpdates.sh"
 
-srt_scripts=/home/nvdal10n/mr/srt/scripts/
+00  0 * * fri $NVDATranslationUpdate
+
 poStatusHtml=/home/nvdal10n/ikiwiki/publish/poStatus.html
-22 * * * * cd $srt_scripts; ./poStatus.py >${poStatusHtml}
+22 * * * * cd ${PathToMrRepo}/scripts && ./poStatus.py >${poStatusHtml}
 
 # Keep live crontab in sync with version control.
 1 * * * * cd ${PathToMrRepo} && git pull -q && crontab automatic.crontab
+
+# Ensure webhooks stay up to date.
+3 * * * * cp ${PathToMrRepo}/hooks/* ${PathToCGI}
 
 # Keep addonFiles in sync with version control.
 1 * * * * cd ${PathToMrRepo}/addons/addonFiles && git pull -q
 
 #x  1 for addons starting with a
-00  1 * * fri cd ${PathToMrRepo}/addons/addonUpdater && chronic mr addon2svn && chronic mr svn2addon
-03  1 * * fri cd ${PathToMrRepo}/addons/addonsHelp && chronic mr addon2svn && chronic mr svn2addon
-05  1 * * fri cd ${PathToMrRepo}/addons/audioChart && chronic mr addon2svn && chronic mr svn2addon
-10  1 * * fri cd ${PathToMrRepo}/addons/AudioThemes && chronic mr addon2svn && chronic mr svn2addon
+00  1 * * fri $AddonTranslationUpdate addonUpdater
+03  1 * * fri $AddonTranslationUpdate addonsHelp
+05  1 * * fri $AddonTranslationUpdate audioChart
+10  1 * * fri $AddonTranslationUpdate audiothemes
 
 #x  2 for addons starting with b
-00  2 * * fri cd ${PathToMrRepo}/addons/bitChe && chronic mr addon2svn && chronic mr svn2addon
-02  2 * * fri cd ${PathToMrRepo}/addons/beepKeyboard && chronic mr addon2svn && chronic mr svn2addon
-05  2 * * fri cd ${PathToMrRepo}/addons/bluetoothaudio && chronic mr addon2svn && chronic mr svn2addon
+00  2 * * fri $AddonTranslationUpdate bitChe
+02  2 * * fri $AddonTranslationUpdate beepKeyboard
+05  2 * * fri $AddonTranslationUpdate bluetoothaudio
 
 #x  3 for addons starting with c
-00  3 * * fri cd ${PathToMrRepo}/addons/clipContentsDesigner && chronic mr addon2svn && chronic mr svn2addon
-05  3 * * fri cd ${PathToMrRepo}/addons/controlUsageAssistant && chronic mr addon2svn && chronic mr svn2addon
-10  3 * * fri cd ${PathToMrRepo}/addons/calibre && chronic mr addon2svn && chronic mr svn2addon
-15  3 * * fri cd ${PathToMrRepo}/addons/clock && chronic mr addon2svn && chronic mr svn2addon
+00  3 * * fri $AddonTranslationUpdate clipContentsDesigner
+05  3 * * fri $AddonTranslationUpdate controlUsageAssistant
+10  3 * * fri $AddonTranslationUpdate calibre
+15  3 * * fri $AddonTranslationUpdate clock
 
 #x  4 for addons starting with d
-00  4 * * fri cd ${PathToMrRepo}/addons/dayOfTheWeek && chronic mr addon2svn && chronic mr svn2addon
-02  4 * * fri cd ${PathToMrRepo}/addons/debugHelper && chronic mr addon2svn && chronic mr svn2addon
-05  4 * * fri cd ${PathToMrRepo}/addons/dropbox && chronic mr addon2svn && chronic mr svn2addon
+00  4 * * fri $AddonTranslationUpdate dayOfTheWeek
+02  4 * * fri $AddonTranslationUpdate debugHelper
 
 #x  5 for addons starting with e
-00  5 * * fri cd ${PathToMrRepo}/addons/emoticons && chronic mr addon2svn && chronic mr svn2addon
-05  5 * * fri cd ${PathToMrRepo}/addons/eMule && chronic mr addon2svn && chronic mr svn2addon
-10  5 * * fri cd ${PathToMrRepo}/addons/enhancedAria && chronic mr addon2svn && chronic mr svn2addon
-15  5 * * fri cd ${PathToMrRepo}/addons/enhancedTouchGestures && chronic mr addon2svn && chronic mr svn2addon
+00  5 * * fri $AddonTranslationUpdate emoticons
+05  5 * * fri $AddonTranslationUpdate eMule
+10  5 * * fri $AddonTranslationUpdate enhancedAria
+15  5 * * fri $AddonTranslationUpdate enhancedTouchGestures
 
 #x  6 for addons starting with f
-00  6 * * fri cd ${PathToMrRepo}/addons/focusHighlight && chronic mr addon2svn && chronic mr svn2addon
+00  6 * * fri $AddonTranslationUpdate focusHighlight
 
 #x  7 for addons starting with g
-00  7 * * fri cd ${PathToMrRepo}/addons/goldenCursor && chronic mr addon2svn && chronic mr svn2addon
-05  7 * * fri cd ${PathToMrRepo}/addons/goldwave && chronic mr addon2svn && chronic mr svn2addon
+00  7 * * fri $AddonTranslationUpdate goldenCursor
+05  7 * * fri $AddonTranslationUpdate goldwave
 
 #x  8 for addons starting with h
 #x  9 for addons starting with i
-00  9 * * fri cd ${PathToMrRepo}/addons/IndentNav && chronic mr addon2svn && chronic mr svn2addon
-05  9 * * fri cd ${PathToMrRepo}/addons/inputLock && chronic mr addon2svn && chronic mr svn2addon
-10  9 * * fri cd ${PathToMrRepo}/addons/instantTranslate && chronic mr addon2svn && chronic mr svn2addon
+00  9 * * fri $AddonTranslationUpdate IndentNav
+05  9 * * fri $AddonTranslationUpdate inputLock
+10  9 * * fri $AddonTranslationUpdate instantTranslate
 
 #x 10 for addons starting with j
 #x 11 for addons starting with k
 #x 12 for addons starting with l
-00 12 * * fri cd ${PathToMrRepo}/addons/lambda && chronic mr addon2svn && chronic mr svn2addon
+00 12 * * fri $AddonTranslationUpdate lambda
 
 #x 13 for addons starting with m
-00 13 * * fri cd ${PathToMrRepo}/addons/mp3DirectCut && chronic mr addon2svn && chronic mr svn2addon
+00 13 * * fri $AddonTranslationUpdate mp3DirectCut
 
 #x 14 for addons starting with n
-00 14 * * fri cd ${PathToMrRepo}/addons/noBeepsSpeechMode && chronic mr addon2svn && chronic mr svn2addon
+00 14 * * fri $AddonTranslationUpdate noBeepsSpeechMode
 
 #x 15 for addons starting with o
-00 15 * * fri cd ${PathToMrRepo}/addons/objPad && chronic mr addon2svn && chronic mr svn2addon
-05 15 * * fri cd ${PathToMrRepo}/addons/outlookExtended && chronic mr addon2svn && chronic mr svn2addon
+00 15 * * fri $AddonTranslationUpdate objPad
+05 15 * * fri $AddonTranslationUpdate outlookExtended
 
 #x 16 for addons starting with p
-00 16 * * fri cd ${PathToMrRepo}/addons/placeMarkers && chronic mr addon2svn && chronic mr svn2addon
+00 16 * * fri $AddonTranslationUpdate placeMarkers
 
 # x 17 for addons starting with q
 # x 18 for addons starting with r
-00 18 * * fri cd ${PathToMrRepo}/addons/readFeeds && chronic mr addon2svn && chronic mr svn2addon
-02 18 * * fri cd ${PathToMrRepo}/addons/reportPasswords && chronic mr addon2svn && chronic mr svn2addon
-05 18 * * fri cd ${PathToMrRepo}/addons/reportSymbols && chronic mr addon2svn && chronic mr svn2addon
-10 18 * * fri cd ${PathToMrRepo}/addons/resourceMonitor && chronic mr addon2svn && chronic mr svn2addon
-15 18 * * fri cd ${PathToMrRepo}/addons/reviewCursorCopier && chronic mr addon2svn && chronic mr svn2addon
+00 18 * * fri $AddonTranslationUpdate readFeeds
+02 18 * * fri $AddonTranslationUpdate reportPasswords
+05 18 * * fri $AddonTranslationUpdate reportSymbols
+10 18 * * fri $AddonTranslationUpdate resourceMonitor
+15 18 * * fri $AddonTranslationUpdate reviewCursorCopier
 
 # x 19 for addons starting with s
-00 19 * * fri cd ${PathToMrRepo}/addons/sayCurrentKeyboardLanguage && chronic mr addon2svn && chronic mr svn2addon
-02 19 * * fri cd ${PathToMrRepo}/addons/SentenceNav && chronic mr addon2svn && chronic mr svn2addon
-05 19 * * fri cd ${PathToMrRepo}/addons/stationPlaylist && chronic mr addon2svn && chronic mr svn2addon
-10 19 * * fri cd ${PathToMrRepo}/addons/synthRingSettingsSelector && chronic mr addon2svn && chronic mr svn2addon
-15 19 * * fri cd ${PathToMrRepo}/addons/systrayList && chronic mr addon2svn && chronic mr svn2addon
+00 19 * * fri $AddonTranslationUpdate sayCurrentKeyboardLanguage
+02 19 * * fri $AddonTranslationUpdate SentenceNav
+05 19 * * fri $AddonTranslationUpdate stationPlaylist
+10 19 * * fri $AddonTranslationUpdate synthRingSettingsSelector
+15 19 * * fri $AddonTranslationUpdate systrayList
 
 # x 20 for addons starting with t
-00  20 * * fri cd ${PathToMrRepo}/addons/teamViewer && chronic mr addon2svn && chronic mr svn2addon
-05  20 * * fri cd ${PathToMrRepo}/addons/textnav && chronic mr addon2svn && chronic mr svn2addon
-10  20 * * fri cd ${PathToMrRepo}/addons/toneMaster && chronic mr addon2svn && chronic mr svn2addon
-15  20 * * fri cd ${PathToMrRepo}/addons/toolbarsExplorer && chronic mr addon2svn && chronic mr svn2addon
+00  20 * * fri $AddonTranslationUpdate teamViewer
+05  20 * * fri $AddonTranslationUpdate textnav
+10  20 * * fri $AddonTranslationUpdate toneMaster
+15  20 * * fri $AddonTranslationUpdate toolbarsExplorer
 
 # x 21 for addons starting with u
-00  21 * * fri cd ${PathToMrRepo}/addons/unicodeBrailleInput && chronic mr addon2svn && chronic mr svn2addon
+00  21 * * fri $AddonTranslationUpdate unicodeBrailleInput
 
 # x 22 for addons starting with v or w
-00  22 * * fri cd ${PathToMrRepo}/addons/VLC && chronic mr addon2svn && chronic mr svn2addon
-05  22 * * fri cd ${PathToMrRepo}/addons/Weather_Plus && chronic mr addon2svn && chronic mr svn2addon
-10  22 * * fri cd ${PathToMrRepo}/addons/wintenApps && chronic mr addon2svn && chronic mr svn2addon
-15  22 * * fri cd ${PathToMrRepo}/addons/wordCount && chronic mr addon2svn && chronic mr svn2addon
+00  22 * * fri $AddonTranslationUpdate VLC
+05  22 * * fri $AddonTranslationUpdate Weather_Plus
+10  22 * * fri $AddonTranslationUpdate wintenApps
+15  22 * * fri $AddonTranslationUpdate wordCount
 
 # x 23 for addons starting with x y or z
