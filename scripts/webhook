@@ -17,9 +17,6 @@ os.environ["PATH"] = "/home/nvdal10n/bin:/usr/local/bin:" + os.environ["PATH"]
 
 form = cgi.FieldStorage() # instantiate only once!
 
-print("Content-type: text/plain\n")
-
-
 author = form['author'].value if 'author' in form else 'pratchett'
 action = form['action'].value if 'action' in form else 'wrote'
 body = form['body'].value if 'body' in form else 'the colour of magic'

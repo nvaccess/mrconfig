@@ -6,6 +6,9 @@ import subprocess
 import os
 from datetime import datetime
 
+print("Content-type: text/plain\n")
+print("starting")
+
 logging.basicConfig(
 	# This process is run as user nvdal10n, which does not have write permissions for
 	# /var/log/uwsgi/app/ so instead of writing to file, write to stderr.
@@ -49,3 +52,4 @@ except Exception as e:
 
 endDate = datetime.now().strftime("%Y-%b-%d %H:%M:%S")
 logging.info(f"Webhook finished: {endDate}")
+print("ok")
