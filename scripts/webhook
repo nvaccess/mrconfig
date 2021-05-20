@@ -94,7 +94,7 @@ email(rcpts, subject, body, includeAdmin=hasAlert)
 print("Notification sent.")
 
 rawData= "\n".join(
-    [f"{key}='{form[key].value}'n" for key in form.keys()]
+    [f"{key}='{form[key].value}'" for key in form.keys()]
 )
 print(f"""--- start ---
 rcpts: {", ".join(rcpts)}
