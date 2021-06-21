@@ -82,3 +82,11 @@ Now:
 ## Errors / loggin
 - When a crontab command fails an email is sent to the nvdal10n account.
   Which is forwarded to the addresses listed in `~/.forward`
+
+
+## Website
+
+The website is an ikiwiki. The source for the pages are `*.mdwn` files in the `SRT/website/` folder.
+The ikiwiki "post svn commit hook" is a binary generated from config living on the server.
+To build / rebuild execute `ikiwiki --setup ikiwiki.setup` (Unknown: is an argument like `refresh` or `rebuild` required? )
+It is executed by the `hooks/webhook script`
