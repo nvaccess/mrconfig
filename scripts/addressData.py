@@ -147,6 +147,8 @@ addresses = {
 			'Abdelkrim Bensaid <abdelkrim.bensaid@free.fr>',
 			'Cyrille Bougot <cyrille.bougot2@laposte.net>',
 			'Corentin Bacqué-Cazenave <corentin@progaccess.net>',
+			'Sylvie Duchateau <sylvieduchateau@gmail.com>',
+			'Sof <hellosof@gmail.com>',
 		],
 	},
 	'ga': {
