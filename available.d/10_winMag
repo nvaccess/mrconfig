@@ -1,0 +1,2 @@
+[addons/winMag]
+checkout = git clone $(getGithubURL) $MR_REPO
