@@ -50,7 +50,7 @@ try:
 		logging.debug(line)
 except Exception as e:
 	logging.error(f"Error running scripts\\webhook process: {e}")
-logging.error(f"finished scripts\\webhook")
+logging.debug(f"finished scripts\\webhook")
 endDate = datetime.now().strftime("%Y-%b-%d %H:%M:%S")
 logging.info(f"Webhook finished: {endDate}")
 print("ok")
