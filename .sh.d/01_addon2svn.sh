@@ -56,6 +56,8 @@ addon2svn() {
         if [ "$want" != "1" ]; then
             continue
         fi
+        # do svn update here, it has been confirmed that this language wants to translate this addon, but no
+        # modifications have been made to the working directory yet.
         addonPath=$lang/add-ons/${addonName}
         addonPoPath=${addonPath}/nvda.po
         if [ ! -d ${addonPath} ]; then
@@ -84,9 +86,14 @@ addon2svn() {
 
             if [ "$bmsg" != "$amsg" ]; then
                 logMsg "committing changes"
+                # There is no svn update. The only time that the SRT repository is
+                # updated (files / versions fetched from the remote) is when 'nvdaTranslationUpdates.sh' is called.
+                # There could be quite a long time between that and this code executing.
+                # Suggestion, update for each lang. IE each commit comes shortly after an update.
                 # need to commit, because before and after are different.
                 svn commit -m "${lang}: ${addonName} merged in ${amsg} messages"  ${addonPoPath}
             else
+                # Reverting should also happen if svn commit fails for some reason.
                 logMsg "reverting changes"
                 # nothing has changed, dont need to action.
                 # revert because comments/timestamps in po file might have changed.
