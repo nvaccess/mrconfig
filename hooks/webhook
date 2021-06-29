@@ -34,6 +34,7 @@ def executeScriptsWebhook():
 		encoding="UTF-8",
 		bufsize=0,
 	)
+	logging.info(f"Proc pid: {proc.pid}")
 	logging.debug("Start logging output from proc")
 	# https://docs.python.org/3.7/library/subprocess.html#subprocess.Popen.stderr
 	#  If the encoding or errors arguments were specified or the universal_newlines argument was True,
