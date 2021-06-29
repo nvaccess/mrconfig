@@ -24,7 +24,8 @@ SCRIPTS_PATH = os.path.abspath('../mr/scripts')
 
 def executeScriptsWebhook():
 	cmd = (os.path.join(SCRIPTS_PATH, "webhook"))
-	proc = subprocess.Popen(
+	logging.debug(f"Running: {cmd}")
+	proc: subprocess.Popen = subprocess.Popen(
 		cmd,
 		cwd=SCRIPTS_PATH,
 		stdout=subprocess.PIPE,
@@ -32,13 +33,13 @@ def executeScriptsWebhook():
 		errors="UTF-8",
 		encoding="UTF-8",
 	)
-
+	logging.debug("Start logging output from proc")
 	# https://docs.python.org/3.7/library/subprocess.html#subprocess.Popen.stderr
 	#  If the encoding or errors arguments were specified or the universal_newlines argument was True,
 	#  the stream is a text stream, otherwise it is a byte stream. If the stderr argument was not PIPE,
 	#  this attribute is None.
 	for stdout_line in proc.stdout:
-		yield stdout_line
+		logging.debug( stdout_line)
 	logging.debug("No more stdout")
 	proc.stdout.close()
 	logging.debug("waiting for proc")
@@ -49,8 +50,7 @@ def executeScriptsWebhook():
 
 try:
 	logging.debug(f"starting scripts\\webHook")
-	for line in executeScriptsWebhook():
-		logging.debug(line)
+	executeScriptsWebhook()
 except Exception as e:
 	logging.error(f"Error running scripts\\webhook process: {e}")
 logging.debug(f"finished scripts\\webhook")
