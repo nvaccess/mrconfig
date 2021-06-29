@@ -39,9 +39,12 @@ def executeScriptsWebhook():
 	#  this attribute is None.
 	for stdout_line in proc.stdout:
 		yield stdout_line
+	logging.debug("No more stdout")
 	proc.stdout.close()
+	logging.debug("waiting for proc")
 	return_code = proc.wait()
 	if return_code:
+		logging.debug("Called Process Error")
 		raise subprocess.CalledProcessError(return_code, cmd)
 
 try:
