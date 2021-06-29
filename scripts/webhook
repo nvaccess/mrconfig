@@ -109,6 +109,11 @@ if re.search("/website/", body):
     print("running website post-commit hook.")
     pc = '/home/nvdal10n/ikiwiki/publish/post-commit'
     try:
+        # post-commit can take multiple minutes to run. This causes a CGI timeout.
+        # Perhaps instead of running synchronously, the hooks/webhook should just
+        # signal (via creating a file) that scripts/webhook should execute when it is scheduled by cron
+        # perhaps every 5 minutes? This would also help to prevent multiple hooks running at once and
+        # the variety of errors that might cause.
         subprocess.check_output(
             [pc],
             stderr=subprocess.STDOUT,
