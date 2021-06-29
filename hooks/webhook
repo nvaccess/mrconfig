@@ -32,6 +32,7 @@ def executeScriptsWebhook():
 		stderr=subprocess.STDOUT,
 		errors="UTF-8",
 		encoding="UTF-8",
+		bufsize=0,
 	)
 	logging.debug("Start logging output from proc")
 	# https://docs.python.org/3.7/library/subprocess.html#subprocess.Popen.stderr
