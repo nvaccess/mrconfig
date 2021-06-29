@@ -19,6 +19,7 @@ Should be run with working directory set to SRT directory
 logging.basicConfig(filename='findRevs.log',
     level=logging.DEBUG,
     format='%(asctime)s - %(levelname)s - %(message)s')
+logging.debug(f"args: {sys.argv}")
 
 parser = argparse.ArgumentParser(description='language processor.')
 #parser.add_argument('--type', required=True, choices=('ug', 'ch', 'sy'))
@@ -46,6 +47,7 @@ linfo = {
 }
 _wdiff = wdiff['-w', '-{', '-x', '}-', '-y', '+{', '-z', '}+', '-d']
 for lang in args.langs:
+    logging.debug(f"lang: {lang}")
     settingsPath = tbpath.join(lang).join('settings')
     try:
         mySettings = DB(settingsPath._path)
