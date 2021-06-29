@@ -67,6 +67,8 @@ addon2svn() {
             _addFreshPoFile ${addonName} ${lang}
         else
             logMsg "Already available for translation, merging in new messages."
+            logMsg "svn status"
+            svn status ${addonPath}
 
             # Statistics before merging pot.
             bfuzzy=$(pocount ${addonPoPath} | grep -i fuzzy | awk '{print $2}')
@@ -81,9 +83,11 @@ addon2svn() {
             amsg="$afuzzy fuzzy and $auntranslated untranslated"
 
             if [ "$bmsg" != "$amsg" ]; then
+                logMsg "committing changes"
                 # need to commit, because before and after are different.
                 svn commit -m "${lang}: ${addonName} merged in ${amsg} messages"  ${addonPoPath}
             else
+                logMsg "reverting changes"
                 # nothing has changed, dont need to action.
                 # revert because comments/timestamps in po file might have changed.
                 svn revert ${addonPoPath}

@@ -22,34 +22,35 @@ logging.info(f"Webhook starting: {startDate}")
 
 SCRIPTS_PATH = os.path.abspath('../mr/scripts')
 
-try:
+def executeScriptsWebhook():
+	cmd = (os.path.join(SCRIPTS_PATH, "webhook"))
 	proc = subprocess.Popen(
-		(os.path.join(SCRIPTS_PATH, "webhook")),
+		cmd,
 		cwd=SCRIPTS_PATH,
 		stdout=subprocess.PIPE,
-		stderr=subprocess.PIPE,
+		stderr=subprocess.STDOUT,
 		errors="UTF-8",
 		encoding="UTF-8",
 	)
+
 	# https://docs.python.org/3.7/library/subprocess.html#subprocess.Popen.stderr
 	#  If the encoding or errors arguments were specified or the universal_newlines argument was True,
 	#  the stream is a text stream, otherwise it is a byte stream. If the stderr argument was not PIPE,
 	#  this attribute is None.
-	WAIT_MINUTES = 5
-	MINUTE_SECONDS = 60
-	try:
-		outs, errs = proc.communicate(timeout=MINUTE_SECONDS * WAIT_MINUTES)
-	except subprocess.TimeoutExpired:
-		logging.error("TimeoutExpired. Process Killed.")
-		proc.kill()
-		outs, errs = proc.communicate()
-	logging.debug(f"scripts\\webHook:\n{outs}")
-	if errs:
-		logging.error(f"scripts\\webhook:\n{errs}")
+	for stdout_line in proc.stdout:
+		yield stdout_line
+	proc.stdout.close()
+	return_code = proc.wait()
+	if return_code:
+		raise subprocess.CalledProcessError(return_code, cmd)
 
+try:
+	logging.debug(f"starting scripts\\webHook")
+	for line in executeScriptsWebhook():
+		logging.debug(line)
 except Exception as e:
-	logging.error(f"Error running process: {e}")
-
+	logging.error(f"Error running scripts\\webhook process: {e}")
+logging.debug(f"finished scripts\\webhook")
 endDate = datetime.now().strftime("%Y-%b-%d %H:%M:%S")
 logging.info(f"Webhook finished: {endDate}")
 print("ok")
