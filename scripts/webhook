@@ -1,5 +1,8 @@
-#!/usr/bin/python3
+#!/usr/bin/env -S python3 -u
+# -S allows for arguments
+# -u unbuffered output
 
+print("imports")
 import os
 import cgi
 import re
@@ -15,6 +18,7 @@ SCRIPTS_PATH = "/home/nvdal10n/mr/scripts"
 # Also add /usr/local/bin, which isn't already included in this context.
 os.environ["PATH"] = "/home/nvdal10n/bin:/usr/local/bin:" + os.environ["PATH"]
 
+print("load cgi field storage")
 form = cgi.FieldStorage() # instantiate only once!
 
 author = form['author'].value if 'author' in form else 'pratchett'

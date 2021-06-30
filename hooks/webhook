@@ -1,4 +1,6 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S python3 -u
+# -S allows for arguments
+# -u unbuffered output
 
 import sys
 import logging
@@ -24,30 +26,35 @@ SCRIPTS_PATH = os.path.abspath('../mr/scripts')
 
 def executeScriptsWebhook():
 	cmd = (os.path.join(SCRIPTS_PATH, "webhook"))
-	proc = subprocess.Popen(
+	logging.debug(f"Running: {cmd}")
+	proc: subprocess.Popen = subprocess.Popen(
 		cmd,
 		cwd=SCRIPTS_PATH,
 		stdout=subprocess.PIPE,
 		stderr=subprocess.STDOUT,
 		errors="UTF-8",
 		encoding="UTF-8",
+		bufsize=0,
 	)
-
+	logging.info(f"Proc pid: {proc.pid}")
+	logging.debug("Start logging output from proc")
 	# https://docs.python.org/3.7/library/subprocess.html#subprocess.Popen.stderr
 	#  If the encoding or errors arguments were specified or the universal_newlines argument was True,
 	#  the stream is a text stream, otherwise it is a byte stream. If the stderr argument was not PIPE,
 	#  this attribute is None.
 	for stdout_line in proc.stdout:
-		yield stdout_line
+		logging.debug( stdout_line)
+	logging.debug("No more stdout")
 	proc.stdout.close()
+	logging.debug("waiting for proc")
 	return_code = proc.wait()
 	if return_code:
+		logging.debug("Called Process Error")
 		raise subprocess.CalledProcessError(return_code, cmd)
 
 try:
 	logging.debug(f"starting scripts\\webHook")
-	for line in executeScriptsWebhook():
-		logging.debug(line)
+	executeScriptsWebhook()
 except Exception as e:
 	logging.error(f"Error running scripts\\webhook process: {e}")
 logging.debug(f"finished scripts\\webhook")
