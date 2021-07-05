@@ -62,7 +62,8 @@ poStatusHtml=/home/nvdal10n/ikiwiki/publish/poStatus.html
 02  4 * * fri $AddonTranslationUpdate debugHelper
 
 #x  5 for addons starting with e
-00  5 * * fri $AddonTranslationUpdate emoticons
+00  5 * * fri $AddonTranslationUpdate easyTableNavigator
+02  5 * * fri $AddonTranslationUpdate emoticons
 05  5 * * fri $AddonTranslationUpdate eMule
 10  5 * * fri $AddonTranslationUpdate enhancedAria
 15  5 * * fri $AddonTranslationUpdate enhancedTouchGestures
