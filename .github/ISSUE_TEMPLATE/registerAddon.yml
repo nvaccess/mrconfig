@@ -1,0 +1,43 @@
+name: Addon registration
+description: Request the registration of an add-on to be translated by NVDA l10n team
+title: "[Register add-on in translation system]: "
+labels: [enhancement]
+assignees: 
+- nvaccess
+body:
+- type: markdown
+  attributes:
+    value: |
+      Request add-on registration to be translated by l10n team. Provide add-on name, GitHub username of maintainer, repo on GitHub nvdaaddons organization, anc confirm the existence of a stable branch.
+- type: input
+  id: addon-name
+  attributes:
+    label: Add-on name
+    description: The name of the add-on to be registered.
+    placeholder: addonName
+  validations:
+    required: true
+- type: input
+  id: addon-maintainer
+  attributes:
+    label: Add-on maintainer
+    description: Mention GitHub user account of add-on maintainer.
+    placeholder: "@nvdaAddonMaintainer"
+  validations:
+    required: true
+- type: input
+  id: addon-repo
+  attributes:
+    label: Add-on repository
+    description: The repository of the add-on on the nvdaaddons GitHub organization.
+    placeholder: https://github.com/nvdaaddons/addonName
+  validations:
+    required: true
+- type: checkboxes
+  id: stable-branch
+  attributes:
+    label: Stable branch
+    description: Check that stable branch exist in the provided repository.
+    options:
+      - label: Stable branch exists in add-on repo
+        required: true
