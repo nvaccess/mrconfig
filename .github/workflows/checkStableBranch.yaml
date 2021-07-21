@@ -1,0 +1,51 @@
+name: Check stable branch
+
+on:
+  issues:
+    types: 
+      - opened
+      - reopened
+      - edited
+
+jobs:
+  stable-branch:
+    name: Check for stable branch
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get data
+      id: get-data
+      uses: actions/github-script@v4
+      with:
+        script: |
+          const body = context.payload.issue.body   
+          const name = body.split("### Add-on name")[1].split("###")[0].trim()
+          core.setOutput('repo', "nvdaaddons/" + name)
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        repository: ${{steps.get-data.outputs.repo}}
+        ref: stable
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - name: Install dependencies
+      run: |
+        pip install scons markdown
+        sudo apt update
+        sudo apt install gettext
+    - name: Build
+      run: |
+        scons
+        scons pot
+    - name: Comment
+      uses: actions/github-script@v4
+      with:
+        script: |
+          github.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: 'The add-on and pot files were built from stable branch'
+          })
+          
