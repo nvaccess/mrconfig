@@ -19,6 +19,7 @@ https://github.com/nvaccess/addonFiles#readme
    - A member of the NVDA add-on team creates a repo for the add-on at
 	 [NVDA Addons GitHub](https://github.com/nvdaaddons)
    - The member of the NVDA add-on team should confirm there is a branch `stable`
+   - `nvaccessAuto` should have permission to push to the `stable` branch.
 3. Create an issue on [nvaccess/mrconfig](https://github.com/nvaccess/mrconfig) asking for the addon to be included.
    - NV Access staff will update the server:
 	 - `cd mr`
