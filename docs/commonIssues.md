@@ -58,3 +58,43 @@ msgid "Shows a dictionary dialog to customize emoticons"
 msgstr ""
 ```
 This needs to be done in the SRT repository.
+
+
+### Unable to checkout stable due to local changes
+
+```
+Running addon2svn for charInfo
+Saved working directory and index state On master: 2021-07-21 at 09:52:15 on master before switching to stable branch
+error: Your local changes to the following files would be overwritten by checkout:
+        addon/locale/fr/LC_MESSAGES/nvda.po
+Please commit your changes or stash them before you switch branches.
+Aborting
+mr addon2svn: command failed
+```
+When running `git diff` from the `mr/addons/<addonName>` directory, many lines like:
+```
+diff --git a/addon/locale/fr/LC_MESSAGES/nvda.po b/addon/locale/fr/LC_MESSAGES/nvda.po
+index f6cec9b..b7bb9f4 100644
+--- a/addon/locale/fr/LC_MESSAGES/nvda.po
++++ b/addon/locale/fr/LC_MESSAGES/nvda.po
+@@ -19,82 +19,66 @@ msgstr ""
+ "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+ #. Translators: Title on the char info displayed message
+-#: addon\globalPlugins\charinfo\__init__.py:53
+ msgid "Detailed character information'"
+ msgstr "Information détaillée sur un caractère"
+
+ #. Translators: A column title on the char info displayed message
+-#: addon\globalPlugins\charinfo\__init__.py:78
+ msgid "Attribute"
+ msgstr "Attribut"
+ ```
+ 
+ This is caused by a filter to prevent these lines from changing regularly (updating line numbers), and causing conflicts.
+ - Disable the filter by commenting it out (`vim ~/.gitconfig`) add a '#' to comment.
+ - `git checkout stable`
+ - `git status`
+ - Enable the filter `vim ~/.gitconfig` again.
+ - `git status`
+ 
