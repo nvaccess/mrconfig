@@ -31,7 +31,7 @@ https://github.com/nvaccess/addonFiles#readme
 	 - `mr up`
 	 - `cd addons/addonRepoName`
 	 - `mr addon2settings`
-	 - `cd ../../mr/srt`
+	 - `cd ../../srt`
 	 - `svn commit */settings -m "Make <addonName> add-on available for translation."`
    - NV Access staff will edit `mr/automatic.crontab`
 	 - Copy one of the lines for one of the existing addons, just change the addon name and paste it in the correct section, commit and push.
