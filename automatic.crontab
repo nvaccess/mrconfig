@@ -69,6 +69,7 @@ poStatusHtml=/home/nvdal10n/ikiwiki/publish/poStatus.html
 05  5 * * fri $AddonTranslationUpdate eMule
 10  5 * * fri $AddonTranslationUpdate enhancedAria
 15  5 * * fri $AddonTranslationUpdate enhancedTouchGestures
+20  5 * * fri $AddonTranslationUpdate easyTableNavigator
 
 #x  6 for addons starting with f
 00  6 * * fri $AddonTranslationUpdate focusHighlight
