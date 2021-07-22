@@ -29,7 +29,8 @@ https://github.com/nvaccess/addonFiles#readme
 	 - `git push`
 	 - `cd ../` (mr dir)
 	 - `mr up`
-	 - `cd addons/addonRepoName`
+	 - `cd addons/<addonRepoName>`
+	 - `git checkout stable` (if there is an error, see `docs/commonIssues.md`)
 	 - `mr addon2settings`
 	 - `cd ../../srt`
 	 - `svn commit */settings -m "Make <addonName> add-on available for translation."`
