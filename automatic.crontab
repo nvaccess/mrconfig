@@ -62,6 +62,7 @@ poStatusHtml=/home/nvdal10n/ikiwiki/publish/poStatus.html
 00  4 * * fri $AddonTranslationUpdate dayOfTheWeek
 02  4 * * fri $AddonTranslationUpdate debugHelper
 04  4 * * fri $AddonTranslationUpdate dropbox
+08  4 * * fri $AddonTranslationUpdate DirectLink
 
 #x  5 for addons starting with e
 00  5 * * fri $AddonTranslationUpdate emoticons
