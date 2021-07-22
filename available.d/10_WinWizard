@@ -1,0 +1,2 @@
+[addons/WinWizard]
+checkout = git clone $(getGithubURL) $MR_REPO
