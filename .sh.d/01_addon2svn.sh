@@ -26,12 +26,20 @@ renameAddonInSettings() {
     cd $PATH2TOPDIR/srt
     ls -1 */settings | while read file; do
         lang=$(dirname $file)
-        logMsg "Getting value for ${oldAddonName} in $file"
-        value=`python3 ${scriptsDir}/db.py -f $file --get addon.${oldAddonName}`
-        logMsg "Setting ${value} for ${addonName} in $file"
+        logMsg "Processing $file"
+        logMsg "Getting oldValue from ${oldAddonName}, newValue from ${addonName}"
+        oldValue=`python3 ${scriptsDir}/db.py -f $file --get addon.${oldAddonName}`
+        logMsg "oldValue: ${oldValue}"
+        newValue=`python3 ${scriptsDir}/db.py -f $file --get addon.${addonName}`
+        logMsg "newValue: ${newValue}"
+        setValue=0
+        if ([ $oldValue -eq 1 ] || [ $newValue -eq 1 ]); then
+            setValue=1
+        fi
+        logMsg "Setting ${setValue} for ${addonName} in $file"
         # Note: the following uses --set not --set_default. This will override a key if it already exists.
         # The alternative "--set_default" will silently discard the value if the key already exists.
-        python3 ${scriptsDir}/db.py -f $file --set addon.${addonName} ${value}
+        python3 ${scriptsDir}/db.py -f $file --set addon.${addonName} ${setValue}
         logMsg "Removing old key: ${oldAddonName} in $file"
         python3 ${scriptsDir}/db.py -f $file --delete addon.${oldAddonName}
     done
