@@ -1,5 +1,5 @@
 [DEFAULT]
-jobs = 5
+jobs = 1
 include =
 	. $(dirname $MR_CONFIG)/.library-loaders
 	load_libraries $(dirname $MR_CONFIG)/.sh.d/*
@@ -9,6 +9,7 @@ include =
 isAddon = if $(isAddon); then echo yes; else echo no; fi
 addon2svn = addon2svn 
 addon2settings = addon2settings
+renameAddonInSettings = renameAddonInSettings "$@"
 svn2addon = svn2addon
 checkProgs = :
 registerAddon = :

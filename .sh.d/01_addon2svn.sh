@@ -13,6 +13,30 @@ addon2settings() {
     done
 }
 
+
+renameAddonInSettings() {
+  if [ -z "$1" ]; then
+    logMsg "Expected old addon name."
+    exit 1
+  fi
+  oldAddonName=$1
+    isAddonOrDie
+    hasStableBranchOrDie
+    addonName=$(basename $PWD)
+    cd $PATH2TOPDIR/srt
+    ls -1 */settings | while read file; do
+        lang=$(dirname $file)
+        logMsg "Getting value for ${oldAddonName} in $file"
+        value=`python3 ${scriptsDir}/db.py -f $file --get addon.${oldAddonName}`
+        logMsg "Setting ${value} for ${addonName} in $file"
+        # Note: the following uses --set not --set_default. This will override a key if it already exists.
+        # The alternative "--set_default" will silently discard the value if the key already exists.
+        python3 ${scriptsDir}/db.py -f $file --set addon.${addonName} ${value}
+        logMsg "Removing old key: ${oldAddonName} in $file"
+        python3 ${scriptsDir}/db.py -f $file --delete addon.${oldAddonName}
+    done
+}
+
 _addFreshPoFile() {
     addonName=$1
     lang=$2
@@ -43,6 +67,7 @@ addon2svn() {
     git reset --hard origin/stable
 
     scons pot mergePot
+    logMsg "Pot files: "`ls *.pot`
     cp *.pot /tmp/
     ADDONDIR="$(pwd)"
     cd $PATH2TOPDIR/srt
