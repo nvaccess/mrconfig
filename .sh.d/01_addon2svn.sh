@@ -4,7 +4,7 @@ scriptsDir="../scripts"
 addon2settings() {
     isAddonOrDie
     hasStableBranchOrDie
-	addonName=$(basename $PWD)
+    addonName=$(basename $PWD)
     cd $PATH2TOPDIR/srt
     ls -1 */settings | while read file; do
         lang=$(dirname $file)
@@ -29,8 +29,8 @@ _addFreshPoFile() {
 addon2svn() {
     isAddonOrDie
     hasStableBranchOrDie
-	addonName=$(basename $PWD)
-	logMsg "Running addon2svn for $addonName"
+    addonName=$(basename $PWD)
+    logMsg "Running addon2svn for $addonName"
     # If there are any locally modified files, make sure to stash them so they are not accidentally committed.
     curBranch="$(git branch | grep '*' | awk '{print $2}')"
     needToStash="$(git status --porcelain -uno | wc -l)"
@@ -42,8 +42,8 @@ addon2svn() {
     git fetch
     git reset --hard origin/stable
 
-	scons pot mergePot
-	cp *.pot /tmp/
+    scons pot mergePot
+    cp *.pot /tmp/
     ADDONDIR="$(pwd)"
     cd $PATH2TOPDIR/srt
     ls -1 */settings | while read file; do
