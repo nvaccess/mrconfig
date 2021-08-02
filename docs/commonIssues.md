@@ -60,6 +60,45 @@ msgstr ""
 This needs to be done in the SRT repository.
 
 
+### Po file missing
+
+Error text:
+```
+Wanted, but po file is missing, restoring file.
+cp: cannot stat '/tmp/DirectLink.pot': No such file or directory
+mr addon2svn: command failed
+```
+
+Common cause: Case differences between repo name and addon name.
+E.G., DirectLink repo has addon name directLink
+In `buildvars.py` the `addon_name` is "directLink", this creates a "directLink.pot" file.
+Our scripts rely on the add-on repository folder matching the add-on name.
+
+Fix: rename the local addon repository to match the addonName.
+- `cd mr/addons/`
+- `mv DirectLink/ directLink`
+- `cd ../available.d/`
+- `git mv 10_DirectLink 10_directLink`
+- Edit `10_directLink` change `[addons/DirectLink]` to `[addons/directLink]`
+- `cd ../enabled.d/`
+- `rm 10_DirectLink`
+- `ln -s ../available.d/10_directLink`
+- `cd ../` 
+- Edit `automatic.crontab` fix case for addon entry.
+- `mr up` check for errors for modified addon
+- `git add automatic.crontab available.d/10_directLink`
+- `git commit -m "rename addon repo"`
+- `git push`
+- `cd addons/directLink/`
+- **Warning:**
+  This step could result in data loss if the new name already exists.
+  First ensure there are no other changes in the srt repo (`svn status`) to allow easy revert (`svn revert --recursive .`) 
+  This creates new entries for the new name, using the values for the oldname, then deletes the oldname.
+  - `mr renameAddonInSettings DirectLink` 
+  - `cd ../../mr/srt`
+  - `svn commit */settings -m "Make <addonName> add-on available for translation."`
+
+
 ### Unable to checkout stable due to local changes
 
 ```

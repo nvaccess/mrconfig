@@ -41,7 +41,9 @@ for langCode in addresses.keys():
 hasAlert = False
 subprocess.call(["svn", "update", "-q"], cwd=SRT_PATH)
 
-# Check any po files in this commit.
+# Check any po files in this commit, matches:
+# M /fr/add-ons/outlookExtended/nvda.po
+# A /fr/add-ons/outlookExtended/nvda.po
 poFiles = re.findall(r'(?<=[AM]\s)/.*\.po', body)
 for po in poFiles:
     print(f"Found poFile match:{po}")

@@ -25,7 +25,7 @@ https://github.com/nvaccess/addonFiles#readme
 	 - `cd mr`
 	 - `mr up`
 	 - `cd available.d`
-	 - `mr registerAddon addonRepoName`
+	 - `mr registerAddon addonRepoName` Ensure that addonRepoName matches repo_name in buildVars. See commonIssues 'po file missing'.
 	 - `git push`
 	 - `cd ../` (mr dir)
 	 - `mr up`
