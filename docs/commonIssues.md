@@ -94,8 +94,11 @@ Fix: rename the local addon repository to match the addonName.
   This step could result in data loss if the new name already exists.
   First ensure there are no other changes in the srt repo (`svn status`) to allow easy revert (`svn revert --recursive .`) 
   This creates new entries for the new name, using the values for the oldname, then deletes the oldname.
+  If either the new name of the old name key have value '1' (translator wants to translate this addon)
+  then 1 is set. See `.sh.d/01_addon2svn.sh` function `renameAddonInSetting`
   - `mr renameAddonInSettings DirectLink` 
-  - `cd ../../mr/srt`
+  - `cd ../../srt`
+  - `svn diff */settings | less` Manually inspect the files, use revert is outcome is not as expected.
   - `svn commit */settings -m "Make <addonName> add-on available for translation."`
 
 
