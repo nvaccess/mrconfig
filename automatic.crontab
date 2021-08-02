@@ -23,6 +23,7 @@
 PATH=/home/nvdal10n/bin:/usr/local/bin:/usr/bin:/bin
 PathToMrRepo=/home/nvdal10n/mr
 PathToCGI=/home/nvdal10n/cgi/
+PathToBin=/home/nvdal10n/bin/
 AddonTranslationUpdate="/home/nvdal10n/mr/scripts/addonTranslationUpdates.sh"
 NVDATranslationUpdate="/home/nvdal10n/mr/scripts/nvdaTranslationUpdates.sh"
 
@@ -36,6 +37,9 @@ poStatusHtml=/home/nvdal10n/ikiwiki/publish/poStatus.html
 
 # Ensure webhooks stay up to date.
 3 * * * * cp ${PathToMrRepo}/hooks/* ${PathToCGI}
+
+# Override SVN with a command that uses a log to ensure sequential access.
+3 * * * * cp ${PathToMrRepo}/scripts/svn ${PathToBin}
 
 # Keep addonFiles in sync with version control.
 1 * * * * cd ${PathToMrRepo}/addons/addonFiles && git pull -q
