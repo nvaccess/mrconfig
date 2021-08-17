@@ -1,0 +1,2 @@
+[addons/zoomEnhancements]
+checkout = git clone git@github.com:nvdaaddons/zoom-enhancements $MR_REPO
