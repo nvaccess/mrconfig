@@ -122,6 +122,7 @@ poStatusHtml=/home/nvdal10n/ikiwiki/publish/poStatus.html
 10 19 * * fri $AddonTranslationUpdate synthRingSettingsSelector
 15 19 * * fri $AddonTranslationUpdate systrayList
 20 19 * * fri $AddonTranslationUpdate searchWith
+25 19 * * fri $AddonTranslationUpdate sayProductNameAndVersion
 
 # x 20 for addons starting with t
 00  20 * * fri $AddonTranslationUpdate teamViewer
