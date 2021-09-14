@@ -49,6 +49,7 @@ poStatusHtml=/home/nvdal10n/ikiwiki/publish/poStatus.html
 03  1 * * fri $AddonTranslationUpdate addonsHelp
 05  1 * * fri $AddonTranslationUpdate audioChart
 10  1 * * fri $AddonTranslationUpdate audiothemes
+15  1 * * fri $AddonTranslationUpdate Access8Math
 
 #x  2 for addons starting with b
 00  2 * * fri $AddonTranslationUpdate bitChe
