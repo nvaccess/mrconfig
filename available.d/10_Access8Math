@@ -1,0 +1,2 @@
+[addons/Access8Math]
+checkout = git clone $(getGithubURL) $MR_REPO
