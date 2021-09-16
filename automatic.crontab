@@ -62,6 +62,7 @@ poStatusHtml=/home/nvdal10n/ikiwiki/publish/poStatus.html
 10  3 * * fri $AddonTranslationUpdate calibre
 15  3 * * fri $AddonTranslationUpdate clock
 20  3 * * fri $AddonTranslationUpdate charInfo
+25  3 * * fri $AddonTranslationUpdate columnsReview
 
 #x  4 for addons starting with d
 00  4 * * fri $AddonTranslationUpdate dayOfTheWeek
