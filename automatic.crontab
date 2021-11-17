@@ -108,6 +108,7 @@ poStatusHtml=/home/nvdal10n/ikiwiki/publish/poStatus.html
 #x 16 for addons starting with p
 00 16 * * fri $AddonTranslationUpdate placeMarkers
 05 16 * * fri $AddonTranslationUpdate pcKbBrl
+10 16 * * fri $AddonTranslationUpdate proxy
 
 # x 17 for addons starting with q
 # x 18 for addons starting with r
