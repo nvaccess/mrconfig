@@ -339,6 +339,7 @@ addresses = {
 			'Cleverson Casarin Uliana <clul@disr.it>',
 			'Marlin Rodrigues <marlincgrodrigues@yahoo.com.br>',
 			'Tiago Melo Casal <tcasal@intervox.nce.ufrj.br>',
+			'Lucas Antonio <lucasantoniocwb@gmail.com>',
 		],
 	},
 	'pt_PT': {
