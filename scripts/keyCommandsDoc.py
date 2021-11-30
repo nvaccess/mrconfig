@@ -11,6 +11,8 @@
 import os
 import codecs
 import re
+import sys
+
 import txt2tags
 
 LINE_END = u"\r\n"
@@ -18,6 +20,9 @@ LINE_END = u"\r\n"
 class KeyCommandsError(Exception):
 	"""Raised due to an error encountered in the User Guide related to generation of the Key Commands document.
 	"""
+	def __init__(self, message):
+		self.message = message
+		super().__init__(message)
 
 class KeyCommandsMaker(object):
 	"""Generates the Key Commands document from the User Guide.
@@ -283,3 +288,15 @@ class KeyCommandsMaker(object):
 			os.remove(self.kcFn)
 		except OSError:
 			pass
+
+if __name__ == "__main__":
+	f = KeyCommandsMaker(
+		userGuideFilename='userGuide.t2t',
+		keyCommandsFileName='keyCommands.html'
+	)
+	try:
+		result = f.make()
+		if not result:
+			sys.exit("User Guide does not contain key commands markup")
+	except KeyCommandsError as e:
+		sys.exit(e.message)
