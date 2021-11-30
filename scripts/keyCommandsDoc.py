@@ -292,7 +292,7 @@ class KeyCommandsMaker(object):
 if __name__ == "__main__":
 	f = KeyCommandsMaker(
 		userGuideFilename='userGuide.t2t',
-		keyCommandsFileName='keyCommands.html'
+		keyCommandsFileName='keyCommands.t2t'
 	)
 	try:
 		result = f.make()
