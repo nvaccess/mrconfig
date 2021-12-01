@@ -140,3 +140,29 @@ index f6cec9b..b7bb9f4 100644
  - Enable the filter `vim ~/.gitconfig` again.
  - `git status`
  
+### Files have incorrect encoding
+
+This can be confirmed by running `file`.
+
+Example:
+```sh
+$ file /home/nvdal10n/mr/srt/ar/userGuide.t2t
+/home/nvdal10n/mr/srt/ar/userGuide.t2t: data
+```
+
+Expected output is UTF-8 such as:
+```sh
+$ file /home/nvdal10n/mr/srt/ar/userGuide.t2t
+/home/nvdal10n/mr/srt/ar/userGuide.t2t: UTF-8 Unicode text, with very long lines, with CRLF line terminators
+```
+
+One approach to fix this is with a rudimentary binary search.
+
+1. Copy the file locally
+1. Open a wsl terminal
+1. Split the file into 10 files, prefixed by "A": `split -n 10 userGuideCopy.t2t A`
+1. Check the encoding of each file: `file A*`
+1. Pick a file with data as the encoding (example, assume `Aab` has data encoding)
+1. Check the length of the file to determine an appropriate split: `wc -l Aab`
+1. Split the file as appropriate, repeating 4-6 while incrementing the prefix alphabetically: `split -n N Aab B`
+1. Manually inspect the single line on the final file to find any non UTF-8 characters.
