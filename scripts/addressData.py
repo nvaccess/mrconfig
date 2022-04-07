@@ -40,6 +40,13 @@ addresses = {
 			'Omar Alojaimi <amrahmad1995@gmail.com>',
 		],
 	},
+	
+	'bn': {
+		'lang': 'Bangla',
+		'email': [
+			'Farhan Ishrak Fahim <fahim.net.2014@gmail.com>',
+		],
+	},
 	'bg': {
 		'lang': 'Bulgarian',
 		'email': [
