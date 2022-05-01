@@ -14,19 +14,19 @@ jobs:
     steps:
     - name: Get data
       id: get-data
-      uses: actions/github-script@v4
+      uses: actions/github-script@v6
       with:
         script: |
           const body = context.payload.issue.body   
           const name = body.split("### Add-on name")[1].split("###")[0].trim()
           core.setOutput('repo', "nvdaaddons/" + name)
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         repository: ${{steps.get-data.outputs.repo}}
         ref: stable
     - name: Set up Python 3.8
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v3
       with:
         python-version: 3.8
     - name: Install dependencies
@@ -39,7 +39,7 @@ jobs:
         scons
         scons pot
     - name: Comment
-      uses: actions/github-script@v4
+      uses: actions/github-script@v6
       with:
         script: |
           github.issues.createComment({
