@@ -51,7 +51,7 @@ addresses = {
 		'lang': 'Bulgarian',
 		'email': [
 			'Zahari Yurukov <zahari.yurukov@gmail.com>',
-			'Kostadin Kolev <k_kolev1985@mail.bg>',
+			'Kostadin Kolev <k.kolev1985@gmail.com>',
 		],
 	},
 	'ca': {
