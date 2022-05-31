@@ -51,7 +51,7 @@ This info is provided for convenience, according to discussions like this
 - Fetch the GitHub/nvdaaddons repo:
 	- `git fetch nvdaaddons`
 - Track the stable branch:
-	- `git checkout -t nvdaadons/stable`
+	- `git checkout -t nvdaaddons/stable`
 - Periodically:
 	- From stable branch:
 		- `git pull` # Get translations
