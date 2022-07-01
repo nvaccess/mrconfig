@@ -79,9 +79,16 @@ Now:
   - `svn commit */settings -m "Make <addon name> add-on available for translation."`
 - add entry to `automatic.crontab`
 
-## Errors / loggin
+## Errors / logging
 - When a crontab command fails an email is sent to the nvdal10n account.
   Which is forwarded to the addresses listed in `~/.forward`
+- Running `mr findRevs` may result in:
+  ```
+  svn: E200009: Could not add all targets because some targets don't exist
+  svn: E200009: Could not add all targets because some targets are already versioned
+  svn: E200009: Illegal target for the requested operation
+  ```
+  - This error is ouput by Subversion when a file can not be added because it is already tracked.
 
 
 ## Website
