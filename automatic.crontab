@@ -63,6 +63,7 @@ poStatusHtml=/home/nvdal10n/ikiwiki/publish/poStatus.html
 15  3 * * fri $AddonTranslationUpdate clock
 20  3 * * fri $AddonTranslationUpdate charInfo
 25  3 * * fri $AddonTranslationUpdate columnsReview
+30  3 * * fri $AddonTranslationUpdate cursorLocator
 
 #x  4 for addons starting with d
 00  4 * * fri $AddonTranslationUpdate dayOfTheWeek
@@ -76,6 +77,7 @@ poStatusHtml=/home/nvdal10n/ikiwiki/publish/poStatus.html
 10  5 * * fri $AddonTranslationUpdate enhancedAria
 15  5 * * fri $AddonTranslationUpdate enhancedTouchGestures
 20  5 * * fri $AddonTranslationUpdate easyTableNavigator
+30  5 * * fri $AddonTranslationUpdate enhancedAnnotations
 
 #x  6 for addons starting with f
 00  6 * * fri $AddonTranslationUpdate focusHighlight
