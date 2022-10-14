@@ -343,7 +343,7 @@ addresses = {
 	'pt_BR': {
 		'lang': 'Brazilian Portuguese',
 		'email': [
-			'Cleverson Casarin Uliana <clul@disr.it>',
+			'Cleverson Casarin Uliana <nvdasrt@clul.router5.com>',
 			'Marlin Rodrigues <marlincgrodrigues@yahoo.com.br>',
 			'Tiago Melo Casal <tcasal@intervox.nce.ufrj.br>',
 			'Lucas Antonio <lucasantoniocwb@gmail.com>',
