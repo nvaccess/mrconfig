@@ -80,6 +80,7 @@ svn2nvda () {
         _cp $lang/gestures.ini source/locale/$lang/gestures.ini
 
         checkT2t $lang/changes.t2t && _cp $lang/changes.t2t  user_docs/$lang/changes.t2t
+        checkT2t $lang/locale.t2tconf && _cp $lang/locale.t2tconf  user_docs/$lang/locale.t2tconf
         checkUserGuide $lang && _cp $lang/userGuide.t2t  user_docs/$lang/userGuide.t2t
         commit=$(git -C "$gitDir" diff --cached | wc -l)
         if [ "$commit" -gt "0" ]; then
