@@ -34,6 +34,11 @@ linfo = {
         'srcpath': 'user_docs/en/changes.t2t',
         'dstprefix': 'changes-newRevisions',
     },
+    'locale': {
+        'filename': 'locale.t2tconf',
+        'srcpath': 'user_docs/en/locale.t2tconf',
+        'dstprefix': 'locale-newRevisions',
+    },
     'userGuide': {
         'filename': 'userGuide.t2t',
         'srcpath': 'user_docs/en/userGuide.t2t',
