@@ -4,9 +4,9 @@
 
 Used to manage translation updates for NVDA and NVDA add-ons.
 
-## Addon website
-For information on having add-ons added to the nvda-addons website:
-https://github.com/nvaccess/addonFiles#readme
+## Add-on store and website
+For information on having add-ons added to the NVDA add-on store and legacy nvda-addons website:
+https://github.com/nvaccess/addon-datastore/blob/master/docs/submitters/submissionGuide.md
 
 ## Translating your addon
 

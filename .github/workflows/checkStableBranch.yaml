@@ -39,13 +39,7 @@ jobs:
         scons
         scons pot
     - name: Comment
-      uses: actions/github-script@v6
+      uses: peter-evans/create-or-update-comment@v2
       with:
-        script: |
-          github.issues.createComment({
-            issue_number: context.issue.number,
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            body: 'The add-on and pot files were built from stable branch'
-          })
-          
+        issue-number: ${{ github.event.issue.number }}
+        body: The add-on and pot files were built from stable branch
