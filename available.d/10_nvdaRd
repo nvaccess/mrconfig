@@ -1,0 +1,2 @@
+[addons/nvdaRd]
+checkout = git clone $(getGithubURL) $MR_REPO
