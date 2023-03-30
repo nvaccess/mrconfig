@@ -36,7 +36,6 @@ jobs:
         sudo apt install gettext
     - name: Build
       run: |
-        scons
         scons pot
     - name: Comment
       uses: peter-evans/create-or-update-comment@v2
