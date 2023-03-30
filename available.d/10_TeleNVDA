@@ -1,0 +1,2 @@
+[addons/TeleNVDA]
+checkout = git clone $(getGithubURL) $MR_REPO
