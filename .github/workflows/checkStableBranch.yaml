@@ -41,4 +41,4 @@ jobs:
       uses: peter-evans/create-or-update-comment@v2
       with:
         issue-number: ${{ github.event.issue.number }}
-        body: The add-on and pot files were built from stable branch
+        body: The pot files were built from the stable branch.
