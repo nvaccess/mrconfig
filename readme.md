@@ -37,6 +37,7 @@ https://github.com/nvaccess/addon-datastore/blob/master/docs/submitters/submissi
    - NV Access staff will edit `mr/automatic.crontab`
 	 - Copy one of the lines for one of the existing addons, just change the addon name and paste it in the correct section, commit and push.
 	 - Note: Run line from crontab manually to confirm.
+	 - Commit and push changes to master
 
 ### Maintaining the add-on
 
