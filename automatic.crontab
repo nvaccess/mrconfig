@@ -102,6 +102,8 @@ poStatusHtml=/home/nvdal10n/ikiwiki/publish/poStatus.html
 
 #x 14 for addons starting with n
 00 14 * * fri $AddonTranslationUpdate noBeepsSpeechMode
+03 14 * * fri $AddonTranslationUpdate numpadNavMode
+06 14 * * fri $AddonTranslationUpdate nvdaRd
 
 #x 15 for addons starting with o
 00 15 * * fri $AddonTranslationUpdate objPad
@@ -128,12 +130,14 @@ poStatusHtml=/home/nvdal10n/ikiwiki/publish/poStatus.html
 15 19 * * fri $AddonTranslationUpdate systrayList
 20 19 * * fri $AddonTranslationUpdate searchWith
 25 19 * * fri $AddonTranslationUpdate sayProductNameAndVersion
+30 19 * * fri $AddonTranslationUpdate speechLogger
 
 # x 20 for addons starting with t
 00  20 * * fri $AddonTranslationUpdate teamViewer
 05  20 * * fri $AddonTranslationUpdate textnav
 10  20 * * fri $AddonTranslationUpdate toneMaster
 15  20 * * fri $AddonTranslationUpdate toolbarsExplorer
+20  20 * * fri $AddonTranslationUpdate TeleNVDA
 
 # x 21 for addons starting with u
 00  21 * * fri $AddonTranslationUpdate unicodeBrailleInput
