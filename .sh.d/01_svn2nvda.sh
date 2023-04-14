@@ -30,7 +30,7 @@ checkT2tConf() {
         echo Warning: $1 does not exist
         return 1
     fi
-    encoding=`file $1 | grep -vP ': +(HTML document, )?(PostScript document text)'`
+    encoding=`file $1 | grep -vP ': +(HTML document, )?(ASCII text|UTF-8|empty|PostScript document text)'`
     if [ "$encoding" != "" ]; then
         echo Encoding problem: $encoding
         return 1
