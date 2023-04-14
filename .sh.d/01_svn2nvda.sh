@@ -25,6 +25,23 @@ checkT2t() {
     fi
 }
 
+checkT2tConf() {
+    if [ ! -f $1 ]; then
+        echo Warning: $1 does not exist
+        return 1
+    fi
+    encoding=`file $1 | grep -vP ': +(HTML document, )?(PostScript document text)'`
+    if [ "$encoding" != "" ]; then
+        echo Encoding problem: $encoding
+        return 1
+    fi
+    if ! output=$(python3 /home/nvdal10n/mr/scripts/txt2tags.py -q -o /dev/null $1 2>&1); then
+        echo Error in $1:
+        echo "$output"
+        return 1
+    fi
+}
+
 checkUserGuide() {
     checkT2t $1/userGuide.t2t || return 1
     origDir=`pwd`
@@ -80,7 +97,7 @@ svn2nvda () {
         _cp $lang/gestures.ini source/locale/$lang/gestures.ini
 
         checkT2t $lang/changes.t2t && _cp $lang/changes.t2t  user_docs/$lang/changes.t2t
-        checkT2t $lang/locale.t2tconf && _cp $lang/locale.t2tconf  user_docs/$lang/locale.t2tconf
+        checkT2tConf $lang/locale.t2tconf && _cp $lang/locale.t2tconf  user_docs/$lang/locale.t2tconf
         checkUserGuide $lang && _cp $lang/userGuide.t2t  user_docs/$lang/userGuide.t2t
         commit=$(git -C "$gitDir" diff --cached | wc -l)
         if [ "$commit" -gt "0" ]; then
