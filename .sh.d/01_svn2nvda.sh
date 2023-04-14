@@ -35,11 +35,6 @@ checkT2tConf() {
         echo Encoding problem: $encoding
         return 1
     fi
-    if ! output=$(python3 /home/nvdal10n/mr/scripts/txt2tags.py -q -o /dev/null $1 2>&1); then
-        echo Error in $1:
-        echo "$output"
-        return 1
-    fi
 }
 
 checkUserGuide() {
