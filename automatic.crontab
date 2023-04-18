@@ -142,6 +142,7 @@ poStatusHtml=/home/nvdal10n/ikiwiki/publish/poStatus.html
 # x 21 for addons starting with u
 00  21 * * fri $AddonTranslationUpdate unicodeBrailleInput
 05  21 * * fri $AddonTranslationUpdate updateChannel
+10  21 * * fri $AddonTranslationUpdate urlShortener
 
 # x 22 for addons starting with v or w
 00  22 * * fri $AddonTranslationUpdate VLC
