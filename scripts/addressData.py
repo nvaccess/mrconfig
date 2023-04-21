@@ -149,7 +149,6 @@ addresses = {
 		'lang': 'French',
 		'email': [
 			'Michel such <michel.such@free.fr>',
-			'Patrick ZAJDA <patrick@zajda.fr>',
 			'Remy Ruiz <remyruiz@gmail.com>',
 			'Abdelkrim Bensaid <abdelkrim.bensaid@free.fr>',
 			'Cyrille Bougot <cyrille.bougot2@laposte.net>',
