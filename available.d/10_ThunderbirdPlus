@@ -1,0 +1,2 @@
+[addons/ThunderbirdPlus]
+checkout = git clone $(getGithubURL) $MR_REPO
