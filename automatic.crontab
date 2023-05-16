@@ -138,6 +138,7 @@ poStatusHtml=/home/nvdal10n/ikiwiki/publish/poStatus.html
 10  20 * * fri $AddonTranslationUpdate toneMaster
 15  20 * * fri $AddonTranslationUpdate toolbarsExplorer
 20  20 * * fri $AddonTranslationUpdate TeleNVDA
+25  20 * * fri $AddonTranslationUpdate ThunderbirdPlus
 
 # x 21 for addons starting with u
 00  21 * * fri $AddonTranslationUpdate unicodeBrailleInput
