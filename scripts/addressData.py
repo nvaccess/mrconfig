@@ -361,13 +361,14 @@ addresses = {
 		'lang': 'Romanian',
 		'email': [
 			'Dan Pungă <dan.punga@gmail.com>',
-			'Florian Ionașcu <7ro2014@gmail.com>',
+			'Florian Ionașcu <contact@florian-ionascu.ro>',
 			'Alexandru Matei <alexandrumateistelian@gmail.com>',
 			'Nicuşor Untilă <nicusoruntila@yahoo.com>',
 			'Adriani Ionuț Botez <ionutz_tero@yahoo.com>',
 			'Dragoș Grecianu <grecianu.dragos@gmail.com>',
 			'Daniela Popovici <vlajna95@gmail.com>',
 			'George Antonio Andrei <george.andrei2002@gmail.com>',
+			'Mădălin Grădinaru <madalingradinaru@gmail.com>',
 		],
 	},
 	'ru': {
