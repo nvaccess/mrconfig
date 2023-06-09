@@ -73,9 +73,14 @@ class PoChecker(object):
 				'Original: "{msgid}"\n'
 				'Translated: "{msgstr}"\n'
 				"{alertType}: {alert}"
-			.format(msgType=msgType, lineNum=self._messageLineNum,
-				msgid=self._msgid, msgstr=self._msgstr[-1],
-				alertType="Error" if isError else "Warning", alert=alert))
+			.format(
+				msgType=msgType,
+				lineNum=self._messageLineNum,
+				msgid=self._msgid,
+				msgstr=self._msgstr[-1],
+				alertType="Error" if isError else "Warning",
+				alert=alert,
+			))
 
 	def _checkSyntax(self):
 		p = subprocess.Popen((MSGFMT, "-o", "-", self._poPath),
@@ -122,18 +127,7 @@ class PoChecker(object):
 				command = self.MSGID_PLURAL
 				start = command				
 			elif line.startswith(self.MSGSTR):
-				if command == self.MSGID:
-					self._msgid = self._finishString()
-				elif command == self.MSGID_PLURAL:
-					self._msgid_plural = self._finishString()
-				elif command == self.MSGSTR:
-					self._msgstr[-1] = self._finishString()
-					self._checkMessage()
-				else:
-					raise RuntimeError(f'Unexpected command before line {lineNum}: {command}')
-				if command != self.MSGSTR:
-					self._msgstr = []
-				self._msgstr.append("")
+				self._handleMsgStrReaching(lastCommand=command)
 				command = self.MSGSTR
 				start = line[:line.find(' ')]
 			elif line.startswith('"'):
@@ -147,6 +141,30 @@ class PoChecker(object):
 			# Handle the last message.
 			self._msgstr[-1] = self._finishString()
 			self._checkMessage()
+
+	def _handleMsgStrReaching(self, lastCommand: str) -> None:
+		"""Helper function used by _checkMessages to handle the required processing when reaching a line
+		starting with "msgstr".
+		@param lastCommand: the current command just before the msgstr line is reached.
+		"""
+
+		# Finish the string of the last command and check the message if it was an msgstr
+		if lastCommand == self.MSGID:
+			self._msgid = self._finishString()
+		elif lastCommand == self.MSGID_PLURAL:
+			self._msgid_plural = self._finishString()
+		elif lastCommand == self.MSGSTR:
+			self._msgstr[-1] = self._finishString()
+			self._checkMessage()
+		else:
+			raise RuntimeError(f'Unexpected command before line {lineNum}: {lastCommand}')
+	
+		# For first msgstr create the msgstr list
+		if lastCommand != self.MSGSTR:
+			self._msgstr = []
+	
+		# Initiate the string for the current msgstr
+		self._msgstr.append("")
 
 	def check(self):
 		"""Check the file.
