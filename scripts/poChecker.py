@@ -69,18 +69,21 @@ class PoChecker(object):
 			msgType = "Fuzzy message"
 		else:
 			msgType = "Message"
-		self.alerts.append(u"{msgType} starting on line {lineNum}\n"
+		self.alerts.append(
+			(
+				"{msgType} starting on line {lineNum}\n"
 				'Original: "{msgid}"\n'
 				'Translated: "{msgstr}"\n'
 				"{alertType}: {alert}"
-			.format(
+			).format(
 				msgType=msgType,
 				lineNum=self._messageLineNum,
 				msgid=self._msgid,
 				msgstr=self._msgstr[-1],
 				alertType="Error" if isError else "Warning",
 				alert=alert,
-			))
+			)
+		)
 
 	def _checkSyntax(self):
 		p = subprocess.Popen((MSGFMT, "-o", "-", self._poPath),
