@@ -21,6 +21,7 @@ class PoChecker(object):
 
 	FUZZY = "#, fuzzy"
 	MSGID = "msgid"
+	MSGID_PLURAL = "msgid_plural"
 	MSGSTR = "msgstr"
 
 	def __init__(self, po):
@@ -68,13 +69,21 @@ class PoChecker(object):
 			msgType = "Fuzzy message"
 		else:
 			msgType = "Message"
-		self.alerts.append(u"{msgType} starting on line {lineNum}\n"
+		self.alerts.append(
+			(
+				"{msgType} starting on line {lineNum}\n"
 				'Original: "{msgid}"\n'
 				'Translated: "{msgstr}"\n'
 				"{alertType}: {alert}"
-			.format(msgType=msgType, lineNum=self._messageLineNum,
-				msgid=self._msgid, msgstr=self._msgstr,
-				alertType="Error" if isError else "Warning", alert=alert))
+			).format(
+				msgType=msgType,
+				lineNum=self._messageLineNum,
+				msgid=self._msgid,
+				msgstr=self._msgstr[-1],
+				alertType="Error" if isError else "Warning",
+				alert=alert,
+			)
+		)
 
 	def _checkSyntax(self):
 		p = subprocess.Popen((MSGFMT, "-o", "-", self._poPath),
@@ -96,6 +105,7 @@ class PoChecker(object):
 	def _checkMessages(self):
 		command = None
 		self._msgid = None
+		self._msgid_plural = None
 		self._msgstr = None
 		nextFuzzy = False
 		self._fuzzy = False
@@ -104,10 +114,10 @@ class PoChecker(object):
 			if line.startswith(self.FUZZY):
 				nextFuzzy = True
 				continue
-			elif line.startswith(self.MSGID):
+			elif line.startswith(self.MSGID) and not line.startswith(self.MSGID_PLURAL):
 				# New message.
-				self._msgstr = self._finishString()
-				if self._msgstr:
+				if self._msgstr is not None:
+					self._msgstr[-1] = self._finishString()
 					# Check the message we just handled.
 					self._checkMessage()
 				command = self.MSGID
@@ -115,12 +125,16 @@ class PoChecker(object):
 				self._messageLineNum = lineNum
 				self._fuzzy = nextFuzzy
 				nextFuzzy = False
-			elif line.startswith(self.MSGSTR):
+			elif line.startswith(self.MSGID_PLURAL):
 				self._msgid = self._finishString()
+				command = self.MSGID_PLURAL
+				start = command				
+			elif line.startswith(self.MSGSTR):
+				self._handleMsgStrReaching(lastCommand=command)
 				command = self.MSGSTR
-				start = command
+				start = line[:line.find(' ')]
 			elif line.startswith('"'):
-				# Continug a string.
+				# Continuing a string.
 				start = None
 			else:
 				# This line isn't of interest.
@@ -128,9 +142,32 @@ class PoChecker(object):
 			self._addToString(line, startingCommand=start)
 		if command == self.MSGSTR:
 			# Handle the last message.
-			self._msgstr = self._finishString()
-			if self._msgstr:
-				self._checkMessage()
+			self._msgstr[-1] = self._finishString()
+			self._checkMessage()
+
+	def _handleMsgStrReaching(self, lastCommand: str) -> None:
+		"""Helper function used by _checkMessages to handle the required processing when reaching a line
+		starting with "msgstr".
+		@param lastCommand: the current command just before the msgstr line is reached.
+		"""
+
+		# Finish the string of the last command and check the message if it was an msgstr
+		if lastCommand == self.MSGID:
+			self._msgid = self._finishString()
+		elif lastCommand == self.MSGID_PLURAL:
+			self._msgid_plural = self._finishString()
+		elif lastCommand == self.MSGSTR:
+			self._msgstr[-1] = self._finishString()
+			self._checkMessage()
+		else:
+			raise RuntimeError(f'Unexpected command before line {lineNum}: {lastCommand}')
+	
+		# For first msgstr create the msgstr list
+		if lastCommand != self.MSGSTR:
+			self._msgstr = []
+	
+		# Initiate the string for the current msgstr
+		self._msgstr.append("")
 
 	def check(self):
 		"""Check the file.
@@ -178,7 +215,9 @@ class PoChecker(object):
 
 	def _checkMessage(self):
 		idUnnamedPercent, idNamedPercent, idFormats = self._getInterpolations(self._msgid)
-		strUnnamedPercent, strNamedPercent, strFormats = self._getInterpolations(self._msgstr)
+		if not self._msgstr[-1]:
+			return
+		strUnnamedPercent, strNamedPercent, strFormats = self._getInterpolations(self._msgstr[-1])
 		error = False
 		alerts = []
 		if idUnnamedPercent != strUnnamedPercent:
