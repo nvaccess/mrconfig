@@ -1,0 +1,2 @@
+[addons/soundSplitter]
+checkout = git clone $(getGithubURL) $MR_REPO
