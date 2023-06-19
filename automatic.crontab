@@ -100,7 +100,7 @@ poStatusHtml=/home/nvdal10n/ikiwiki/publish/poStatus.html
 
 #x 13 for addons starting with m
 00 13 * * fri $AddonTranslationUpdate mp3DirectCut
-05 13 * * fri $AddonTranslationUpdate msEdgeDiscardAnnouncements
+05 13 * * fri $AddonTranslationUpdate MSEdgeDiscardAnnouncements
 
 #x 14 for addons starting with n
 00 14 * * fri $AddonTranslationUpdate noBeepsSpeechMode
