@@ -9,7 +9,7 @@ makePot() {
         --foreign-user --add-comments=Translators: --keyword=pgettext:1c,2 \
         --from-code utf-8 \
         --language=python \
-        *.py *.pyw */*.py */*/*.py
+        *.py *.pyw */*.py */*/*.py */*/*/*.py
     cd $origDir
     # Tweak the headers.
     sed -i '
