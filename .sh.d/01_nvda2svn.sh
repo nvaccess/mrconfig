@@ -9,7 +9,7 @@ makePot() {
         --foreign-user \
         --add-comments=Translators: \
         --keyword=pgettext:1c,2 \
-        --keyword=npgettext:1c,2,3
+        --keyword=npgettext:1c,2,3 \
         --from-code utf-8 \
         --language=python \
         *.py *.pyw */*.py */*/*.py
