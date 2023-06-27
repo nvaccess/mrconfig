@@ -6,7 +6,10 @@ makePot() {
     version="beta-`git rev-parse --short beta`"
     xgettext -o $potName \
         --package-name NVDA --package-version "$version" \
-        --foreign-user --add-comments=Translators: --keyword=pgettext:1c,2 \
+        --foreign-user \
+        --add-comments=Translators: \
+        --keyword=pgettext:1c,2 \
+        --keyword=npgettext:1c,2,3 \
         --from-code utf-8 \
         --language=python \
         *.py *.pyw */*.py */*/*.py
