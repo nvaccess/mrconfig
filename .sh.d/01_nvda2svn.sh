@@ -9,6 +9,7 @@ makePot() {
         --foreign-user --add-comments=Translators: --keyword=pgettext:1c,2 \
         --from-code utf-8 \
         --language=python \
+        # Unfortunately **/*.py doesn't work here
         *.py *.pyw */*.py */*/*.py */*/*/*.py
     cd $origDir
     # Tweak the headers.
