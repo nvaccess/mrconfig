@@ -43,9 +43,7 @@ addresses = {
 	
 	'bn': {
 		'lang': 'Bangla',
-		'email': [
-			'Farhan Ishrak Fahim <fahim.net.2014@gmail.com>',
-		],
+		'email': [],
 	},
 	'bg': {
 		'lang': 'Bulgarian',
