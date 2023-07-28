@@ -91,7 +91,8 @@ poStatusHtml=/home/nvdal10n/ikiwiki/publish/poStatus.html
 #x  9 for addons starting with i
 00  9 * * fri $AddonTranslationUpdate IndentNav
 05  9 * * fri $AddonTranslationUpdate inputLock
-10  9 * * fri $AddonTranslationUpdate instantTranslate
+# instantTranslate failed due to base string errors
+# 10  9 * * fri $AddonTranslationUpdate instantTranslate
 
 #x 10 for addons starting with j
 #x 11 for addons starting with k
@@ -105,7 +106,6 @@ poStatusHtml=/home/nvdal10n/ikiwiki/publish/poStatus.html
 #x 14 for addons starting with n
 00 14 * * fri $AddonTranslationUpdate noBeepsSpeechMode
 03 14 * * fri $AddonTranslationUpdate numpadNavMode
-06 14 * * fri $AddonTranslationUpdate nvdaRd
 09 14 * * fri $AddonTranslationUpdate nvdaDevTestToolbox
 
 #x 15 for addons starting with o
@@ -124,6 +124,7 @@ poStatusHtml=/home/nvdal10n/ikiwiki/publish/poStatus.html
 05 18 * * fri $AddonTranslationUpdate reportSymbols
 10 18 * * fri $AddonTranslationUpdate resourceMonitor
 15 18 * * fri $AddonTranslationUpdate reviewCursorCopier
+20 18 * * fri $AddonTranslationUpdate rdAccess
 
 # x 19 for addons starting with s
 00 19 * * fri $AddonTranslationUpdate sayCurrentKeyboardLanguage
