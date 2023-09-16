@@ -189,8 +189,8 @@ addresses = {
 		'lang': 'Croatian',
 		'email': [
 			'Hrvoje Katic <hrvojekatic@gmail.com>',
-			'Zvonimir Stanecic <9a5dsz@gozaltech.org>',
-			'Milo Ivir <mivir@milotype.de>',
+			'Zvonimir Stanecic <zvonimirek222@yandex.com>',
+			'Milo Ivir <mail@milotype.de>',
 			'Dejana Rakic <dejana.rakic.2@gmail.com>',
 		],
 	},
@@ -278,7 +278,7 @@ addresses = {
 	'mk': {
 		'lang': 'Macedonian',
 		'email': [
-			'zvonimir stanecic <9a5dsz@gozaltech.org>',
+			'zvonimir stanecic <zvonimirek222@yandex.com>',
 			'Ertay Shashko <ertay@outlook.com>',
 			'Aleksandar <glupav@gmail.com>',
 			'Kiko Lazarev <kristijan.lazarev@gmail.com>',
@@ -330,7 +330,7 @@ addresses = {
 		'email': [
 			'Grzegorz Zlotowicz <grzezlo@wp.pl>',
 			'Patryk Faliszewski <patric3031@wp.pl>',
-			'Zvonimir Stanecic <9a5dsz@gozaltech.org>',
+			'Zvonimir Stanecic <zvonimirek222@yandex.com>',
 			'Dorota Krac <dorkakrac@yandex.com>',
 			'Piotr Rakowski <kontakt@piotrrakowski.net>',
 			'Hubert Meyer <hubmeyer1989@gmail.com>',
@@ -372,7 +372,7 @@ addresses = {
 	'ru': {
 		'lang': 'Russian',
 		'email': [
-			'Zvonimir Stanecic <9a5dsz@gozaltech.org>',
+			'Zvonimir Stanecic <zvonimirek222@yandex.com>',
 			"Aleksandr Lin'kov <kvark128@yandex.ru>",
 		],
 	},
@@ -401,7 +401,7 @@ addresses = {
 		'email': [
 			'Nikola Jovic <wwenikola123@gmail.com>',
 			'Janko Valencik <janko.valencik@alfanum.co.rs>',
-			'Zvonimir <9a5dsz@gozaltech.org>',
+			'Zvonimir <zvonimirek222@yandex.com>',
 			'Danijela Popovic <vlajna95@gmail.com>',
 		],
 	},
