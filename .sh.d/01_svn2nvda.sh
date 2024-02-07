@@ -76,17 +76,6 @@ svn2nvda () {
             logMsg "LastSubmittedSvnRev == 0 setting to 1"
             lastSubmittedSvnRev=1
         fi
-        if test "60531" -gt "${lastSubmittedSvnRev}"; then
-          logMsg "Force needsCommitting"
-          needsCommitting=1
-        else
-          needsCommitting=$(svn log -r${lastSubmittedSvnRev}:head ${lang}/nvda.po | grep -iP "r[0-9]+ \|" | grep -viP "commitbot" | wc -l)
-        fi
-        logMsg "Needs committing: ${needsCommitting}"
-        if test "$needsCommitting" != "0" && python3 ../scripts/poChecker.py $lang/nvda.po ; then
-            logMsg "copying po file"
-            _cp $lang/nvda.po source/locale/$lang/LC_MESSAGES/nvda.po
-        fi
         _cp $lang/symbols.dic source/locale/$lang/symbols.dic
         _cp $lang/characterDescriptions.dic source/locale/$lang/characterDescriptions.dic
         _cp $lang/gestures.ini source/locale/$lang/gestures.ini
