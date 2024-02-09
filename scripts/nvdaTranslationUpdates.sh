@@ -19,13 +19,6 @@ _doNVDATranslationUpdate(){
     error=1
   fi
 
-  mergePotLogPath="${LogDir}/mr-mergePot.log"
-  cd ${PathToMrRepo}/srt/ && mr mergePot &> $mergePotLogPath
-  if [ $? -ne 0 ] ; then
-    echo mr mergePot failed
-    error=1
-  fi
-
   findRevsLogPath="${LogDir}/mr-findRevs.log"
   cd ${PathToMrRepo}/srt/ && mr findRevs &> $findRevsLogPath
   if [ $? -ne 0 ] ; then
