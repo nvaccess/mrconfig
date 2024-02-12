@@ -13,7 +13,7 @@ SRT_ROOT = "../srt"
 def listLangs():
 	langs = []
 	for lang in os.listdir(SRT_ROOT):
-		if os.path.isfile(os.path.join(SRT_ROOT, lang, "nvda.po")):
+		if os.path.isfile(os.path.join(SRT_ROOT, lang, "settings")):
 			langs.append(lang)
 	langs.sort()
 	return langs
@@ -58,6 +58,9 @@ def makeReport():
 	stats = statsdb.StatsCache()
 	webPoFiles = listWebPoFiles()
 	for lang in listLangs():
+		posForLang = list(listPoFiles(lang, webPoFiles))
+		if len(posForLang) == 0:
+			continue
 		out.write(
 			f'<br/><H2>{lang}</H2><br/>\n'
 			'<table>\n'
@@ -66,7 +69,7 @@ def makeReport():
 			'<th>Total number of messages</th>'
 			'</tr>\n'
 		)
-		for po in listPoFiles(lang, webPoFiles):
+		for po in posForLang:
 			path = os.path.join(SRT_ROOT, po)
 			try:
 				totals = stats.filetotals(path)
