@@ -13,12 +13,12 @@ checkT2t() {
         echo Warning: $1 does not exist
         return 1
     fi
-    encoding=`file $1 | grep -vP ': +(HTML document, )?(ASCII text|UTF-8|empty)'`
+    encoding=`file $1 | grep -vP ': +(HTML document, |Unicode text, )?(ASCII text|UTF-8|empty)'`
     if [ "$encoding" != "" ]; then
         echo Encoding problem: $encoding
         return 1
     fi
-    if ! output=$(python3 /home/nvdal10n/mr/scripts/txt2tags.py -q -o /dev/null $1 2>&1); then
+    if ! output=$(python3 /home/nvdal10n/mr/scripts/txt2tags.py -q -t html -o /dev/null $1 2>&1); then
         echo Error in $1:
         echo "$output"
         return 1
