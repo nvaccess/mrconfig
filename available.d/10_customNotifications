@@ -1,0 +1,2 @@
+[addons/customNotifications]
+checkout = git clone $(getGithubURL) $MR_REPO
