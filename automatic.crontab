@@ -128,6 +128,7 @@ poStatusHtml=/home/nvdal10n/ikiwiki/publish/poStatus.html
 10 18 * * fri $AddonTranslationUpdate resourceMonitor
 15 18 * * fri $AddonTranslationUpdate reviewCursorCopier
 20 18 * * fri $AddonTranslationUpdate rdAccess
+25 18 * * fri $AddonTranslationUpdate robEnhancements
 
 # x 19 for addons starting with s
 00 19 * * fri $AddonTranslationUpdate sayCurrentKeyboardLanguage
