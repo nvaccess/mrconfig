@@ -93,7 +93,7 @@ poStatusHtml=/home/nvdal10n/ikiwiki/publish/poStatus.html
 00  9 * * fri $AddonTranslationUpdate IndentNav
 05  9 * * fri $AddonTranslationUpdate inputLock
 # instantTranslate failed due to base string errors
-# 10  9 * * fri $AddonTranslationUpdate instantTranslate
+10  9 * * fri $AddonTranslationUpdate instantTranslate
 
 #x 10 for addons starting with j
 #x 11 for addons starting with k
