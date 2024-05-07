@@ -1,0 +1,2 @@
+[addons/wordNav]
+checkout = git clone $(getGithubURL) $MR_REPO
