@@ -163,6 +163,7 @@ poStatusHtml=/home/nvdal10n/ikiwiki/publish/poStatus.html
 15  22 * * fri $AddonTranslationUpdate wordCount
 20  22 * * fri $AddonTranslationUpdate winMag
 25  22 * * fri $AddonTranslationUpdate winWizard
+30  22 * * fri $AddonTranslationUpdate wordNav
 
 # x 23 for addons starting with x y or z
 00  23 * * fri $AddonTranslationUpdate zoomEnhancements
