@@ -16,33 +16,43 @@ source "${MYDIR}/lock.sh"
 result=0
 lang=$(basename $(pwd))
 
-encoding=`file *.t2t | grep -vP ': +(HTML document, |Unicode text, )?(ASCII text|UTF-8|empty)'`
+encoding=`file *.md | grep -vP ': +(HTML document, |Unicode text, )?(ASCII text|UTF-8|empty)'`
 if [ "$encoding" != "" ]; then
     result=1
-    echo $lang: File encoding problem in t2t file. Please save the following as Unicode UTF-8:
+    echo $lang: File encoding problem in md file. Please save the following as Unicode UTF-8:
     echo "$encoding"
     echo
-else
-    if ! output=$(python3 ${MYDIR}/keyCommandsDoc.py 2>&1); then
-        result=2
-        echo "$lang: Error generating Key Commands document from User Guide: $output"
-        echo
-    fi
 
-    # process each t2t file individually to make it easier to spot errors in output.
-    for file in *.t2t; do
-        if ! output=$(python3 ${MYDIR}/txt2tags.py -q -t html $file 2>&1); then
+    if [ -f changes.md ]; then
+        if ! output=$(python3 ${MYDIR}/md2html.py changes.md changes.html 2>&1); then
             result=3
-            echo $lang: Error processing $file:
+            echo $lang: Error processing changes.md:
             echo "$output"
             echo
         fi
-    done
+    else
+        echo No changes.md
+    fi
 
-    ${MYDIR}/rebuildStats.sh
+    if [ -f userGuide.md ]; then
+        if ! output=$(python3 ${MYDIR}/md2html.py userGuide.md userGuide.html 2>&1); then
+            result=4
+            echo $lang: Error processing userGuide.md:
+            echo "$output"
+            echo
+        fi
+        if ! output=$(python3 ${MYDIR}/md2html.py userGuide.md keyCommands.html 2>&1); then
+            result=5
+            echo $lang: Error generating keyCommands.html from  userGuide.md:
+            echo "$output"
+            echo
+        fi
+    else
+        echo No userGuide.md
+    fi
 
-    rm -f keyCommands.t2t
-
+    # Disabled for now
+    # ${MYDIR}/rebuildStats.sh
 
     svn add -q *.html *.txt >& /dev/null
     mfiles=`svn status -q | awk '{printf(" %s", $2)}'`
