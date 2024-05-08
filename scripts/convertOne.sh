@@ -24,7 +24,7 @@ if [ "$encoding" != "" ]; then
     echo
 
     if [ -f changes.md ]; then
-        if ! output=$(python3 ${MYDIR}/md2html.py changes.md changes.html 2>&1); then
+        if ! output=$(python3 ${MYDIR}/md2html.py convert changes.md changes.html 2>&1); then
             result=3
             echo $lang: Error processing changes.md:
             echo "$output"
@@ -35,13 +35,13 @@ if [ "$encoding" != "" ]; then
     fi
 
     if [ -f userGuide.md ]; then
-        if ! output=$(python3 ${MYDIR}/md2html.py userGuide.md userGuide.html 2>&1); then
+        if ! output=$(python3 ${MYDIR}/md2html.py convert userGuide.md userGuide.html 2>&1); then
             result=4
             echo $lang: Error processing userGuide.md:
             echo "$output"
             echo
         fi
-        if ! output=$(python3 ${MYDIR}/md2html.py userGuide.md keyCommands.html 2>&1); then
+        if ! output=$(python3 ${MYDIR}/md2html.py convert userGuide.md keyCommands.html 2>&1); then
             result=5
             echo $lang: Error generating keyCommands.html from  userGuide.md:
             echo "$output"

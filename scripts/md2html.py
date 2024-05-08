@@ -128,7 +128,9 @@ def _generateSanitizedHTML(md: str, isKeyCommands: bool = False) -> str:
 	return htmlOutput
 
 
-def main(source: str, dest: str):
+def main(cmd: str, source: str, dest: str):
+	if cmd not in ('check', 'convert'):
+		raise ValueError(f"Unknown command {cmd}")
 	isKeyCommands = dest.endswith("keyCommands.html")
 	isUserGuide = dest.endswith("userGuide.html")
 	isDevGuide = dest.endswith("developerGuide.html")
@@ -169,14 +171,16 @@ def main(source: str, dest: str):
 	htmlBuffer.seek(0, io.SEEK_END)
 	htmlBuffer.write("\n</body>\n</html>\n")
 
-	with open(dest, "w", encoding="utf-8") as targetFile:
-		# Make next read at start of buffer
-		htmlBuffer.seek(0)
-		shutil.copyfileobj(htmlBuffer, targetFile)
+	if cmd == "convert":
+		with open(dest, "w", encoding="utf-8") as targetFile:
+			# Make next read at start of buffer
+			htmlBuffer.seek(0)
+			shutil.copyfileobj(htmlBuffer, targetFile)
 
 	htmlBuffer.close()
 
 if __name__ == '__main__':
-	source = sys.argv[1]
-	dest = sys.argv[2]
-	main(source, dest)
+	cmd = sys.argv[1]
+	source = sys.argv[2]
+	dest = sys.argv[3]
+	main(cmd, source, dest)

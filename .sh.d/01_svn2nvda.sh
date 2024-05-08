@@ -8,7 +8,7 @@ _cp() {
     fi
 }
 
-checkT2t() {
+checkMd() {
     if [ ! -f $1 ]; then
         echo Warning: $1 does not exist
         return 1
@@ -18,37 +18,11 @@ checkT2t() {
         echo Encoding problem: $encoding
         return 1
     fi
-    if ! output=$(python3 /home/nvdal10n/mr/scripts/txt2tags.py -q -t html -o /dev/null $1 2>&1); then
+    if ! output=$(python3 /home/nvdal10n/mr/scripts/md2html.py check $1 $2 2>&1); then
         echo Error in $1:
         echo "$output"
         return 1
     fi
-}
-
-checkT2tConf() {
-    if [ ! -f $1 ]; then
-        echo Warning: $1 does not exist
-        return 1
-    fi
-    encoding=`file $1 | grep -vP ': +(HTML document, )?(ASCII text|UTF-8|empty|PostScript document text)'`
-    if [ "$encoding" != "" ]; then
-        echo Encoding problem: $encoding
-        return 1
-    fi
-}
-
-checkUserGuide() {
-    checkT2t $1/userGuide.t2t || return 1
-    origDir=`pwd`
-    cd $1
-    result=0
-    if ! output=$(python3 ../../scripts/keyCommandsDoc.py 2>&1); then
-        echo Key commands error in $1/userGuide.t2t: $output
-        result=1
-    fi
-    rm -f keyCommands.t2t
-    cd $origDir
-    return $result
 }
 
 # Run by cron from path ${PathToMrRepo}/srt/
@@ -80,9 +54,8 @@ svn2nvda () {
         _cp $lang/characterDescriptions.dic source/locale/$lang/characterDescriptions.dic
         _cp $lang/gestures.ini source/locale/$lang/gestures.ini
 
-        checkT2t $lang/changes.t2t && _cp $lang/changes.t2t  user_docs/$lang/changes.t2t
-        checkT2tConf $lang/locale.t2tconf && _cp $lang/locale.t2tconf  user_docs/$lang/locale.t2tconf
-        checkUserGuide $lang && _cp $lang/userGuide.t2t  user_docs/$lang/userGuide.t2t
+        checkMd $lang/changes.md $lang/changes.html && _cp $lang/changes.md  user_docs/$lang/changes.md
+        checkMd $lang/userGuide.md $lang/keyCommands.html && _cp $lang/userGuide.md  user_docs/$lang/userGuide.md
         commit=$(git -C "$gitDir" diff --cached | wc -l)
         if [ "$commit" -gt "0" ]; then
             logMsg "Doing commit and updating lastSubmittedSvnRev to $svnRev"
