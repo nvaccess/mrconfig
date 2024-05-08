@@ -72,10 +72,10 @@ for f in files:
         hasAlert = True
         body += "\n\n\nError in %s: %s" % (f, e)
 
-# Convert any t2t files in this commit.
-# The t2t conversion code operates per language.
-t2tLangs = re.findall(r'(?<=[AM]\s)/([^/]+)/[^/]+\.t2t', body)
-for lang in t2tLangs:
+# Convert any md files in this commit.
+# The md conversion code operates per language.
+mdLangs = re.findall(r'(?<=[AM]\s)/([^/]+)/[^/]+\.md', body)
+for lang in mdLangs:
     print(f"run convertOne for {lang}")
     try:
         subprocess.check_output([os.path.join(SCRIPTS_PATH, "convertOne.sh")],
