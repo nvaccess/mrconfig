@@ -13,7 +13,7 @@ checkMd() {
         echo Warning: $1 does not exist
         return 1
     fi
-    encoding=`file $1 | grep -vP ': +(HTML document, |Unicode text, )?(ASCII text|UTF-8|empty)'`
+    encoding=`file $1 | grep -vP ': .*(ASCII text|UTF-8 text)'`
     if [ "$encoding" != "" ]; then
         echo Encoding problem: $encoding
         return 1
