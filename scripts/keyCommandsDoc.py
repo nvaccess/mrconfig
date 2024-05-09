@@ -13,12 +13,25 @@ Refer to user guide standards for more information on syntax rules:
 https://github.com/nvaccess/nvda/blob/master/projectDocs/dev/userGuideStandards.md
 """
 
-from enum import auto, Enum, IntEnum, StrEnum
+from enum import auto, Enum, IntEnum
 import re
 from collections.abc import Iterator
 
 from markdown import Extension, Markdown
 from markdown.preprocessors import Preprocessor
+
+
+class StrEnum(str, Enum):
+	"""
+	Enum where members are also (and must be) strings.
+	"""
+	def __new__(cls, value):
+		member = str.__new__(cls, value)  # Create a string instance
+		member._value_ = value
+		return member
+
+	def __str__(self):
+		return self.value
 
 
 LINE_END = "\r\n"
