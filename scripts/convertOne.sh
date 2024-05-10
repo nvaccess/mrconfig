@@ -16,13 +16,13 @@ source "${MYDIR}/lock.sh"
 result=0
 lang=$(basename $(pwd))
 
-encoding=`file *.md | grep -vP ': +(HTML document, |Unicode text, )?(ASCII text|UTF-8|empty)'`
+encoding=`file *.md | grep -vP ': .*(ASCII text|UTF-8 text)'`
 if [ "$encoding" != "" ]; then
     result=1
     echo $lang: File encoding problem in md file. Please save the following as Unicode UTF-8:
     echo "$encoding"
     echo
-
+else
     if [ -f changes.md ]; then
         if ! output=$(python3 ${MYDIR}/md2html.py convert changes.md changes.html 2>&1); then
             result=3
