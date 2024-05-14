@@ -11,4 +11,4 @@ fi
 scriptsDir="../../scripts"
 lang=$(basename `pwd`)
 
-python3 ${scriptsDir}/structDiffMd.py $lang userGuide.md userGuide-newRevisions/$nextRev/userGuide.md userGuide-structureDifferences.txt
+python3 ${scriptsDir}/structDiffMd.py $lang userGuide-newRevisions/$nextRev/userGuide.md userGuide.md userGuide-structureDifferences.txt
