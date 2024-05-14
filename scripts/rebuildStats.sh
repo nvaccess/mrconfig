@@ -4,7 +4,7 @@
 
 nextRev=`ls -1 userGuide-newRevisions/ | head -n 1`
 if [ "$nextRev" == "" ]; then
-    echo "No revision found, unable to calculate structure difference." >${outFile}
+    echo "No revision found, unable to calculate structure difference."
     exit
 fi
 
