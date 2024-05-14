@@ -51,8 +51,7 @@ else
         echo No userGuide.md
     fi
 
-    # Disabled for now
-    # ${MYDIR}/rebuildStats.sh
+    ${MYDIR}/rebuildStats.sh
 
     svn add -q *.html *.txt >& /dev/null
     mfiles=`svn status -q | awk '{printf(" %s", $2)}'`
