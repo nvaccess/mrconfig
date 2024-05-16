@@ -27,12 +27,12 @@ def structDiff(enFile, localeFile):
 			if err is not None:
 				output.append(f'Line {nLine+1}: {err}')
 				output.append(f'English = {repr(enLine)}')
-				output.append(f'Locale = {repr(locLine)}')
+				output.append(f'Locale  = {repr(locLine)}')  # Double space for vertical alignment between both lines.
 			err = compareLineContents(enLine, locLine)
 			if err is not None:
 				output.append(f'Line {nLine+1}: {err}')
 				output.append(f'English = {repr(enLine)}')
-				output.append(f'Locale = {repr(locLine)}')
+				output.append(f'Locale  = {repr(locLine)}')  # Double space for vertical alignment between both lines.
 	return "\n".join(output)
 
 
@@ -42,10 +42,10 @@ RE_LINE = """
 	(  # Tags
 		<!--\ 
 		KC:(
-			(title:\ NVDA\ NVDA_VERSION\ ([^-](?!->))+)
+			(title:\ [^\n]+)
 			|(beginInclude)
 			|(endInclude)
-			|(settingsSection:\ ([^-](?!->))+)
+			|(settingsSection:\ [^\n]+)
 			|(setting)
 		)\ -->
 	)
@@ -135,7 +135,7 @@ if __name__ == '__main__':
 	output = structDiff(enFile, transFile)
 	if output:
 		print(f"Differences found. Written to {outFile}")
-		open(outFile, 'w').write(output)
 	else:
 		print("No differences found")
-		open(outFile, 'w').write("No differences found")
+		output = "No differences found"
+	open(outFile, 'w', encoding='utf-8').write(output)
