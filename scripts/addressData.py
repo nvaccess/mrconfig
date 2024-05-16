@@ -328,7 +328,6 @@ addresses = {
 	'pl': {
 		'lang': 'Polish',
 		'email': [
-			'Grzegorz Zlotowicz <grzezlo@wp.pl>',
 			'Patryk Faliszewski <patric3031@wp.pl>',
 			'Zvonimir Stanecic <zvonimirek222@yandex.com>',
 			'Dorota Krac <dorkakrac@yandex.com>',
