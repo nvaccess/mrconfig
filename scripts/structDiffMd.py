@@ -11,6 +11,7 @@ If no error is found, nothing is printed on the output.
 import sys
 import os
 import re
+from itertools import zip_longest
 
 # Set to True to check blank at end of line. It is currently disabled due to the high number of diffs in 
 # the change log (French)
@@ -22,7 +23,12 @@ CHECK_CODE_FORMATTING = True
 def structDiff(enFile, localeFile):
 	output = []
 	with open(enFile, encoding="utf8") as f1, open(localeFile, encoding="utf8") as f2:
-		for (nLine, (enLine, locLine)) in enumerate(zip(f1, f2)):
+		for (nLine, (enLine, locLine)) in enumerate(zip_longest(f1, f2)):
+			if enLine is None or locLine is None:
+				output.append(f'Line {nLine+1}: One of the files is shortest')
+				output.append(f'English = {repr(enLine)}')
+				output.append(f'Locale  = {repr(locLine)}')  # Double space for vertical alignment between both lines.
+				continue
 			err = compareLines(enLine, locLine)
 			if err is not None:
 				output.append(f'Line {nLine+1}: {err}')
@@ -138,4 +144,10 @@ if __name__ == '__main__':
 	else:
 		print("No differences found")
 		output = "No differences found"
-	open(outFile, 'w', encoding='utf-8').write(output)
+	compaInfo = f"Comparing {locale} {baseName} against English:\n"
+	compaInfo += f"English file: {enFile}\n"
+	compaInfo += f"Local file: {transFile}\n"
+	compaInfo += "\n"
+	with open(outFile, 'w', encoding='utf-8') as f:
+		f.write(compaInfo)
+		f.write(output)
