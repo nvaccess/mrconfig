@@ -153,7 +153,6 @@ addresses = {
 			'Corentin Bacque-Cazenave <corentin@progaccess.net>',
 			'Sylvie Duchateau <sylvieduchateau@gmail.com>',
 			'Sof <hellosof@gmail.com>',
-			'Michael curran <mick@nvaccess.org>',
 		],
 	},
 	'ga': {
