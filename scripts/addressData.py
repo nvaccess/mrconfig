@@ -8,7 +8,7 @@ addresses = {
 	'default': {
 		'lang': '',
 		'email': [
-			'nvdal10n@zebi.nvaccess.org',
+			'nvdal10n@l10n.nvaccess.org',
 		],
 	},
 	'af_ZA': {
@@ -150,9 +150,10 @@ addresses = {
 			'Remy Ruiz <remyruiz@gmail.com>',
 			'Abdelkrim Bensaid <abdelkrim.bensaid@free.fr>',
 			'Cyrille Bougot <cyrille.bougot2@laposte.net>',
-			'Corentin Bacqué-Cazenave <corentin@progaccess.net>',
+			'Corentin Bacque-Cazenave <corentin@progaccess.net>',
 			'Sylvie Duchateau <sylvieduchateau@gmail.com>',
 			'Sof <hellosof@gmail.com>',
+			'Michael curran <mick@nvaccess.org>',
 		],
 	},
 	'ga': {
