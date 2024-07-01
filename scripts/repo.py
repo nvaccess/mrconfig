@@ -25,7 +25,7 @@ class Repo():
 
     def getDiffBetween(self, rhash1, rhash2, file):
         revrange = "%s..%s" %(rhash1, rhash2)
-        # ignore carage returns for diffs as crlf changed to lf in the repo recently.
+        # ignore carriage returns for diffs as crlf changed to lf in the repo recently.
         return self.git['diff', revrange, '--ignore-cr-at-eol', '--', file]()
 
     def getFileAt(self, rhash, file):
