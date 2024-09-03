@@ -55,6 +55,7 @@ poStatusHtml=/home/nvdal10n/ikiwiki/publish/poStatus.html
 00  2 * * fri $AddonTranslationUpdate bitChe
 02  2 * * fri $AddonTranslationUpdate beepKeyboard
 05  2 * * fri $AddonTranslationUpdate bluetoothaudio
+07  2 * * fri $AddonTranslationUpdate BMI
 
 #x  3 for addons starting with c
 00  3 * * fri $AddonTranslationUpdate clipContentsDesigner
