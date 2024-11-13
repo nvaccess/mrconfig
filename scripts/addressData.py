@@ -379,7 +379,7 @@ addresses = {
 		'lang': 'Slovak',
 		'email': [
 			'Ondrej Rosik <ondrej.rosik@gmail.com>',
-			'Peter Vagner <peter.v@datagate.sk>',
+			'Peter Vagner <pvagner@pvagner.sk>',
 			'Jan Kulik <jan.kulik.szsle@outlook.sk>',
 		],
 	},
