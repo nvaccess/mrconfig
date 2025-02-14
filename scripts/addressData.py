@@ -343,6 +343,7 @@ addresses = {
 			'Marlin Rodrigues <marlincgrodrigues@yahoo.com.br>',
 			'Tiago Melo Casal <tcasal@intervox.nce.ufrj.br>',
 			'Lucas Antonio <lucasantoniocwb@gmail.com>',
+			'Josevan Fernandes <josevan@intervox.nce.ufrj.br>',
 		],
 	},
 	'pt_PT': {
