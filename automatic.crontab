@@ -45,7 +45,6 @@ poStatusHtml=/home/nvdal10n/ikiwiki/publish/poStatus.html
 1 * * * * cd ${PathToMrRepo}/addons/addonFiles && git pull -q
 
 #x  1 for addons starting with a
-00  1 * * fri $AddonTranslationUpdate addonUpdater
 03  1 * * fri $AddonTranslationUpdate addonsHelp
 05  1 * * fri $AddonTranslationUpdate audioChart
 10  1 * * fri $AddonTranslationUpdate audiothemes
