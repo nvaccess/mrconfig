@@ -14,14 +14,14 @@ It is an English low traffic list devoted to the discussion of translation.
 
 ### Install recommended software
 
-* [SVN](https://tortoisesvn.net/downloads.html)
-* [Poedit](https://poedit.net/download)
+- [SVN](https://tortoisesvn.net/downloads.html)
+- [Poedit](https://poedit.net/download)
 
 ### Checkout the repository
 
 1. Create a new folder to host the translations repository, for example, presing `control+shift+n`.
 1. Open the context menu (for example, presing the `applications` key, `shift+f10`, or the `right mouse button`).
-3 From the SVN submenu, choose checkout and, in the corresponding edit box, paste the following URL:
+1. From the SVN submenu, choose checkout and, in the corresponding edit box, paste the following URL:
 
 ```
 https://subversion.assembla.com/svn/screenReaderTranslations
