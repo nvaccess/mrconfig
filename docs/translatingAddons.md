@@ -12,6 +12,10 @@ Translators should subscribe to the [NVDA translations mailing list hosted at Gr
 
 It is an English low traffic list devoted to the discussion of translation.
 
+If you aren't a member of the translation team, request an invitation on the translation mailing list.
+
+Once you receive your [assembla(http://www.assembla.com) invitation, you can proceed by creating a username/password so that you can use the svn server. Once you are logged in, you need to accept the invitation to the screenReaderTranslations team. After that, you don't need to come back to the website.
+
 ### Install recommended software
 
 - [SVN](https://tortoisesvn.net/downloads.html)
@@ -19,8 +23,8 @@ It is an English low traffic list devoted to the discussion of translation.
 
 ### Checkout the repository
 
-1. Create a new folder to host the translations repository, for example, presing `control+shift+n`.
-1. Open the context menu (for example, presing the `applications` key, `shift+f10`, or the `right mouse button`).
+1. Create a new folder to host the translations repository, for example, pressing `control+shift+n`.
+1. Open the context menu (for example, pressing the `applications` key, `shift+f10`, or the `right mouse button`).
 1. From the SVN submenu, choose checkout and, in the corresponding edit box, paste the following URL:
 
 ```
@@ -43,13 +47,14 @@ So if you are interested in translating a particular add-on to your language, op
 
 If you set add-on translation value to 1, the next time you receive interface file updates, you'll receive the add-on file in the following location:
 yourlang/Add-ons/addonname/nvda.po
-Where yourlang is your language and addonname is the name of the add-on.
+Where yourLang is your language and addonName is the name of the add-on.
 
 Generally, new messages to be translated will be available once a week.
 
 ### Translation process
 
-1. Open the context menú on the translations folder.
+1. Open the context menu on the translations folder.
 1. From the SVN submenu, select `SVN update` to get the latest changes.
 1. Open `langCode/addons/`addonName` folder, and use Poedit to translate the `nvda.po` file to translate messages corresponding to the add-on interface.
 1. Open `website/addons`, and use Poedit to translate `addonName.langCode.po`, to translate add-ons documentation
+1. Open the context menu on the translated file, and select the `SVN commit` command to submit your changes to the server.
