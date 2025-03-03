@@ -4,9 +4,9 @@ This document provides guidance about translating add-ons registered to be trans
 
 Add-ons maintainers can request for their add-ons to be registered on that system, or they may choose other procedures to get their add-ons translated.
 
-## Before translating add-ons
+## Before translating
 
-### Join the translation mailing list
+### Join the translations mailing list
 
 Translators should subscribe to the [NVDA translations mailing list hosted at Groups.IO](https://groups.io/g/nvda-translations).
 
@@ -31,25 +31,57 @@ Once you receive your [assembla(http://www.assembla.com) invitation, you can pro
 https://subversion.assembla.com/svn/screenReaderTranslations
 ```
 
+Wait until, in the SVN dialog, you receive a message confirming that the process is complete. 
+
 ## Translating
 
 ### The Add-on Settings
 
 Each language folder in the translations repository contains a file named "settings". This is a text file containing a list of add-ons and the translation settings value for the add-on (1 means yes, 0 means no). For example, a typical entry for an add-on looks like:
+
+```
 instantTranslate: "1"
+```
+
 This means that a translator decided to translate Instant Translate add-on. Another example is:
+
+```
 VocalizerDriver: "0"
+```
+
 This means that the translator is not interested in translating Vocalizer speech synthesizer add-on at this time.
 
-So if you are interested in translating a particular add-on to your language, open yourlangcode/Settings and change the value for the add-on to 1. If you do not want to translate the add-on at this time, set add-on value to 0. Then commit your settings.
+So if you are interested in translating a particular add-on to your language, open `yourLangCode/settings` and change the value for the add-on to 1. If you do not want to translate the add-on at this time, set add-on value to 0. Then commit your settings.
 
 # ## Add-on file location
 
-If you set add-on translation value to 1, the next time you receive interface file updates, you'll receive the add-on file in the following location:
-yourlang/Add-ons/addonname/nvda.po
-Where yourLang is your language and addonName is the name of the add-on.
 
-Generally, new messages to be translated will be available once a week.
+Two different files can be available to translate for each add-on:
+
+#### File for interface messages
+
+If you set add-on translation value to 1, the next time you receive interface file updates, you'll receive the add-on file in the following location:
+
+```
+yourLangCode/addons/addonName/nvda.po
+```
+
+Where `yourLangCode` is your language and `addonName` is the name of the add-on.
+
+Generally, new interface messages to be translated will be available once a week.
+
+#### File for documentation
+
+This file will be available in the following location:
+
+```
+website/addons/addonName.yourLangCode.po
+
+```
+
+Translate the documentation and commit changes.
+
+
 
 ### Translation process
 
@@ -58,3 +90,4 @@ Generally, new messages to be translated will be available once a week.
 1. Open `langCode/addons/`addonName` folder, and use Poedit to translate the `nvda.po` file to translate messages corresponding to the add-on interface.
 1. Open `website/addons`, and use Poedit to translate `addonName.langCode.po`, to translate add-ons documentation
 1. Open the context menu on the translated file, and select the `SVN commit` command to submit your changes to the server.
+
