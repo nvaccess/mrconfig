@@ -1,4 +1,4 @@
-# Translating NVA Add-ons
+# Translating NVDA Add-ons
 
 This document provides guidance about translating add-ons registered in the [NVDA community add-on translation system](https://github.com/nvaccess/addon-datastore/blob/master/docs/submitters/submissionGuide.md#RegisteringAnAdd-onInTheTranslationSystem).
 
