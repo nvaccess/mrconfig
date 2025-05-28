@@ -160,7 +160,6 @@ poStatusHtml=/home/nvdal10n/ikiwiki/publish/poStatus.html
 # x 22 for addons starting with v or w
 00  22 * * fri $AddonTranslationUpdate VLC
 05  22 * * fri $AddonTranslationUpdate Weather_Plus
-10  22 * * fri $AddonTranslationUpdate wintenApps
 # 15  22 * * fri $AddonTranslationUpdate wordCount
 20  22 * * fri $AddonTranslationUpdate winMag
 25  22 * * fri $AddonTranslationUpdate winWizard
