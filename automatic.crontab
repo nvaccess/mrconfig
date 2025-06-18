@@ -25,9 +25,6 @@ PathToMrRepo=/home/nvdal10n/mr
 PathToCGI=/home/nvdal10n/cgi/
 PathToBin=/home/nvdal10n/bin/
 AddonTranslationUpdate="/home/nvdal10n/mr/scripts/addonTranslationUpdates.sh"
-NVDATranslationUpdate="/home/nvdal10n/mr/scripts/nvdaTranslationUpdates.sh"
-
-00  0 * * fri $NVDATranslationUpdate
 
 poStatusHtml=/home/nvdal10n/ikiwiki/publish/poStatus.html
 22 * * * * cd ${PathToMrRepo}/scripts && ./poStatus.py >${poStatusHtml}
